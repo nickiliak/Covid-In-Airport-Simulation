@@ -17,7 +17,7 @@ public class Crowd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        FindeTarget();
     }
 
     public void FindeTarget()
