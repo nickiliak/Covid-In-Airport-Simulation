@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentSpawner : MonoBehaviour
+public class ArrivingAgentsSpawner : MonoBehaviour
 {
     public GameObject agentPrefab; // Prefab of the agent to spawn
     public float minSpawnDelay = 1f; // Minimum delay between spawns
