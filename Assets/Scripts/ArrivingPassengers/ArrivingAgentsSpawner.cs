@@ -1,33 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArrivingAgentsSpawner : MonoBehaviour
 {
     public GameObject agentPrefab; // Prefab of the agent to spawn
-    public float minSpawnDelay = 1f; // Minimum delay between spawns
-    public float maxSpawnDelay = 5f; // Maximum delay between spawns
+    public float minSpawnDelay = 10f; // Minimum delay between spawns
+    public float maxSpawnDelay = 30f; // Maximum delay between spawns
+    public int minSpawnCount = 10;
+    public int maxSpawnCount = 20;
+    public float waitTime = 30f;
+
+    private int FlightNo = 0;
+    private List<GameObject> agents = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SpawnAgent", Random.Range(minSpawnDelay, maxSpawnDelay));
+        StartCoroutine(StartAFlight());
     }
-
-    void SpawnAgent()
+    private IEnumerator StartAFlight()
     {
-        // Instantiate a new instance of the agent prefab
-        Vector3 AgentPos = transform.position;
-        AgentPos.x = AgentPos.x + Random.Range(-80f, 80f);
-        GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
+        
+        while (true)
+        {
+            if(agents.Count != 0 )
+            {
+                foreach (GameObject agent in agents)
+                {
+                    ArrivingAgentsMovement agentScript = agent.GetComponent<ArrivingAgentsMovement>();
+                    agentScript.TimeToBoard = true;
+                }
 
-        // Set any necessary properties on the agent
-        // ...
+                agents.Clear();
+            }
 
-        // Add any necessary components to the new agent GameObject
-        // ...
+            int agentCount = Random.Range(minSpawnCount, maxSpawnCount);
+            Color randomColor = Random.ColorHSV();
+            FlightNo++;
 
-        // Schedule the next agent spawn at a random interval
-        Invoke("SpawnAgent", Random.Range(minSpawnDelay, maxSpawnDelay));
+            for (int i = 0; i < agentCount; i++)
+            {
+                Vector3 AgentPos = transform.position;
+                AgentPos.x = AgentPos.x + Random.Range(-5f, 5f);
+                GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
+                agents.Add(newAgent);
+
+                //Agent Flight Number and Number
+                newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
+
+                //Set color for this agent so all agents of this flight have the same color
+                Renderer agentRenderer = newAgent.GetComponent<Renderer>();
+                agentRenderer.material.color = randomColor;
+
+                //Wait a little bit until next Agent
+                float spawnDelay = Random.Range(0.1f, 2f);
+                yield return new WaitForSeconds(spawnDelay);
+            }
+
+            //Wait until next flight is ready
+            float randomSpawnInterval = Random.Range(minSpawnDelay, maxSpawnDelay);
+            yield return new WaitForSeconds(randomSpawnInterval);
+            yield return new WaitForSeconds(waitTime);
+        }
     }
 }

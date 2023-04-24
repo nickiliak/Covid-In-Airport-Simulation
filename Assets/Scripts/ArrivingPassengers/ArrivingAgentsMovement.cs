@@ -9,13 +9,16 @@ public class ArrivingAgentsMovement : MonoBehaviour
     public enum AgentState { None, CheckIn, Restroom, Shop, Eat, Board }
     public AgentState agentState;
 
+
     public float ChanceToUseRestroom = 0.33f;
     public float ChanceToShop= 0.8f;
     public float ChanceToEat = 0.2f;
+    public bool TimeToBoard = false;
 
     private bool NeedsRestroom = false;
     private bool NeedsShop = false;
     private bool NeedsEat = false;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,6 @@ public class ArrivingAgentsMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (TimeToBoard == true) agentState = AgentState.Board;
     }
 }

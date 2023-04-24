@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7084595388658863954}
   - component: {fileID: 6771738127742226002}
   - component: {fileID: 2196357913976524832}
+  - component: {fileID: 1286229699135955175}
   m_Layer: 0
   m_Name: arriving_agent
   m_TagString: Untagged
@@ -98,3 +99,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1286229699135955175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083532259587614262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01df2f000530fa46a59886475985efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 0}
+  agentState: 0
+  ChanceToUseRestroom: 0.33
+  ChanceToShop: 0.8
+  ChanceToEat: 0.2
+  TimeToBoard: 0
