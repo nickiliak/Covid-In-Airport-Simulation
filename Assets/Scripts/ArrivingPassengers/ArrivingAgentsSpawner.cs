@@ -10,7 +10,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     public float maxSpawnDelay = 30f; // Maximum delay between spawns
     public int minSpawnCount = 10;
     public int maxSpawnCount = 20;
-    public float waitTime = 30f;
+    public float waitTime = 120f;
 
     private int FlightNo = 0;
     private List<GameObject> agents = new List<GameObject>();
@@ -43,7 +43,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             for (int i = 0; i < agentCount; i++)
             {
                 Vector3 AgentPos = transform.position;
-                AgentPos.x = AgentPos.x + Random.Range(-5f, 5f);
+                AgentPos.x = AgentPos.x + Random.Range(-80f, 80f);
                 GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
 

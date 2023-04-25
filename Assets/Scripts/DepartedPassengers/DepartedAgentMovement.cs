@@ -33,7 +33,7 @@ public class DepartedAgentMovement : MonoBehaviour
     void Update()
     {
         if(agentState == AgentState.None) ControlState();
-        MoveDepartedAgent();
+        StateBehavior();
     }
 
     void ControlState() {
@@ -61,7 +61,7 @@ public class DepartedAgentMovement : MonoBehaviour
             navMeshAgent.destination = new Vector3(129, 0, -24);
         }
     }
-    void MoveDepartedAgent()
+    void StateBehavior()
     {
         if(Vector3.Distance(transform.position, navMeshAgent.destination) < 2f)
         {
