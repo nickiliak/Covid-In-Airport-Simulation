@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8048945791244016405}
   - component: {fileID: 556014425830254171}
   - component: {fileID: -6012737723049047640}
+  - component: {fileID: -7103914521687032286}
   m_Layer: 0
   m_Name: departed_agent
   m_TagString: Untagged
@@ -139,3 +140,20 @@ MonoBehaviour:
   ChanceToUseRestroom: 0.33
   ChanceToHaveBaggage: 0.8
   ChanceToWantACar: 0.2
+--- !u!114 &-7103914521687032286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8720071481651670940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90e288a6965a1f4abe78f2626ee6054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Age: 0
+  Gender: 0
+  Speed: 0
+  Proximity: 0
+  navMeshAgent: {fileID: 556014425830254171}

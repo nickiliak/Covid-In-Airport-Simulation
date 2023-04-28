@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7084595388658863954}
   - component: {fileID: 6771738127742226002}
   - component: {fileID: 2196357913976524832}
-  - component: {fileID: 1286229699135955175}
   - component: {fileID: 1121267112736129269}
+  - component: {fileID: 1286229699135955175}
+  - component: {fileID: 3727757614724893633}
   m_Layer: 0
   m_Name: arriving_agent
   m_TagString: Untagged
@@ -100,25 +101,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1286229699135955175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7083532259587614262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c01df2f000530fa46a59886475985efb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 1121267112736129269}
-  agentState: 0
-  ChanceToUseRestroom: 0.33
-  ChanceToCheckIn: 0.7
-  ChanceToShop: 0.8
-  ChanceToEat: 0.2
-  TimeToBoard: 0
 --- !u!195 &1121267112736129269
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -139,5 +121,41 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1286229699135955175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083532259587614262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01df2f000530fa46a59886475985efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 1121267112736129269}
+  agentState: 0
+  ChanceToUseRestroom: 0.33
+  ChanceToCheckIn: 0.7
+  ChanceToShop: 0.8
+  ChanceToEat: 0.2
+  TimeToBoard: 0
+--- !u!114 &3727757614724893633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083532259587614262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d90e288a6965a1f4abe78f2626ee6054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Age: 0
+  Gender: 0
+  Speed: 0
+  Proximity: 0
+  navMeshAgent: {fileID: 1121267112736129269}
