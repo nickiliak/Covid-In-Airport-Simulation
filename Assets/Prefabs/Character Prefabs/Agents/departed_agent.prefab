@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7103914521687032286}
   m_Layer: 0
   m_Name: departed_agent
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,9 +98,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.7072163
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.35360813, z: 0}
 --- !u!195 &556014425830254171
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -155,5 +155,6 @@ MonoBehaviour:
   Age: 0
   Gender: 0
   Speed: 0
+  Accelaration: 0
   Proximity: 0
   navMeshAgent: {fileID: 556014425830254171}
