@@ -12,6 +12,8 @@ public class AgentCounter : MonoBehaviour
         GameObject ChildText = transform.Find("AgentCounter").gameObject;
         AgentCounterText = ChildText.GetComponent<TextMesh>();
         AgentCounterText.text = objectsTouchingFloor.ToString();
+        AgentCounterText.color = Color.black;
+        AgentCounterText.richText = true;
     }
 
     void OnTriggerEnter(Collider other)
