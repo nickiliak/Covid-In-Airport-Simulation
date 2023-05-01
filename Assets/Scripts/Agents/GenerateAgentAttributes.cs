@@ -20,7 +20,7 @@ public class GenerateAgentAttributes : MonoBehaviour
     {
         Speed = Random.Range(4f, 8f);
         Accelaration = Random.Range(4f, 10f);
-        Proximity = Random.Range(0.5f, 2f);
+        Proximity = Random.Range(0.5f, 1f);
 
         navMeshAgent.speed = Speed;
         navMeshAgent.acceleration = Accelaration;  

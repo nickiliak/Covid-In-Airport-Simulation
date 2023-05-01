@@ -63,7 +63,6 @@ public class DepartedAgentMovement : MonoBehaviour
         else if (NeedsCar)
         {
             agentState = AgentState.CarRental;
-            navMeshAgent.destination = new Vector3(96, 0, 36);
             NeedsCar = false;
         }
         else
@@ -80,8 +79,10 @@ public class DepartedAgentMovement : MonoBehaviour
             {
                 case AgentState.Restroom:
                     //Randomly select Toilet and sink
-                    destinations.Add(Airport.transform.Find(SecondSectionAreas + "/Bathroom (1)/BathroomBuild (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
-                    destinations.Add(Airport.transform.Find(SecondSectionAreas + "/Bathroom (1)/BathroomBuild (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas + 
+                        "/Bathroom (1)/BathroomBuild (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas + 
+                        "/Bathroom (1)/BathroomBuild (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
 
                     navMeshAgent.ResetPath();
 
@@ -91,9 +92,32 @@ public class DepartedAgentMovement : MonoBehaviour
                     break;
 
                 case AgentState.BaggageClaim:
+                    //Randomly pick one of the conveyor belts
+                    destinations.Add(Airport.transform.Find(FirstSectionAreas +
+                        "/BaggageClaim/PickUp" + " (" + Random.Range(1, 3).ToString() + ")" +
+                        "/Items" + "/SuitCase" + " (" + Random.Range(0, 8).ToString() + ")"
+                        ).position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 2f));
+                    WaitTime.Add(Random.Range(1f, 2f));
+
                     break;
 
                 case AgentState.CarRental:
+                    //Randomly pick one of the conveyor belts
+                    destinations.Add(Airport.transform.Find(FirstSectionAreas +
+                        "/Car Rental/Targets/Target" + " (" + Random.Range(0, 3).ToString() + ")"
+                        ).position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(2f, 4f));
+                    WaitTime.Add(Random.Range(2f, 4f));
+
                     break;
 
                 case AgentState.ExitAirport:
