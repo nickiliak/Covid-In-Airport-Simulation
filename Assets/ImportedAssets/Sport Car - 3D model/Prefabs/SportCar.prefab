@@ -2647,7 +2647,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4735839243174642}
   - component: {fileID: 95679165997764248}
-  - component: {fileID: 114944249367113288}
   m_Layer: 0
   m_Name: SportCar
   m_TagString: Untagged
@@ -2697,39 +2696,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &114944249367113288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536997390485366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71a2b3939a0e91f4fbe29ecd1c4af43d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  on: 0
-  on2: 0
-  on3: 0
-  BrakeL: 0
-  ReverseL: 0
-  FrontL: 0
-  TailL: 0
-  IndicatorL: 0
-  IndicatorR: 0
-  INDICATORS: 0
-  FL: {fileID: 0}
-  BL: {fileID: 0}
-  TL: {fileID: 0}
-  RL: {fileID: 0}
-  IL: {fileID: 0}
-  IR: {fileID: 0}
-  FLM: {fileID: 2100000, guid: e7c201546902c694084067c04832f71f, type: 2}
-  TLM: {fileID: 2100000, guid: 3ff81be07d516b84498d830e113ce20d, type: 2}
-  RLM: {fileID: 2100000, guid: 0a5d78c3e1415ac40a0e25976aaae858, type: 2}
-  ILM: {fileID: 2100000, guid: ca15278988a972e498139a4b1b6b8ce9, type: 2}
-  IRM: {fileID: 2100000, guid: c759fce7a5dd6dc4ea2792a428e94050, type: 2}
 --- !u!1 &1547043310347174
 GameObject:
   m_ObjectHideFlags: 0
