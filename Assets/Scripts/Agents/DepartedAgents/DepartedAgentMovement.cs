@@ -24,8 +24,8 @@ public class DepartedAgentMovement : MonoBehaviour
     private List<float> WaitTime = new List<float>();
 
     private GameObject Airport;
-    private string Buildings = "Second Section/Buildings";
-    private string Areas = "Second Section/Areas";
+    private string FirstSectionAreas = "First Section/Areas";
+    private string SecondSectionAreas = "Second Section/Areas";
 
     void Start()
     {
@@ -51,13 +51,13 @@ public class DepartedAgentMovement : MonoBehaviour
         if (NeedsRestroom)
         {
             agentState = AgentState.Restroom;
-            navMeshAgent.destination = Airport.transform.Find(Buildings + "/Bathroom (1)").position;
+            navMeshAgent.destination = Airport.transform.Find(SecondSectionAreas + "/Bathroom (1)/BathroomBuild (1)/Target").position;
             NeedsRestroom = false;
         }
         else if (NeedsBaggage)
         {
             agentState = AgentState.BaggageClaim;
-            navMeshAgent.destination = new Vector3(73, 0, 18);
+            navMeshAgent.destination = Airport.transform.Find(FirstSectionAreas + "/BaggageClaim/Target").position;
             NeedsBaggage = false;
         }
         else if (NeedsCar)
@@ -80,8 +80,8 @@ public class DepartedAgentMovement : MonoBehaviour
             {
                 case AgentState.Restroom:
                     //Randomly select Toilet and sink
-                    destinations.Add(Airport.transform.Find(Buildings + "/Bathroom (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
-                    destinations.Add(Airport.transform.Find(Buildings + "/Bathroom (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas + "/Bathroom (1)/BathroomBuild (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas + "/Bathroom (1)/BathroomBuild (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
 
                     navMeshAgent.ResetPath();
 
