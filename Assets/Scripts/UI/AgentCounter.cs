@@ -12,13 +12,14 @@ public class AgentCounter : MonoBehaviour
         GameObject ChildText = transform.Find("AgentCounter").gameObject;
         AgentCounterText = ChildText.GetComponent<TextMesh>();
         AgentCounterText.text = objectsTouchingFloor.ToString();
-        AgentCounterText.color = Color.black;
+        AgentCounterText.color = Color.white;
+        AgentCounterText.fontStyle= FontStyle.Bold;
+        AgentCounterText.fontSize = 30;
         AgentCounterText.richText = true;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        print("hey");
         if (other.gameObject.CompareTag("Agent")) // Change "Player" tag to your object tag
         {
             objectsTouchingFloor++;

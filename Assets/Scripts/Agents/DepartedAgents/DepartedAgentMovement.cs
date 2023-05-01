@@ -10,18 +10,28 @@ public class DepartedAgentMovement : MonoBehaviour
     public enum AgentState {None, Restroom, BaggageClaim, CarRental, ExitAirport }
     public AgentState agentState;
 
-    public float ChanceToUseRestroom = 0.33f;
-    public float ChanceToHaveBaggage = 0.8f;
-    public float ChanceToWantACar = 0.2f;
+    private float ChanceToUseRestroom = 0.33f;
+    private float ChanceToHaveBaggage = 0.8f;
+    private float ChanceToWantACar = 0.2f;
 
     private bool NeedsRestroom = false;
     private bool NeedsBaggage = false;
     private bool NeedsCar = false;
 
+    private bool AreaBehaviour = false;
+    private bool Waiting = false;
+    private List<Vector3> destinations = new List<Vector3>();
+    private List<float> WaitTime = new List<float>();
+
+    private GameObject Airport;
+    private string Buildings = "Second Section/Buildings";
+    private string Areas = "Second Section/Areas";
+
     void Start()
     {
         //Initial State
         agentState = AgentState.None;
+        Airport = GameObject.Find("Airport");
 
         //Randomly make them need to use the bathroom or not
         if (Random.value < ChanceToUseRestroom) NeedsRestroom = true;
@@ -32,15 +42,16 @@ public class DepartedAgentMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agentState == AgentState.None) ControlState();
-        StateBehavior();
+        if (agentState == AgentState.None && AreaBehaviour == false) ControlState();
+        if (AreaBehaviour == false) ActivateStateBehavior();
+        if (AreaBehaviour == true && Waiting == false) StartCoroutine(StateBehavior());
     }
 
     void ControlState() {
         if (NeedsRestroom)
         {
             agentState = AgentState.Restroom;
-            navMeshAgent.destination = new Vector3(75, 0, 56);
+            navMeshAgent.destination = Airport.transform.Find(Buildings + "/Bathroom (1)").position;
             NeedsRestroom = false;
         }
         else if (NeedsBaggage)
@@ -61,31 +72,69 @@ public class DepartedAgentMovement : MonoBehaviour
             navMeshAgent.destination = new Vector3(129, 0, -24);
         }
     }
-    void StateBehavior()
+    void ActivateStateBehavior()
     {
         if(Vector3.Distance(transform.position, navMeshAgent.destination) < 2f)
         {
-            if(agentState == AgentState.Restroom)
+            switch (agentState)
             {
+                case AgentState.Restroom:
+                    //Randomly select Toilet and sink
+                    destinations.Add(Airport.transform.Find(Buildings + "/Bathroom (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(Buildings + "/Bathroom (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
 
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    break;
+
+                case AgentState.BaggageClaim:
+                    break;
+
+                case AgentState.CarRental:
+                    break;
+
+                case AgentState.ExitAirport:
+                    Destroy(gameObject);
+                    break;
+
+                default:
+                    break;
             }
 
-            if (agentState == AgentState.BaggageClaim)
+            AreaBehaviour = true;
+        }
+    }
+    IEnumerator StateBehavior()
+    {
+        if(destinations.Count != 0)
+        {
+            if (navMeshAgent.hasPath == false)
             {
-
+                navMeshAgent.destination = destinations[0];
             }
-
-            if (agentState == AgentState.CarRental)
+            else
             {
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+                {
+                    navMeshAgent.ResetPath();
+                    destinations.Remove(destinations[0]);
+                    Waiting = true;
 
+                    yield return new WaitForSeconds(WaitTime[0]);
+                    WaitTime.Remove(WaitTime[0]);
+                    Waiting = false;
+                }
             }
-
-            if (agentState == AgentState.ExitAirport)
-            {
-                Destroy(gameObject);
-            }
-
+        }
+        else
+        {
             agentState = AgentState.None;
+            AreaBehaviour = false;
         }
     }
 }
+
+

@@ -13,8 +13,8 @@ NavMeshProjectSettings:
     cost: 2
   - name: DepartedAgentsOnly
     cost: 3
-  - name: 
-    cost: 1
+  - name: ArrivingAgentsOnly
+    cost: 4
   - name: 
     cost: 1
   - name: 

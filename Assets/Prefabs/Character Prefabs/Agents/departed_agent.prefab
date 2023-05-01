@@ -121,7 +121,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 15
   m_ObstacleAvoidanceType: 4
 --- !u!114 &-6012737723049047640
 MonoBehaviour:
@@ -137,9 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 556014425830254171}
   agentState: 0
-  ChanceToUseRestroom: 0.33
-  ChanceToHaveBaggage: 0.8
-  ChanceToWantACar: 0.2
+  Airport: {fileID: 0}
 --- !u!114 &-7103914521687032286
 MonoBehaviour:
   m_ObjectHideFlags: 0
