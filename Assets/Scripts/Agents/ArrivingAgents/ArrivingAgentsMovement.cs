@@ -21,11 +21,20 @@ public class ArrivingAgentsMovement : MonoBehaviour
     private bool NeedsShop = false;
     private bool NeedsEat = false;
 
-    // Start is called before the first frame update
+    private bool AreaBehaviour = false;
+    private bool Waiting = false;
+    private List<Vector3> destinations = new List<Vector3>();
+    private List<float> WaitTime = new List<float>();
+
+    private GameObject Airport;
+    private string FirstSectionAreas = "First Section/Areas";
+    private string SecondSectionAreas = "Second Section/Areas";
+
     void Start()
     {
         //Initial State
         agentState = AgentState.None;
+        Airport = GameObject.Find("Airport");
 
         //Randomly make them need to use the bathroom or not
         if (Random.value < ChanceToUseRestroom) NeedsRestroom = true;
@@ -37,8 +46,9 @@ public class ArrivingAgentsMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agentState == AgentState.None) ControlState();
-        StateBehavior();
+        if (agentState == AgentState.None && AreaBehaviour == false) ControlState();
+        if (AreaBehaviour == false) ActivateStateBehavior();
+        if (AreaBehaviour == true && Waiting == false) StartCoroutine(StateBehavior());
     }
 
     void ControlState()
@@ -73,7 +83,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
             NeedsEat = false;
         }
     }
-    void StateBehavior()
+    void ActivateStateBehavior()
     {
         if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2f)
         {
@@ -103,6 +113,35 @@ public class ArrivingAgentsMovement : MonoBehaviour
             }
 
             agentState = AgentState.None;
+        }
+    }
+
+    IEnumerator StateBehavior()
+    {
+        if (destinations.Count != 0)
+        {
+            if (navMeshAgent.hasPath == false)
+            {
+                navMeshAgent.destination = destinations[0];
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+                {
+                    navMeshAgent.ResetPath();
+                    destinations.Remove(destinations[0]);
+                    Waiting = true;
+
+                    yield return new WaitForSeconds(WaitTime[0]);
+                    WaitTime.Remove(WaitTime[0]);
+                    Waiting = false;
+                }
+            }
+        }
+        else
+        {
+            agentState = AgentState.None;
+            AreaBehaviour = false;
         }
     }
 }
