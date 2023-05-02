@@ -103,7 +103,6 @@ public class DepartedAgentMovement : MonoBehaviour
                     //Randomly wait a time in each 
                     WaitTime.Add(Random.Range(1f, 2f));
                     WaitTime.Add(Random.Range(1f, 2f));
-
                     break;
 
                 case AgentState.CarRental:
@@ -117,7 +116,6 @@ public class DepartedAgentMovement : MonoBehaviour
                     //Randomly wait a time in each 
                     WaitTime.Add(Random.Range(2f, 4f));
                     WaitTime.Add(Random.Range(2f, 4f));
-
                     break;
 
                 case AgentState.ExitAirport:

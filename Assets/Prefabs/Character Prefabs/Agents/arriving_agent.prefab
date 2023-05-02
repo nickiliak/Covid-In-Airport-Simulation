@@ -137,10 +137,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1121267112736129269}
   agentState: 0
-  ChanceToUseRestroom: 0.33
+  ChanceToUseRestroom: 0.2
   ChanceToCheckIn: 0.7
-  ChanceToShop: 0.8
-  ChanceToEat: 0.2
+  ChanceToShop: 0.4
+  ChanceToEat: 0.7
   TimeToBoard: 0
 --- !u!114 &3727757614724893633
 MonoBehaviour:

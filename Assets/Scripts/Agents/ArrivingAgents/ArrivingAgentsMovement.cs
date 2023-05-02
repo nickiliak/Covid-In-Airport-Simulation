@@ -10,10 +10,10 @@ public class ArrivingAgentsMovement : MonoBehaviour
     public AgentState agentState;
 
 
-    public float ChanceToUseRestroom = 0.33f;
-    public float ChanceToCheckIn = 0.7f;
-    public float ChanceToShop= 0.8f;
-    public float ChanceToEat = 0.2f;
+    public float ChanceToUseRestroom = 0f;
+    public float ChanceToCheckIn = 0f;
+    public float ChanceToShop= 0f;
+    public float ChanceToEat = 1f;
     public bool TimeToBoard = false;
 
     private bool NeedsRestroom = false;
@@ -61,25 +61,24 @@ public class ArrivingAgentsMovement : MonoBehaviour
         else if (NeedsCheckIn)
         {
             agentState = AgentState.CheckIn;
-            navMeshAgent.destination = new Vector3(241, 0, 43);
             NeedsCheckIn = false;
         }
         else if (NeedsRestroom)
         {
             agentState = AgentState.Restroom;
-            navMeshAgent.destination = new Vector3(161, 0, 55);
+            navMeshAgent.destination = Airport.transform.Find(SecondSectionAreas + "/Bathroom/BathroomBuild/Target").position;
             NeedsRestroom = false;
         }
         else if (NeedsShop)
         {
             agentState = AgentState.Shop;
-            navMeshAgent.destination = new Vector3(109, 0, 56);
+            navMeshAgent.destination = Airport.transform.Find(SecondSectionAreas + "/Shop/ShopBuild/Target").position;
             NeedsShop = false;
         }
         else if (NeedsEat)
         {
             agentState = AgentState.Eat;
-            navMeshAgent.destination = new Vector3(143, 0, 94);
+            navMeshAgent.destination = Airport.transform.Find(SecondSectionAreas + "/Food/FoodBuild/Target").position;
             NeedsEat = false;
         }
     }
@@ -87,32 +86,70 @@ public class ArrivingAgentsMovement : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2f)
         {
-            if (agentState == AgentState.Board)
+            switch (agentState)
             {
-                Destroy(gameObject);
+                case AgentState.CheckIn:
+                    //Randomly Select One Office
+                    destinations.Add(Airport.transform.Find(FirstSectionAreas + "/CheckIn/Office" + " (" + Random.Range(0,6).ToString() + ")").position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 5f));
+                    break; 
+
+                case AgentState.Restroom:
+                    //Randomly select Toilet and sink
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Bathroom/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Bathroom/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    break;
+
+                case AgentState.Shop:
+                    //Randomly select one of the item stalls and then go to checkout
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Shop/ShopBuild" + "/Items" + " (" + Random.Range(0, 5).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Shop/ShopBuild" + "/CheckOut").position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    WaitTime.Add(Random.Range(1f, 3f));
+                    break;
+
+                case AgentState.Eat:
+                    //Randomly select one of the item stalls and then go to checkout
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Food/FoodBuild/CheckOut").position);
+                    destinations.Add(Airport.transform.Find(SecondSectionAreas +
+                        "/Food/FoodBuild/Chairs" + "/C" + " (" + Random.Range(0, 14) + ")").position);
+
+                    navMeshAgent.ResetPath();
+
+                    //Randomly wait a time in each 
+                    WaitTime.Add(Random.Range(1f, 2f));
+                    WaitTime.Add(Random.Range(1f, 6f));
+
+                    break;
+
+                case AgentState.Board:
+                    Destroy(gameObject);
+                    break;
+
+                default:
+                    break;
             }
 
-            if (agentState == AgentState.CheckIn)
-            {
-
-            }
-
-            if (agentState == AgentState.Restroom)
-            {
-
-            }
-
-            if (agentState == AgentState.Shop)
-            {
-
-            }
-
-            if (agentState == AgentState.Eat)
-            {
-
-            }
-
-            agentState = AgentState.None;
+            AreaBehaviour = true;
         }
     }
 
