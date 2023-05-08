@@ -8,7 +8,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public enum AgentState { None, CheckIn, Restroom, Shop, Eat, Board }
     public AgentState agentState;
-
+    public int EntryGateNumber;
 
     public float ChanceToUseRestroom = 0f;
     public float ChanceToCheckIn = 0f;
@@ -56,7 +56,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
         if (TimeToBoard == true)
         {
             agentState = AgentState.Board;
-            navMeshAgent.destination = new Vector3(186, 0, 105);
+            navMeshAgent.destination = Airport.transform.Find(SecondSectionAreas + "/GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()).position;
         }
         else if (NeedsCheckIn)
         {

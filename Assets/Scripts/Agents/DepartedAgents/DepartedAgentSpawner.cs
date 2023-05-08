@@ -12,6 +12,8 @@ public class DepartedAgentSpawner : MonoBehaviour
     public float waitTime = 30f;
 
     private int FlightNo = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,7 @@ public class DepartedAgentSpawner : MonoBehaviour
                 Vector3 AgentPos = transform.position;
                 AgentPos.x = AgentPos.x + Random.Range(-5f, 5f);
                 GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
-
+              
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
 

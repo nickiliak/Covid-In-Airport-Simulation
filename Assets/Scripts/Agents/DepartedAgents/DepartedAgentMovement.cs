@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 using static UnityEngine.GraphicsBuffer;
 
 public class DepartedAgentMovement : MonoBehaviour
@@ -26,12 +27,18 @@ public class DepartedAgentMovement : MonoBehaviour
     private GameObject Airport;
     private string FirstSectionAreas = "First Section/Areas";
     private string SecondSectionAreas = "Second Section/Areas";
+    GameObject Stats = GameObject.Find("Statistics");
+    DepAgentStats DepStats;
 
     void Start()
     {
         //Initial State
         agentState = AgentState.None;
         Airport = GameObject.Find("Airport");
+
+        //Get UI to update it
+        DepStats = Stats.GetComponent<DepAgentStats>();
+        DepStats.OnDepAgentCreated();
 
         //Randomly make them need to use the bathroom or not
         if (Random.value < ChanceToUseRestroom) NeedsRestroom = true;
@@ -68,7 +75,11 @@ public class DepartedAgentMovement : MonoBehaviour
         else
         {
             agentState = AgentState.ExitAirport;
-            navMeshAgent.destination = new Vector3(129, 0, -24);
+
+            //Target at the middle of the plane
+            Vector3 ExitPosition = Airport.transform.Find("ExitPlane/Target").position;
+            //Randomly pick a point of the plane to go to and exit the airport
+            navMeshAgent.destination = new Vector3(ExitPosition.x + Random.Range(-70,70), ExitPosition.y, ExitPosition.z);
         }
     }
     void ActivateStateBehavior()
@@ -84,6 +95,7 @@ public class DepartedAgentMovement : MonoBehaviour
                     destinations.Add(Airport.transform.Find(SecondSectionAreas + 
                         "/Bathroom (1)/BathroomBuild (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
 
+                    DepStats.OnDepAgentRestroom();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -98,6 +110,7 @@ public class DepartedAgentMovement : MonoBehaviour
                         "/Items" + "/SuitCase" + " (" + Random.Range(0, 8).ToString() + ")"
                         ).position);
 
+                    DepStats.OnDepAgentBaggage();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -111,6 +124,7 @@ public class DepartedAgentMovement : MonoBehaviour
                         "/Car Rental/Targets/Target" + " (" + Random.Range(0, 3).ToString() + ")"
                         ).position);
 
+                    DepStats.OnDepAgentCar();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -119,7 +133,10 @@ public class DepartedAgentMovement : MonoBehaviour
                     break;
 
                 case AgentState.ExitAirport:
+
+                    DepStats.OnDepAgentDestroyed();
                     Destroy(gameObject);
+
                     break;
 
                 default:

@@ -40,6 +40,8 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             Color randomColor = Random.ColorHSV();
             FlightNo++;
 
+            int agentGate = Random.Range(1, 4); 
+
             for (int i = 0; i < agentCount; i++)
             {
                 Vector3 AgentPos = transform.position;
@@ -47,12 +49,15 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
 
-                //Agent Flight Number and Number
+                //Agent Number and Flight Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
 
                 //Set color for this agent so all agents of this flight have the same color
                 Renderer agentRenderer = newAgent.GetComponent<Renderer>();
                 agentRenderer.material.color = randomColor;
+
+                ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
+                agentScript.EntryGateNumber = agentGate;
 
                 //Wait a little bit until next Agent
                 float spawnDelay = Random.Range(0.1f, 2f);
