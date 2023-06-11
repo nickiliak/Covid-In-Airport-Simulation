@@ -25,10 +25,11 @@ public class DepartedAgentMovement : MonoBehaviour
     private List<float> WaitTime = new List<float>();
 
     private GameObject Airport;
+
     private string FirstSectionAreas = "First Section/Areas";
     private string SecondSectionAreas = "Second Section/Areas";
-    GameObject Stats = GameObject.Find("Statistics");
-    DepAgentStats DepStats;
+    
+    DepStatsData DepStats;
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class DepartedAgentMovement : MonoBehaviour
         Airport = GameObject.Find("Airport");
 
         //Get UI to update it
-        DepStats = Stats.GetComponent<DepAgentStats>();
+        DepStats = GameObject.Find("DepartingData").GetComponent<DepStatsData>();
         DepStats.OnDepAgentCreated();
 
         //Randomly make them need to use the bathroom or not

@@ -30,11 +30,16 @@ public class ArrivingAgentsMovement : MonoBehaviour
     private string FirstSectionAreas = "First Section/Areas";
     private string SecondSectionAreas = "Second Section/Areas";
 
+    ArrStatsData ArrStats;
     void Start()
     {
         //Initial State
         agentState = AgentState.None;
         Airport = GameObject.Find("Airport");
+
+        //Get UI to update it
+        ArrStats = GameObject.Find("ArrivingData").GetComponent<ArrStatsData>();
+        ArrStats.OnArrAgentCreated();
 
         //Randomly make them need to use the bathroom or not
         if (Random.value < ChanceToUseRestroom) NeedsRestroom = true;
@@ -92,6 +97,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     //Randomly Select One Office
                     destinations.Add(Airport.transform.Find(FirstSectionAreas + "/CheckIn/Office" + " (" + Random.Range(0,6).ToString() + ")").position);
 
+                    ArrStats.OnArrAgentCheckIn();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -105,6 +111,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     destinations.Add(Airport.transform.Find(SecondSectionAreas +
                         "/Bathroom/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").position);
 
+                    ArrStats.OnArrAgentRestroom();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -119,6 +126,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     destinations.Add(Airport.transform.Find(SecondSectionAreas +
                         "/Shop/ShopBuild" + "/CheckOut").position);
 
+                    ArrStats.OnArrAgentShop();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -133,6 +141,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     destinations.Add(Airport.transform.Find(SecondSectionAreas +
                         "/Food/FoodBuild/Chairs" + "/C" + " (" + Random.Range(0, 14) + ")").position);
 
+                    ArrStats.OnArrAgentEat();
                     navMeshAgent.ResetPath();
 
                     //Randomly wait a time in each 
@@ -142,7 +151,10 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     break;
 
                 case AgentState.Board:
+
+                    ArrStats.OnArrAgentDestroyed();
                     Destroy(gameObject);
+
                     break;
 
                 default:

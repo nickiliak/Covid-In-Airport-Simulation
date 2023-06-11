@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1121267112736129269}
   agentState: 0
+  EntryGateNumber: 0
   ChanceToUseRestroom: 0.2
   ChanceToCheckIn: 0.7
   ChanceToShop: 0.4
