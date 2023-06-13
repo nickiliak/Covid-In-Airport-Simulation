@@ -6,6 +6,7 @@ using UnityEngine;
 public class ArrivingAgentsSpawner : MonoBehaviour
 {
     public GameObject agentPrefab; // Prefab of the agent to spawn
+    public GameObject Parent;
     public float minSpawnDelay = 10f; // Minimum delay between spawns
     public float maxSpawnDelay = 30f; // Maximum delay between spawns
     public int minSpawnCount = 10;
@@ -51,6 +52,9 @@ public class ArrivingAgentsSpawner : MonoBehaviour
 
                 //Agent Number and Flight Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
+
+                //Set Parent for agents so that its organized
+                newAgent.transform.parent = Parent.transform;
 
                 //Set color for this agent so all agents of this flight have the same color
                 Renderer agentRenderer = newAgent.GetComponent<Renderer>();

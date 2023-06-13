@@ -31,6 +31,9 @@ public class DepartedAgentMovement : MonoBehaviour
     
     DepStatsData DepStats;
 
+    SpawnAgentBaggage SpawnBaggage;
+    GameObject SuitCase;
+
     void Start()
     {
         //Initial State
@@ -43,7 +46,16 @@ public class DepartedAgentMovement : MonoBehaviour
 
         //Randomly make them need to use the bathroom or not
         if (Random.value < ChanceToUseRestroom) NeedsRestroom = true;
-        if (Random.value < ChanceToHaveBaggage) NeedsBaggage = true;
+        if (Random.value < ChanceToHaveBaggage) {
+            //Pick one of two possible conveyor belts
+            if(Random.Range(0, 2) == 0) SpawnBaggage = GameObject.Find("SpawnPoint1").GetComponent<SpawnAgentBaggage>();
+            else SpawnBaggage = GameObject.Find("SpawnPoint2").GetComponent<SpawnAgentBaggage>(); 
+
+            //Spawn SuitCase
+            SuitCase = SpawnBaggage.SpawnBaggage(name);
+
+            NeedsBaggage = true; 
+        }
         if (Random.value < ChanceToWantACar) NeedsCar = true;
     }
 
@@ -105,18 +117,11 @@ public class DepartedAgentMovement : MonoBehaviour
                     break;
 
                 case AgentState.BaggageClaim:
-                    //Randomly pick one of the conveyor belts
-                    destinations.Add(Airport.transform.Find(FirstSectionAreas +
-                        "/BaggageClaim/PickUp" + " (" + Random.Range(1, 3).ToString() + ")" +
-                        "/Items" + "/SuitCase" + " (" + Random.Range(0, 8).ToString() + ")"
-                        ).position);
 
                     DepStats.OnDepAgentBaggage();
                     navMeshAgent.ResetPath();
+                    navMeshAgent.destination = SuitCase.transform.position;
 
-                    //Randomly wait a time in each 
-                    WaitTime.Add(Random.Range(1f, 2f));
-                    WaitTime.Add(Random.Range(1f, 2f));
                     break;
 
                 case AgentState.CarRental:
@@ -149,7 +154,16 @@ public class DepartedAgentMovement : MonoBehaviour
     }
     IEnumerator StateBehavior()
     {
-        if(destinations.Count != 0)
+        if(agentState== AgentState.BaggageClaim) //Special Case
+        {
+            if(Vector3.Distance(transform.position, SuitCase.transform.position) < 2.5f)
+            {
+                agentState = AgentState.None;
+                AreaBehaviour = false;
+                Destroy(SuitCase);
+            }
+        }
+        else if(destinations.Count != 0) //General Case
         {
             if (navMeshAgent.hasPath == false)
             {

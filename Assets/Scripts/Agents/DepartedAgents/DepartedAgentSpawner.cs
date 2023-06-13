@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class DepartedAgentSpawner : MonoBehaviour
 {
     public GameObject agentPrefab; // Prefab of the agent to spawn
+    public GameObject Parent;
     public float minSpawnDelay = 10f; // Minimum delay between spawns
     public float maxSpawnDelay = 30f; // Maximum delay between spawns
     public int minSpawnCount = 10;
     public int maxSpawnCount = 20;
     public float waitTime = 30f;
+    
 
     private int FlightNo = 0;
 
@@ -34,7 +37,10 @@ public class DepartedAgentSpawner : MonoBehaviour
                 Vector3 AgentPos = transform.position;
                 AgentPos.x = AgentPos.x + Random.Range(-5f, 5f);
                 GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
-              
+
+                //Set Parent for agents so that its organized
+                newAgent.transform.parent = Parent.transform;
+
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
 
