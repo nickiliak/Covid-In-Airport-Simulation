@@ -15,8 +15,8 @@ NavMeshProjectSettings:
     cost: 3
   - name: ArrivingAgentsOnly
     cost: 4
-  - name: 
-    cost: 1
+  - name: AfterCheckIn
+    cost: 5
   - name: 
     cost: 1
   - name: 

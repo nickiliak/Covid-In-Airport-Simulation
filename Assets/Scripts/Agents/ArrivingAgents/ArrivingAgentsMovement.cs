@@ -95,7 +95,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
             {
                 case AgentState.CheckIn:
                     //Randomly Select One Office
-                    destinations.Add(Airport.transform.Find(FirstSectionAreas + "/CheckIn/Office" + " (" + Random.Range(0,6).ToString() + ")").position);
+                    destinations.Add(Airport.transform.Find(FirstSectionAreas + "/CheckIn/Targets/" + "Target (" + Random.Range(0,6).ToString() + ")").position);
 
                     ArrStats.OnArrAgentCheckIn();
                     navMeshAgent.ResetPath();
@@ -177,6 +177,8 @@ public class ArrivingAgentsMovement : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
                 {
+                    if(agentState == AgentState.CheckIn) navMeshAgent.areaMask |= (1 << NavMesh.GetAreaFromName("AfterCheckIn"));
+
                     navMeshAgent.ResetPath();
                     destinations.Remove(destinations[0]);
                     Waiting = true;
