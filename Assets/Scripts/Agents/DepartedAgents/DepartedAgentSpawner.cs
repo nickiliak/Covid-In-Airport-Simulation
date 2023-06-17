@@ -5,6 +5,7 @@ using UnityEngine;
 public class DepartedAgentSpawner : MonoBehaviour
 {
     public GameObject agentPrefab; // Prefab of the agent to spawn
+    public GameObject Parent;      // Parent to spawn the object below to
     public float minSpawnDelay = 10f; // Minimum delay between spawns
     public float maxSpawnDelay = 30f; // Maximum delay between spawns
     public int minSpawnCount = 10;
@@ -34,7 +35,10 @@ public class DepartedAgentSpawner : MonoBehaviour
                 Vector3 AgentPos = transform.position;
                 AgentPos.x = AgentPos.x + Random.Range(-5f, 5f);
                 GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
-              
+
+                //Set Parent for agents so that its organized
+                newAgent.transform.parent = Parent.transform;
+
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
 
