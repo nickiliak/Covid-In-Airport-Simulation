@@ -11,7 +11,7 @@ public class ConveyorBelt : MonoBehaviour
     {
 
         Transform Trans = other.GetComponent<Transform>();
-        if (Trans != null)
+        if (Trans != null && other.tag == "SuitCase")
         {
             Trans.position = Trans.position + speed*direction;
         }
