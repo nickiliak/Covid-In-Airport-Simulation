@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AgentCounter : MonoBehaviour
 {
-    private int objectsTouchingFloor = 0;
+    public int objectsTouchingFloor = 0;
     TextMesh AgentCounterText;
 
     void Start()

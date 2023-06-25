@@ -25,8 +25,18 @@ public class UIController : MonoBehaviour
     [SerializeField] Button CloseCamera;
     [SerializeField] GameObject CameraWindow;
 
+    [Space(10)]
+
+    [SerializeField] Button OnOffHeatmap;
+    [SerializeField] GameObject Heatmap;
+    [SerializeField] GameObject AirportPlane;
+
+
+    GameObject[] AgentCounters;
     void Start()
     {
+        AgentCounters = GameObject.FindGameObjectsWithTag("AgentCounterTag");
+
         StatsWindow.SetActive(false);
         OpenStats.onClick.AddListener(OpenStatsWindow); // add the PrintMessage function to the button's onClick event
         CloseStats.onClick.AddListener(CloseStatsWindow); // add the PrintMessage function to the button's onClick event
@@ -38,6 +48,8 @@ public class UIController : MonoBehaviour
         CameraWindow.SetActive(false);
         OpenCamera.onClick.AddListener(OpenCameraWindow); // add the PrintMessage function to the button's onClick event
         CloseCamera.onClick.AddListener(CloseCameraWindow); // add the PrintMessage function to the button's onClick event
+
+        OnOffHeatmap.onClick.AddListener(OnOffHeatmapFunc);
     }
     void OpenStatsWindow()
     {
@@ -77,5 +89,27 @@ public class UIController : MonoBehaviour
     void CloseCameraWindow()
     {
         CameraWindow.SetActive(false);
+    }
+
+    void OnOffHeatmapFunc()
+    {
+        if(Heatmap.active)
+        {
+            Color greenColor = Color.red;
+            Image buttonImage = OnOffHeatmap.GetComponent<Image>();
+            buttonImage.color = greenColor;
+
+            Heatmap.SetActive(false);
+            AirportPlane.SetActive(true);
+        }
+        else
+        {
+            Color greenColor = Color.green;
+            Image buttonImage = OnOffHeatmap.GetComponent<Image>();
+            buttonImage.color = greenColor;
+
+            AirportPlane.SetActive(false);
+            Heatmap.SetActive(true);
+        }
     }
 }

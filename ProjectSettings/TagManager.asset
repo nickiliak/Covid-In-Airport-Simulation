@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Agent
   - SuitCase
+  - AgentCounterTag
   layers:
   - Default
   - TransparentFX
