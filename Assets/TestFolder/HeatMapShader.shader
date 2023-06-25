@@ -52,7 +52,8 @@ Shader "Unlit/HeatMapShader"
             float4 colors[5];
             float pointranges[5];
 
-            float _Hits[1000];
+            float _HitsX[1000];
+            float _HitsY[1000];
             int _HitCount = 0;
 
             float4 _Color0;
@@ -128,9 +129,9 @@ Shader "Unlit/HeatMapShader"
                 uv = uv * 4.0 - float2(2.0, 2.0); //change uv coordinate range to -2 - 2
 
                 float totalWeight = 0;
-                for (float i = 0; i < _HitCount; i = i + 2) {
-                    float2 work_pt = float2(_Hits[i + 0], _Hits[i + 1]);
-                    float pt_intensity = 0.5f;
+                for (float i = 0; i < _HitCount; i++) {
+                    float2 work_pt = float2(_HitsX[i], _HitsY[i]);
+                    float pt_intensity = 1;
 
                     totalWeight += 0.5 * distsq(uv, work_pt) * pt_intensity;
 

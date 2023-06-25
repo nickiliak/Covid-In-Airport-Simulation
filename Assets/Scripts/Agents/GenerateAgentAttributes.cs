@@ -13,6 +13,8 @@ public class GenerateAgentAttributes : MonoBehaviour
     [SerializeField] float Proximity;
 
     public NavMeshAgent navMeshAgent;
+    public float HeatMapTimer;
+    public int HeatMapArrayPos;
     //Health status
 
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class GenerateAgentAttributes : MonoBehaviour
         navMeshAgent.speed = Speed;
         navMeshAgent.acceleration = Accelaration;  
         navMeshAgent.radius= Proximity;
+        HeatMapTimer = Time.time;
+        HeatMapArrayPos = -1;
     }
 
 }

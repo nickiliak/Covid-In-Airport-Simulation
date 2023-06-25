@@ -10,7 +10,9 @@ public class QuadScript1 : MonoBehaviour
     public GameObject go;
 
     Vector2 CurrPos = new Vector3(0, 0);
-    float[] mPoints;
+    float[] mPointsX;
+    float[] mPointsY;
+
     int mHitCount = 0;
     int Counter = 0;
     bool limitReached = false;
@@ -24,19 +26,31 @@ public class QuadScript1 : MonoBehaviour
         mMeshRenderer = GetComponent<MeshRenderer>();
         mMaterial = mMeshRenderer.material;
 
-        mPoints = new float[500 * 2];
+        mPointsX = new float[1000];
+        mPointsY= new float[1000];
         lastEntryTime = Time.time;
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        GenerateAgentAttributes collidedObjectData = collision.gameObject.GetComponent<GenerateAgentAttributes>();
 
-        /*if (Time.time - lastEntryTime >= 0.1f)
-        {*/
-            lastEntryTime = Time.time;
+        if (Time.time - collidedObjectData.HeatMapTimer >= 0.1f)
+        {
+            collidedObjectData.HeatMapTimer = Time.time; 
+            if(collidedObjectData.HeatMapArrayPos == -1)
+            {
+                Debug.Log(Counter);
+
+                if (Counter > 999) { Counter = 0; limitReached = true; }
+                collidedObjectData.HeatMapArrayPos = Counter;
+                Counter++;
+
+                if (limitReached == false) mHitCount++;
+            }
             foreach (ContactPoint cp in collision.contacts)
             {
-                Debug.Log("Contact with object" + cp.otherCollider.gameObject.name);
+                //Debug.Log("Contact with object" + cp.otherCollider.gameObject.name);
                 Vector3 StartOfRay = cp.point - cp.normal;
                 Vector3 RayDir = cp.normal;
 
@@ -47,26 +61,21 @@ public class QuadScript1 : MonoBehaviour
 
                 if (hitit)
                 {
-                    Debug.Log("Hit" + collision.gameObject.name + hit.collider.gameObject.name);
-                    Debug.Log("Hit Texture coords = " + hit.textureCoord.x + "," + hit.textureCoord.y);
-                    addHitPoint(hit.textureCoord.x * 4 - 2, hit.textureCoord.y * 4 - 2);
+                    //Debug.Log("Hit" + collision.gameObject.name + hit.collider.gameObject.name);
+                    //Debug.Log("Hit Texture coords = " + hit.textureCoord.x + "," + hit.textureCoord.y);
+                    addHitPoint(hit.textureCoord.x * 4 - 2, hit.textureCoord.y * 4 - 2, collidedObjectData.HeatMapArrayPos);
                 }
             }
-        //}
+        }
 
     }
 
-    public void addHitPoint(float xp, float yp)
+    public void addHitPoint(float xp, float yp, int HeatMapArrayPos)
     {
-
-        if (Counter > 200) { Counter = 0; limitReached = true; }
-        else Counter = Counter + 2;
-
-        mPoints[Counter] = xp;
-        mPoints[Counter + 1] = yp;
-        if(limitReached == false) mHitCount = mHitCount + 2;
-
-        mMaterial.SetFloatArray("_Hits", mPoints);
-        mMaterial.SetInt("_HitCount", mHitCount); 
+        mPointsX[HeatMapArrayPos] = xp;
+        mPointsY[HeatMapArrayPos] = yp;
+        mMaterial.SetFloatArray("_HitsX", mPointsX);
+        mMaterial.SetFloatArray("_HitsY", mPointsY);
+        mMaterial.SetInt("_HitCount", mHitCount);
     }
 }
