@@ -91,7 +91,7 @@ public class DepartedAgentMovement : MonoBehaviour
             agentState = AgentState.ExitAirport;
 
             //Target at the middle of the plane
-            Vector3 ExitPosition = Airport.transform.Find("Planes/ExitPlane/Target").position;
+            Vector3 ExitPosition = Airport.transform.Find("Planes/ExitPlane/Target").position;  
             //Randomly pick a point of the plane to go to and exit the airport
             navMeshAgent.destination = new Vector3(ExitPosition.x + Random.Range(-70,70), ExitPosition.y, ExitPosition.z);
         }
