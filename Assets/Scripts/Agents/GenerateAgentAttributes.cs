@@ -15,6 +15,7 @@ public class GenerateAgentAttributes : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public float HeatMapTimer;
     public int HeatMapArrayPos;
+
     //Health status
 
     // Start is called before the first frame update

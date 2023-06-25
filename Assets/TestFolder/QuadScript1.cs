@@ -35,17 +35,15 @@ public class QuadScript1 : MonoBehaviour
     {
         GenerateAgentAttributes collidedObjectData = collision.gameObject.GetComponent<GenerateAgentAttributes>();
 
-        if (Time.time - collidedObjectData.HeatMapTimer >= 0.1f)
+        if (collidedObjectData != null && Time.time - collidedObjectData.HeatMapTimer >= 0.1f)
         {
             collidedObjectData.HeatMapTimer = Time.time; 
             if(collidedObjectData.HeatMapArrayPos == -1)
             {
                 Debug.Log(Counter);
-
                 if (Counter > 999) { Counter = 0; limitReached = true; }
                 collidedObjectData.HeatMapArrayPos = Counter;
                 Counter++;
-
                 if (limitReached == false) mHitCount++;
             }
             foreach (ContactPoint cp in collision.contacts)
