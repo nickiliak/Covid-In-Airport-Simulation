@@ -11,8 +11,11 @@ public class GenerateAgentAttributes : MonoBehaviour
     [SerializeField] float Speed;
     [SerializeField] float Accelaration;
     [SerializeField] float Proximity;
+    [SerializeField] float Drag;
+    [SerializeField] float AngularDrag;
 
     public NavMeshAgent navMeshAgent;
+    public Rigidbody rb;
     public float HeatMapTimer;
     public int HeatMapArrayPos;
 
@@ -25,9 +28,13 @@ public class GenerateAgentAttributes : MonoBehaviour
         Accelaration = Random.Range(4f, 10f);
         Proximity = Random.Range(0.5f, 1f);
 
+        rb.drag = 100f;
+        rb.angularDrag = 100f;
+
         navMeshAgent.speed = Speed;
         navMeshAgent.acceleration = Accelaration;  
         navMeshAgent.radius= Proximity;
+
         HeatMapTimer = Time.time;
         HeatMapArrayPos = -1;
     }

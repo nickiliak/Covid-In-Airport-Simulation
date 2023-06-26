@@ -124,7 +124,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                     destinations.Add(Airport.transform.Find(SecondSectionAreas +
                         "/Shop/ShopBuild" + "/Items" + " (" + Random.Range(0, 5).ToString() + ")").position);
                     destinations.Add(Airport.transform.Find(SecondSectionAreas +
-                        "/Shop/ShopBuild" + "/CheckOut").position);
+                        "/Shop/ShopBuild" + "/Target (1)").position);
 
                     ArrStats.OnArrAgentShop();
                     navMeshAgent.ResetPath();

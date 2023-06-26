@@ -176,7 +176,12 @@ MonoBehaviour:
   Speed: 0
   Accelaration: 0
   Proximity: 0
+  Drag: 0
+  AngularDrag: 0
   navMeshAgent: {fileID: 1121267112736129269}
+  rb: {fileID: 4611117111947955232}
+  HeatMapTimer: 0
+  HeatMapArrayPos: 0
 --- !u!54 &4611117111947955232
 Rigidbody:
   m_ObjectHideFlags: 0

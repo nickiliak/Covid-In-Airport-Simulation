@@ -32,10 +32,10 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject AirportPlane;
 
 
-    GameObject[] AgentCounters;
+    AgentCounter[] AgentCounters;
     void Start()
     {
-        AgentCounters = GameObject.FindGameObjectsWithTag("AgentCounterTag");
+        AgentCounters = FindObjectsOfType<AgentCounter>();
 
         StatsWindow.SetActive(false);
         OpenStats.onClick.AddListener(OpenStatsWindow); // add the PrintMessage function to the button's onClick event
@@ -101,6 +101,11 @@ public class UIController : MonoBehaviour
 
             Heatmap.SetActive(false);
             AirportPlane.SetActive(true);
+
+            foreach (AgentCounter AgentCounter_ in AgentCounters)
+            {
+                AgentCounter_.objectsTouchingFloor = 0;
+            }
         }
         else
         {
