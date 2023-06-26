@@ -46,7 +46,6 @@ public class CameraUIControl : MonoBehaviour
             CurrentCamera = Camera.GetComponent<Camera>();
             CurrentCamera.enabled = true;
         }
-
-
+        gameObject.SetActive(false);
     }
 }

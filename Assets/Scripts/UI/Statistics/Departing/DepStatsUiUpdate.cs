@@ -15,11 +15,11 @@ public class DepStatsUiUpdate : MonoBehaviour
     void Start()
     {
         //Set our Objects
-        Created = transform.Find("Basic Stats/Departing/Created").GetComponent<TextMeshProUGUI>();
-        Destroyed = transform.Find("Basic Stats/Departing/Destroyed").GetComponent<TextMeshProUGUI>();
-        Baggage = transform.Find("ExtraDeparting/Baggage/Number").GetComponent<TextMeshProUGUI>();
-        Restroom = transform.Find("ExtraDeparting/Restroom/Number").GetComponent<TextMeshProUGUI>();
-        Car = transform.Find("ExtraDeparting/Car/Number").GetComponent<TextMeshProUGUI>();
+        Created = transform.Find("Basic Stats/Outgoing/Created").GetComponent<TextMeshProUGUI>();
+        Destroyed = transform.Find("Basic Stats/Outgoing/Destroyed").GetComponent<TextMeshProUGUI>();
+        Baggage = transform.Find("ExtraOutgoing/Baggage/Number").GetComponent<TextMeshProUGUI>();
+        Restroom = transform.Find("ExtraOutgoing/Restroom/Number").GetComponent<TextMeshProUGUI>();
+        Car = transform.Find("ExtraOutgoing/Car/Number").GetComponent<TextMeshProUGUI>();
     }
 
     void OnEnable()

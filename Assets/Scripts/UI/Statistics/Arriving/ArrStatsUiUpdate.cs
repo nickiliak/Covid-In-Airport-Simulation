@@ -15,12 +15,12 @@ public class ArrStatsUiUpdate : MonoBehaviour
     void Start()
     {
         //Set our Objects
-        Created = transform.Find("Basic Stats/Arriving/Created").GetComponent<TextMeshProUGUI>();
-        Destroyed = transform.Find("Basic Stats/Arriving/Destroyed").GetComponent<TextMeshProUGUI>();
-        CheckIn = transform.Find("ExtraArriving/CheckIn/Number").GetComponent<TextMeshProUGUI>();
-        Restroom = transform.Find("ExtraArriving/Restroom/Number").GetComponent<TextMeshProUGUI>();
-        Shop = transform.Find("ExtraArriving/Shop/Number").GetComponent<TextMeshProUGUI>();
-        Eat = transform.Find("ExtraArriving/Ate/Number").GetComponent<TextMeshProUGUI>();
+        Created = transform.Find("Basic Stats/Incoming/Created").GetComponent<TextMeshProUGUI>();
+        Destroyed = transform.Find("Basic Stats/Incoming/Destroyed").GetComponent<TextMeshProUGUI>();
+        CheckIn = transform.Find("ExtraIncoming/CheckIn/Number").GetComponent<TextMeshProUGUI>();
+        Restroom = transform.Find("ExtraIncoming/Restroom/Number").GetComponent<TextMeshProUGUI>();
+        Shop = transform.Find("ExtraIncoming/Shop/Number").GetComponent<TextMeshProUGUI>();
+        Eat = transform.Find("ExtraIncoming/Ate/Number").GetComponent<TextMeshProUGUI>();
     }
 
     void OnEnable()
