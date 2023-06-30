@@ -38,5 +38,4 @@ public class GenerateAgentAttributes : MonoBehaviour
         HeatMapTimer = Time.time;
         HeatMapArrayPos = -1;
     }
-
 }

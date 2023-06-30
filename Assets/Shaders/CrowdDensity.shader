@@ -1,4 +1,4 @@
-Shader "Unlit/HeatMapShader"
+Shader "Unlit/CrowdDensityShader"
 {
     Properties
     {
@@ -54,6 +54,7 @@ Shader "Unlit/HeatMapShader"
 
             float _HitsX[1000];
             float _HitsY[1000];
+            float _ValidHits[1000];
             int _HitCount = 0;
 
             float4 _Color0;
@@ -130,11 +131,12 @@ Shader "Unlit/HeatMapShader"
 
                 float totalWeight = 0;
                 for (float i = 0; i < _HitCount; i++) {
-                    float2 work_pt = float2(_HitsX[i], _HitsY[i]);
-                    float pt_intensity = 1;
+                    if (_ValidHits[i] == 1) {
+                        float2 work_pt = float2(_HitsX[i], _HitsY[i]);
+                        float pt_intensity = 1;
 
-                    totalWeight += 0.5 * distsq(uv, work_pt) * pt_intensity;
-
+                        totalWeight += 0.5 * distsq(uv, work_pt) * pt_intensity;
+                    }
                 }
 
                 float3 heat = getHeatForPixel(totalWeight);
