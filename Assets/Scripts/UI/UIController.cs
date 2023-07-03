@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,9 +24,14 @@ public class UIController : MonoBehaviour
 
     [Space(10)]
 
+    [SerializeField] Button OnoffCrowdDensity;
+    [SerializeField] GameObject CrowdDensity;
+    [SerializeField] GameObject AirportPlane;
+
+    [Space(10)]
     [SerializeField] Button OnOffHeatmap;
     [SerializeField] GameObject Heatmap;
-    [SerializeField] GameObject AirportPlane;
+
 
 
     AgentCounter[] AgentCounters;
@@ -49,6 +51,7 @@ public class UIController : MonoBehaviour
         OpenCamera.onClick.AddListener(OpenCameraWindow); // add the PrintMessage function to the button's onClick event
         CloseCamera.onClick.AddListener(CloseCameraWindow); // add the PrintMessage function to the button's onClick event
 
+        OnoffCrowdDensity.onClick.AddListener(OnOffCrowdDensity);
         OnOffHeatmap.onClick.AddListener(OnOffHeatmapFunc);
     }
     void OpenStatsWindow()
@@ -91,15 +94,15 @@ public class UIController : MonoBehaviour
         CameraWindow.SetActive(false);
     }
 
-    void OnOffHeatmapFunc()
+    void OnOffCrowdDensity()
     {
-        if(Heatmap.active)
+        if(Heatmap.activeInHierarchy)
         {
             Color greenColor = Color.red;
-            Image buttonImage = OnOffHeatmap.GetComponent<Image>();
+            Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
             buttonImage.color = greenColor;
 
-            Heatmap.SetActive(false);
+            CrowdDensity.SetActive(false);
             AirportPlane.SetActive(true);
 
             foreach (AgentCounter AgentCounter_ in AgentCounters)
@@ -110,11 +113,17 @@ public class UIController : MonoBehaviour
         else
         {
             Color greenColor = Color.green;
-            Image buttonImage = OnOffHeatmap.GetComponent<Image>();
+            Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
             buttonImage.color = greenColor;
 
             AirportPlane.SetActive(false);
-            Heatmap.SetActive(true);
+            CrowdDensity.SetActive(true);
         }
+    }
+
+    void OnOffHeatmapFunc()
+    {
+        HeatmapController HmC = Heatmap.GetComponent<HeatmapController>();
+        HmC.AddSelectedEventsToHeatmap();
     }
 }

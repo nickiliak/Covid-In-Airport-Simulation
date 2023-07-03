@@ -1,0 +1,15 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct Code {
+	float3 position;
+	float4 color;
+};
+RWStructuredBuffer<Code> Positions;
+float resolution;
+
+[numthreads(10,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+
+}

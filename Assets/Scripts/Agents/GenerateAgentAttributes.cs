@@ -16,9 +16,8 @@ public class GenerateAgentAttributes : MonoBehaviour
 
     public NavMeshAgent navMeshAgent;
     public Rigidbody rb;
-    public float HeatMapTimer;
-    public int HeatMapArrayPos;
-
+    public int CrowdDensityPos;
+    public float HeatmapTimer;
     //Health status
 
     // Start is called before the first frame update
@@ -35,7 +34,7 @@ public class GenerateAgentAttributes : MonoBehaviour
         navMeshAgent.acceleration = Accelaration;  
         navMeshAgent.radius= Proximity;
 
-        HeatMapTimer = Time.time;
-        HeatMapArrayPos = -1;
+        CrowdDensityPos = -1;
+        HeatmapTimer = Time.time;
     }
 }

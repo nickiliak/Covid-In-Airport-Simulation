@@ -8,7 +8,7 @@ public class CleanUp : MonoBehaviour
     {
         //Remove position from crowd density array 
         GenerateAgentAttributes GA = gameObject.GetComponent<GenerateAgentAttributes>();
-        CrowdDensity scriptA = FindObjectOfType<CrowdDensity>();
-        scriptA.ValidPoints[GA.HeatMapArrayPos] = 0f;
+        CrowdDensity CD = FindObjectOfType<CrowdDensity>();
+        if(CD != null) CD.ValidPoints[GA.CrowdDensityPos] = 0f;
     }
 }

@@ -34,11 +34,10 @@ public class CrowdDensity : MonoBehaviour
 
         if (collidedObjectData != null)
         {
-            if(collidedObjectData.HeatMapArrayPos == -1)
+            if(collidedObjectData.CrowdDensityPos == -1)
             {
-                Debug.Log(Counter);
                 if (Counter > 999) { Counter = 0; limitReached = true; }
-                collidedObjectData.HeatMapArrayPos = Counter;
+                collidedObjectData.CrowdDensityPos = Counter;
                 ValidPoints[Counter] = 1f;
                 Counter++;
                 if (limitReached == false) mHitCount++;
@@ -54,15 +53,10 @@ public class CrowdDensity : MonoBehaviour
             bool hitit = Physics.Raycast(ray, out hit, 10f, LayerMask.GetMask("HeatMapLayer"));
 
             if (hitit)
-                addHitPoint(hit.textureCoord.x * 4 - 2, hit.textureCoord.y * 4 - 2, collidedObjectData.HeatMapArrayPos);
+                addHitPoint(hit.textureCoord.x * 4 - 2, hit.textureCoord.y * 4 - 2, collidedObjectData.CrowdDensityPos);
                 
         }
 
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        print("test");
     }
 
     public void addHitPoint(float xp, float yp, int HeatMapArrayPos)

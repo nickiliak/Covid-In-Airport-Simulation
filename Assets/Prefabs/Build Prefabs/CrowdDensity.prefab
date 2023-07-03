@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8017365948087686112}
   - component: {fileID: 1325492176984430461}
   m_Layer: 6
-  m_Name: HeatMap
+  m_Name: CrowdDensity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8017365948087686114}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 140, y: 0, z: 46}
-  m_LocalScale: {x: 300, y: 150, z: 10}
+  m_LocalScale: {x: 300, y: 300, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 88ffa5da569957441ae4e2baec505557, type: 2}
+  - {fileID: 2100000, guid: 2b0254cdee3502d4cafb7cf978666d19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,4 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a34f499937f8ad43a3bfbcd96d617e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 0}
+  mPointsX: []
+  mPointsY: []
+  ValidPoints: []
