@@ -32149,8 +32149,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
+      propertyPath: Points.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
+      propertyPath: settings.colorCutoff
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
       propertyPath: settings.particleSize
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
       propertyPath: settings.colorMultiplier
@@ -32158,19 +32166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
       propertyPath: settings.particleDistance
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2181364716944852008, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
       propertyPath: settings.heightInParticles
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181364716944852009, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
-      propertyPath: m_Size.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 2181364716944852009, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
-      propertyPath: m_Size.z
-      value: 135
       objectReference: {fileID: 0}
     - target: {fileID: 2181364716944852010, guid: e63339b6ab2afc342828f65cca562ab7, type: 3}
       propertyPath: m_Name
@@ -41062,6 +41062,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dea444dbef939d45b03b6b8496f3ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &854468849
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854468844}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 250, y: 1, z: 135}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &856653185
 GameObject:
   m_ObjectHideFlags: 0
@@ -57059,14 +57072,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238185160}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
   m_LocalPosition: {x: -3.81, y: 11.2, z: -15.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 291215213}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 86.456, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1 &1238750169
 GameObject:
   m_ObjectHideFlags: 0

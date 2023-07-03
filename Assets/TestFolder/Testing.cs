@@ -10,12 +10,26 @@ public class Testing : MonoBehaviour
     {
         GenerateAgentAttributes collidedObjectData = collision.gameObject.GetComponent<GenerateAgentAttributes>();
 
-        if (collidedObjectData != null && Time.time - collidedObjectData.HeatmapTimer > 1f)
+        if (collidedObjectData != null && Time.time - collidedObjectData.HeatmapTimer > 0.5f)
         {
             collidedObjectData.HeatmapTimer = Time.time;
-            HeatmapController HmC = GetComponent<HeatmapController>();
-            HmC.Points.Add(collision.transform.position);
+            StartCoroutine(AddThenRemove(collidedObjectData, collision.transform.position, 7f));
+       
         }
+
+    }
+    private IEnumerator AddThenRemove(GenerateAgentAttributes collidedObjectData, Vector3 position, float delaySeconds)
+    {
+        HeatmapController HmC = GetComponent<HeatmapController>();
+        
+        // Add item to list
+        HmC.Points.Add(position);
+
+        yield return new WaitForSeconds(delaySeconds);
+
+        // Delete item from the list
+        HmC.Points.Remove(position);
+
 
     }
 }

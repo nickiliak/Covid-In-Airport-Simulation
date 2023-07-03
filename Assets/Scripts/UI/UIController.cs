@@ -96,7 +96,7 @@ public class UIController : MonoBehaviour
 
     void OnOffCrowdDensity()
     {
-        if(Heatmap.activeInHierarchy)
+        if(CrowdDensity.activeInHierarchy)
         {
             Color greenColor = Color.red;
             Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
@@ -123,7 +123,38 @@ public class UIController : MonoBehaviour
 
     void OnOffHeatmapFunc()
     {
-        HeatmapController HmC = Heatmap.GetComponent<HeatmapController>();
-        HmC.AddSelectedEventsToHeatmap();
+        ParticleSystem HeatmapParticleSystem = Heatmap.GetComponent<ParticleSystem>();
+        Renderer particleRenderer = HeatmapParticleSystem.GetComponent<Renderer>();
+        
+
+        if (particleRenderer.enabled)
+        {
+            Color greenColor = Color.red;
+            Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
+            buttonImage.color = greenColor;
+
+            particleRenderer.enabled = false;
+
+            CrowdDensity.SetActive(false);
+            AirportPlane.SetActive(true);
+
+            foreach (AgentCounter AgentCounter_ in AgentCounters)
+            {
+                AgentCounter_.objectsTouchingFloor = 0;
+            }
+        }
+        else
+        {
+            Color greenColor = Color.green;
+            Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
+            buttonImage.color = greenColor;
+
+            HeatmapController HmC = Heatmap.GetComponent<HeatmapController>();
+            HmC.AddSelectedEventsToHeatmap();
+
+            particleRenderer.enabled = true;
+            AirportPlane.SetActive(false);
+            CrowdDensity.SetActive(false);
+        }
     }
 }
