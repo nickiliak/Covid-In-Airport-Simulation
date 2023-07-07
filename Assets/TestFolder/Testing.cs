@@ -13,7 +13,7 @@ public class Testing : MonoBehaviour
         if (collidedObjectData != null && Time.time - collidedObjectData.HeatmapTimer > 0.5f)
         {
             collidedObjectData.HeatmapTimer = Time.time;
-            StartCoroutine(AddThenRemove(collidedObjectData, collision.transform.position, 7f));
+            StartCoroutine(AddThenRemove(collidedObjectData, collision.transform.position, 0f));
        
         }
 
@@ -28,7 +28,7 @@ public class Testing : MonoBehaviour
         yield return new WaitForSeconds(delaySeconds);
 
         // Delete item from the list
-        HmC.Points.Remove(position);
+        // HmC.Points.Remove(position);
 
 
     }
