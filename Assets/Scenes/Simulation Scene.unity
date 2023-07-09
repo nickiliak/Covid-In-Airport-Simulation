@@ -4269,8 +4269,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 701584694}
+  m_Children: []
   m_Father: {fileID: 544075947}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23204,7 +23203,7 @@ Transform:
   - {fileID: 1538583489}
   - {fileID: 64806081}
   m_Father: {fileID: 1956769449}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545808827
 GameObject:
@@ -30285,13 +30284,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd84d02a56037ea4a8c18ef295546f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
-  Parent: {fileID: 514364551}
-  minSpawnDelay: 1
-  maxSpawnDelay: 5
-  minSpawnCount: 10
-  maxSpawnCount: 20
-  waitTime: 30
+  AgentSettings:
+    ChanceToUseRestroom: 0.306
+    ChanceToCheckIn: 0.696
+    ChanceToShop: 0.396
+    ChanceToEat: 0.344
+  ArrivingSpawnerSettings:
+    agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
+    Parent: {fileID: 514364551}
+    minSpawnDelay: 10
+    maxSpawnDelay: 30
+    minSpawnCount: 10
+    maxSpawnCount: 20
+    waitTime: 20
 --- !u!4 &659094713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6297472634452215652, guid: dcde5bc4b3d64ea4a8857cbe7153e2b7, type: 3}
@@ -34030,12 +34035,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701584693}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 70.5, y: 0, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 64806081}
+  m_Father: {fileID: 1536620949}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &701584695
@@ -46231,7 +46236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008986667}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 176.78099, y: 49.457386, z: 118.39776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -46850,13 +46855,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd84d02a56037ea4a8c18ef295546f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
-  Parent: {fileID: 514364551}
-  minSpawnDelay: 1
-  maxSpawnDelay: 5
-  minSpawnCount: 10
-  maxSpawnCount: 20
-  waitTime: 60
+  AgentSettings:
+    ChanceToUseRestroom: 0.306
+    ChanceToCheckIn: 0.696
+    ChanceToShop: 0.396
+    ChanceToEat: 0.344
+  ArrivingSpawnerSettings:
+    agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
+    Parent: {fileID: 514364551}
+    minSpawnDelay: 10
+    maxSpawnDelay: 30
+    minSpawnCount: 10
+    maxSpawnCount: 20
+    waitTime: 20
 --- !u!4 &1046512459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6297472634452215652, guid: dcde5bc4b3d64ea4a8857cbe7153e2b7, type: 3}
@@ -60597,13 +60608,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd84d02a56037ea4a8c18ef295546f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
-  Parent: {fileID: 514364551}
-  minSpawnDelay: 1
-  maxSpawnDelay: 5
-  minSpawnCount: 10
-  maxSpawnCount: 20
-  waitTime: 30
+  AgentSettings:
+    ChanceToUseRestroom: 0.306
+    ChanceToCheckIn: 0.696
+    ChanceToShop: 0.396
+    ChanceToEat: 0.344
+  ArrivingSpawnerSettings:
+    agentPrefab: {fileID: 7083532259587614262, guid: 7191fedd630a12c42ad07f11deef3d8e, type: 3}
+    Parent: {fileID: 514364551}
+    minSpawnDelay: 10
+    maxSpawnDelay: 30
+    minSpawnCount: 10
+    maxSpawnCount: 20
+    waitTime: 20
 --- !u!4 &1405307481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6297472634452215652, guid: dcde5bc4b3d64ea4a8857cbe7153e2b7, type: 3}
@@ -67308,6 +67325,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536291687}
   m_CullTransparentMesh: 1
+--- !u!1 &1536620948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536620949}
+  m_Layer: 0
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536620949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536620948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 701584694}
+  m_Father: {fileID: 1956769449}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538583488
 GameObject:
   m_ObjectHideFlags: 0
@@ -85600,6 +85649,7 @@ Transform:
   - {fileID: 633848057}
   - {fileID: 304864445}
   - {fileID: 1232841619}
+  - {fileID: 1536620949}
   - {fileID: 544075947}
   m_Father: {fileID: 0}
   m_RootOrder: 3

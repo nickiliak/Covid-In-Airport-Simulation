@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DepartedAgentsController : MonoBehaviour
+public class DepartedAgentsScheduler : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -10,7 +10,7 @@ public class DepartedAgentsController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+    // Schedule
     void Update()
     {
         

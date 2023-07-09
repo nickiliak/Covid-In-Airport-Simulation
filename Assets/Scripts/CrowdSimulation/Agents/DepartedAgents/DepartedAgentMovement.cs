@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Generating and executing the path the agent will use based on parameters
+/// </summary>
 public class DepartedAgentMovement : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
@@ -32,6 +35,7 @@ public class DepartedAgentMovement : MonoBehaviour
         if (Random.value < agentSettings.ChanceToHaveBaggage) NeedsBaggage = true;
         if (Random.value < agentSettings.ChanceToWantACar) NeedsCar = true;
 
+        //Generate the path the agents will walk on based on the parameters
         AgentPath = new DepartedAgentsPathGenerator(name, NeedsRestroom, NeedsBaggage, NeedsCar);
         destinations = AgentPath.Destinations[0];
         waitTimes = AgentPath.WaitTimes[0];
@@ -74,7 +78,10 @@ public class DepartedAgentMovement : MonoBehaviour
                 AgentPath.Destinations.Remove(AgentPath.Destinations[0]);
                 AgentPath.WaitTimes.Remove(AgentPath.WaitTimes[0]);
                 AgentPath.States.Remove(AgentPath.States[0]);
+            }
 
+            if (AgentPath.Destinations.Count != 0)
+            {
                 destinations = AgentPath.Destinations[0];
                 waitTimes = AgentPath.WaitTimes[0];
                 agentState = AgentPath.States[0];

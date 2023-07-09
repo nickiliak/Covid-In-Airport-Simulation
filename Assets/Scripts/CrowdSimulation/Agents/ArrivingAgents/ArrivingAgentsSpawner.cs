@@ -1,17 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ArrivingAgentsSpawner : MonoBehaviour
 {
-    public GameObject agentPrefab; // Prefab of the agent to spawn
-    public GameObject Parent;
-    public float minSpawnDelay = 10f; // Minimum delay between spawns
-    public float maxSpawnDelay = 30f; // Maximum delay between spawns
-    public int minSpawnCount = 10;
-    public int maxSpawnCount = 20;
-    public float waitTime = 120f;
+
+    [Serializable]
+    public class ArrivingAgentSettings
+    {
+        [Range(0f, 1f)]
+        public float ChanceToUseRestroom = 0.2f;
+        [Range(0f, 1f)]
+        public float ChanceToCheckIn = 0.4f;
+        [Range(0f, 1f)]
+        public float ChanceToShop = 0.3f;
+        [Range(0f, 1f)]
+        public float ChanceToEat = 0.5f;
+    }
+    public ArrivingAgentSettings AgentSettings = new();
+
+    [Serializable]
+    public class ArrivingAgentSpawnerSettings
+    {
+        public GameObject agentPrefab; // Prefab of the agent to spawn
+        public GameObject Parent;
+        public float minSpawnDelay = 10f; // Minimum delay between spawns
+        public float maxSpawnDelay = 30f; // Maximum delay between spawns
+        public int minSpawnCount = 10;
+        public int maxSpawnCount = 20;
+        public float waitTime = 120f;
+    }
+    public ArrivingAgentSpawnerSettings ArrivingSpawnerSettings = new();
 
     private int FlightNo = 0;
     private List<GameObject> agents = new List<GameObject>();
@@ -37,7 +59,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 agents.Clear();
             }
 
-            int agentCount = Random.Range(minSpawnCount, maxSpawnCount);
+            int agentCount = Random.Range(ArrivingSpawnerSettings.minSpawnCount, ArrivingSpawnerSettings.maxSpawnCount);
             Color randomColor = Random.ColorHSV();
             FlightNo++;
 
@@ -47,11 +69,11 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             {
                 Vector3 AgentPos = transform.position;
                 AgentPos.x = AgentPos.x + Random.Range(-80f, 80f);
-                GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
+                GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
 
                 //Set Parent for agents so that its organized
-                newAgent.transform.parent = Parent.transform;
+                newAgent.transform.parent = ArrivingSpawnerSettings.Parent.transform;
 
                 //Agent Number and Flight Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
@@ -69,9 +91,9 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             }
 
             //Wait until next flight is ready
-            float randomSpawnInterval = Random.Range(minSpawnDelay, maxSpawnDelay);
+            float randomSpawnInterval = Random.Range(ArrivingSpawnerSettings.minSpawnDelay, ArrivingSpawnerSettings.maxSpawnDelay);
             yield return new WaitForSeconds(randomSpawnInterval);
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(ArrivingSpawnerSettings.waitTime);
         }
     }
 }

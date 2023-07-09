@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
-/// Factory design pattern for generating the agents behavior for each area
+/// Generating points for the path of the agent
 /// </summary>
 public class DepartedAgentsPathGenerator 
 {
