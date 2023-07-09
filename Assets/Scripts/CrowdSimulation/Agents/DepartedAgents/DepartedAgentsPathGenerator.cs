@@ -98,7 +98,7 @@ public class DepartedAgentsPathGenerator
 
     private void GenerateBehaviorExit(out List<Vector3> destinations, out List<float> WaitTime)
     {
-        Vector3 ExitPosition = GameObject.Find("Planes/ExitPlane/Target").transform.position;
+        Vector3 ExitPosition = GameObject.Find("Exit/Target").transform.position;
 
         destinations = new List<Vector3>
         {
