@@ -12,13 +12,13 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     public class ArrivingAgentSettings
     {
         [Range(0f, 1f)]
-        public float ChanceToUseRestroom = 0.2f;
+        public float ChanceToUseRestroom;
         [Range(0f, 1f)]
-        public float ChanceToCheckIn = 0.4f;
+        public float ChanceToCheckIn;
         [Range(0f, 1f)]
-        public float ChanceToShop = 0.3f;
+        public float ChanceToShop;
         [Range(0f, 1f)]
-        public float ChanceToEat = 0.5f;
+        public float ChanceToEat;
     }
     public ArrivingAgentSettings AgentSettings = new();
 
@@ -68,7 +68,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             for (int i = 0; i < agentCount; i++)
             {
                 Vector3 AgentPos = transform.position;
-                AgentPos.x = AgentPos.x + Random.Range(-80f, 80f);
+                AgentPos.x = AgentPos.x + Random.Range(-40f, 40f);
                 GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
 
@@ -84,6 +84,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
 
                 ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
                 agentScript.EntryGateNumber = agentGate;
+                agentScript.agentSettings = AgentSettings;
 
                 //Wait a little bit until next Agent
                 float spawnDelay = Random.Range(0.1f, 2f);

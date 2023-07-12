@@ -10,8 +10,6 @@ public class ArrivingAgentsPathGenerator
     public List<AgentState> States;
 
     public GameObject SuitCase;
-
-    private string AgentName;
     void ListsAdd(List<Vector3> destinations, List<float> waitTime, AgentState state)
     {
         Destinations.Add(destinations);
@@ -25,25 +23,24 @@ public class ArrivingAgentsPathGenerator
         WaitTimes = new List<List<float>>();
         States = new List<AgentState>();
 
-        AgentName = name;
-
         List<Vector3> destinations;
         List<float> waitTime;
 
-        if (NeedsRestroom) { GenerateBehaviorBathroom(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Restroom); }
+        if (NeedsRestroom) { GenerateBehaviorBathroom1(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Restroom); }
         if (NeedsCheckIn) { GenerateBehaviorCheckIn(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.CheckIn); }
+        if (NeedsRestroom) { GenerateBehaviorBathroom2(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Restroom); }
         if (NeedsShop) { GenerateBehaviorShop(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Shop); }
         if (NeedsEat) { GenerateBehaviorEat(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Eat); }
         //GenerateBehaviorBoard(out destinations, out waitTime); ListsAdd(destinations, waitTime, AgentState.Board);
     }
 
-    private void GenerateBehaviorBathroom(out List<Vector3> destinations, out List<float> WaitTime)
+    private void GenerateBehaviorBathroom1(out List<Vector3> destinations, out List<float> WaitTime)
     {
         destinations = new List<Vector3>
         {
-            GameObject.Find("Bathroom/BathroomBuild/Target").transform.position,
-            GameObject.Find("Bathroom/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
-            GameObject.Find("Bathroom/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
+            GameObject.Find("Bathroom1/BathroomBuild/Target").transform.position,
+            GameObject.Find("Bathroom1/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
+            GameObject.Find("Bathroom1/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
         };
 
         WaitTime = new List<float>()
@@ -64,6 +61,23 @@ public class ArrivingAgentsPathGenerator
         WaitTime = new List<float>()
         {
             Random.Range(1f, 5f)
+        };
+    }
+
+    private void GenerateBehaviorBathroom2(out List<Vector3> destinations, out List<float> WaitTime)
+    {
+        destinations = new List<Vector3>
+        {
+            GameObject.Find("Bathroom2/BathroomBuild/Target").transform.position,
+            GameObject.Find("Bathroom2/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
+            GameObject.Find("Bathroom2/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
+        };
+
+        WaitTime = new List<float>()
+        {
+            0f,
+            Random.Range(1f, 3f),
+            Random.Range(1f, 3f)
         };
     }
 

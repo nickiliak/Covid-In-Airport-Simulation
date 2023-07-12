@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 7083532259587614262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 130.9985, y: 42.28501, z: -48.379913}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -136,7 +136,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.5
   m_BaseOffset: 1
   m_WalkableMask: 23
   m_ObstacleAvoidanceType: 4
@@ -169,12 +169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1121267112736129269}
+  agentSettings:
+    ChanceToUseRestroom: 0.2
+    ChanceToCheckIn: 0.4
+    ChanceToShop: 0.3
+    ChanceToEat: 0.5
   agentState: 0
   EntryGateNumber: 0
-  ChanceToUseRestroom: 0.2
-  ChanceToCheckIn: 0.7
-  ChanceToShop: 0.4
-  ChanceToEat: 0.7
   TimeToBoard: 0
 --- !u!114 &3727757614724893633
 MonoBehaviour:
@@ -197,8 +198,8 @@ MonoBehaviour:
   AngularDrag: 0
   navMeshAgent: {fileID: 1121267112736129269}
   rb: {fileID: 4611117111947955232}
-  HeatMapTimer: 0
-  HeatMapArrayPos: 0
+  CrowdDensityPos: 0
+  HeatmapTimer: 0
 --- !u!114 &2163138650694436516
 MonoBehaviour:
   m_ObjectHideFlags: 0

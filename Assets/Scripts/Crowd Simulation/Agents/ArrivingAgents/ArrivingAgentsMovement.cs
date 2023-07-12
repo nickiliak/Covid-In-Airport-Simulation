@@ -37,9 +37,12 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
         //Generate the path the agents will walk on based on the parameters
         AgentPath = new ArrivingAgentsPathGenerator(name, NeedsRestroom, NeedsCheckIn, NeedsShop, NeedsEat);
-        destinations = AgentPath.Destinations[0];
-        waitTimes = AgentPath.WaitTimes[0];
-        agentState = AgentPath.States[0];
+        if (AgentPath.Destinations.Count > 0)
+        {
+            destinations = AgentPath.Destinations[0];
+            waitTimes = AgentPath.WaitTimes[0];
+            agentState = AgentPath.States[0];
+        }
     }
 
     // Update is called once per frame
@@ -51,7 +54,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     void PathExecution()
     {
-        if (destinations.Count != 0)
+        if (destinations != null && destinations.Count != 0)
         {
             if (navMeshAgent.hasPath == false)
             {
@@ -72,7 +75,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                 }
             }
         }
-        else if (destinations.Count == 0)
+        else if (destinations != null && destinations.Count == 0)
         {
             if (AgentPath.Destinations.Count != 0)
             {
