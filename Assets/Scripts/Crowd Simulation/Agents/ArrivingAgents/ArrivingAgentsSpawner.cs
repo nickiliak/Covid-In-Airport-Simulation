@@ -27,11 +27,11 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     {
         public GameObject agentPrefab; // Prefab of the agent to spawn
         public GameObject Parent;
-        public float minSpawnDelay = 10f; // Minimum delay between spawns
-        public float maxSpawnDelay = 30f; // Maximum delay between spawns
-        public int minSpawnCount = 10;
-        public int maxSpawnCount = 20;
-        public float waitTime = 120f;
+        public float minSpawnDelay; // Minimum delay between spawns
+        public float maxSpawnDelay; // Maximum delay between spawns
+        public int minSpawnCount;
+        public int maxSpawnCount;
+        public float waitTime;
     }
     public ArrivingAgentSpawnerSettings ArrivingSpawnerSettings = new();
 

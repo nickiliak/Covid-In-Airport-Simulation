@@ -79,7 +79,7 @@ Shader "Unlit/CrowdDensityShader"
 
             float distsq(float2 a, float2 b)
             {
-                float area_of_effect_size = 0.1;
+                float area_of_effect_size = 0.05;
                 float d = pow(max(0.0, 1.0 - distance(a, b) / area_of_effect_size), 2);
 
                 return d;

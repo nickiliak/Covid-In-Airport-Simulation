@@ -55,7 +55,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeToWait();
+        TimeToWaitUntilBoard();
         IsTimeToBoard();
         HasBoarded();
         if (IsWaitingOver() && TimeToBoard == false) PathExecution();
@@ -103,13 +103,12 @@ public class ArrivingAgentsMovement : MonoBehaviour
         }
     }
 
-    void TimeToWait()
+    void TimeToWaitUntilBoard()
     {
         if (AgentPath.Destinations.Count == 0 && TimeToBoard == false && Waiting == false)
         {
-            agentState = ArrivingAgentsPathGenerator.AgentState.Board;
             navMeshAgent.ResetPath();
-            string ObjectPath = "GatesArr/Seats (" + Random.Range(0, 15).ToString()
+            string ObjectPath = "GatesArr/Seats (" + Random.Range(0, 14).ToString()
                 + ")/Group " + Random.Range(1, 3).ToString()
                 + "/Chair (" + Random.Range(0, 5).ToString() + ")";
             navMeshAgent.destination = GameObject.Find(ObjectPath).transform.position;
@@ -119,7 +118,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     void IsTimeToBoard()
     {
-        if (TimeToBoard == true)
+        if (TimeToBoard == true && agentState != ArrivingAgentsPathGenerator.AgentState.Board)
         {
             agentState = ArrivingAgentsPathGenerator.AgentState.Board;
             navMeshAgent.ResetPath();
@@ -129,9 +128,9 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     void HasBoarded()
     {
-        if(TimeToBoard == true && 
-            agentState == ArrivingAgentsPathGenerator.AgentState.Board 
-            && Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+        if(TimeToBoard == true 
+            && agentState == ArrivingAgentsPathGenerator.AgentState.Board 
+            && Vector3.Distance(transform.position, navMeshAgent.destination) < 1f)
         {
             Destroy(gameObject);
         }
