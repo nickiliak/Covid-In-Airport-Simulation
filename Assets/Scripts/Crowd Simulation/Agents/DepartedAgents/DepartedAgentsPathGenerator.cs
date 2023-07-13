@@ -45,14 +45,12 @@ public class DepartedAgentsPathGenerator
     {
         destinations = new List<Vector3>
         {
-            GameObject.Find("Bathroom (1)/BathroomBuild (1)/Target").transform.position,
-            GameObject.Find("Bathroom (1)/BathroomBuild (1)" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
-            GameObject.Find("Bathroom (1)/BathroomBuild (1)" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
+            GameObject.Find("Bathroom (1)/Toilets/Toilet" + " (" + Random.Range(0, 6).ToString() + ")" + "/T").transform.position,
+            GameObject.Find("Bathroom (1)/Sinks/Sink" + " (" + Random.Range(0, 6).ToString() + ")").transform.position,
         };
 
         WaitTime = new List<float>()
         {
-            0f,
             Random.Range(1f, 3f),
             Random.Range(1f, 3f)
         };

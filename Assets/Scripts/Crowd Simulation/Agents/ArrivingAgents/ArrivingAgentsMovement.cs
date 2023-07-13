@@ -71,7 +71,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 1f)
                 {
                     //Special Cases
                     if (agentState == ArrivingAgentsPathGenerator.AgentState.CheckIn) navMeshAgent.areaMask |= 1 << NavMesh.GetAreaFromName("AfterCheckIn");

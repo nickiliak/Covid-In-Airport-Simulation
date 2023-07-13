@@ -53,7 +53,7 @@ public class DepartedAgentMovement : MonoBehaviour
     }
     void PathExecution()
     {
-        if (destinations.Count != 0)
+        if (destinations != null && destinations.Count != 0)
         {
             if (navMeshAgent.hasPath == false)
             {
@@ -61,7 +61,7 @@ public class DepartedAgentMovement : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+                if (Vector3.Distance(transform.position, navMeshAgent.destination) < 1f)
                 {
                     //Special Cases
                     if (agentState == DepartedAgentsPathGenerator.AgentState.BaggageClaim && destinations.Count == 1) Destroy(AgentPath.SuitCase);
@@ -75,7 +75,7 @@ public class DepartedAgentMovement : MonoBehaviour
                 }
             }
         }
-        else if (destinations.Count == 0)
+        else if (destinations != null && destinations.Count == 0)
         {
             if (AgentPath.Destinations.Count != 0)
             {
