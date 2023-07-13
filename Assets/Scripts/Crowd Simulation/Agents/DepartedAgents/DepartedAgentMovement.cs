@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,8 +24,7 @@ public class DepartedAgentMovement : MonoBehaviour
 
     List<Vector3> destinations;
     List<float> waitTimes;
-    DepStatsData DepStats;
-
+    
     void Start()
     {
         //Initial State
@@ -34,6 +34,10 @@ public class DepartedAgentMovement : MonoBehaviour
         if (Random.value < agentSettings.ChanceToUseRestroom) NeedsRestroom = true;
         if (Random.value < agentSettings.ChanceToHaveBaggage) NeedsBaggage = true;
         if (Random.value < agentSettings.ChanceToWantACar) NeedsCar = true;
+        
+        GameObject myTextObject = GameObject.Find("AgentCounterText");
+        AgentTextCounter myText =  myTextObject.GetComponent<AgentTextCounter>();
+        myText.IncreaseAgentCounter();
 
         //Generate the path the agents will walk on based on the parameters
         AgentPath = new DepartedAgentsPathGenerator(name, NeedsRestroom, NeedsBaggage, NeedsCar);

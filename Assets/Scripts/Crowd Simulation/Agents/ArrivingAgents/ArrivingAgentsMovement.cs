@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +14,8 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     private ArrivingAgentsPathGenerator AgentPath;
     public bool TimeToBoard = false;
+    private bool Waiting = false;
+
     private bool NeedsRestroom = false;
     private bool NeedsCheckIn = false;
     private bool NeedsShop = false;
@@ -23,7 +26,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     List<Vector3> destinations;
     List<float> waitTimes;
-    ArrStatsData ArrStats;
+
     void Start()
     {
         //Initial State
@@ -34,6 +37,10 @@ public class ArrivingAgentsMovement : MonoBehaviour
         if (Random.value < agentSettings.ChanceToCheckIn) NeedsCheckIn = true;
         if (Random.value < agentSettings.ChanceToShop) NeedsShop = true;
         if (Random.value < agentSettings.ChanceToEat) NeedsEat = true;
+
+        GameObject myTextObject = GameObject.Find("AgentCounterText");
+        AgentTextCounter myText = myTextObject.GetComponent<AgentTextCounter>();
+        myText.IncreaseAgentCounter();
 
         //Generate the path the agents will walk on based on the parameters
         AgentPath = new ArrivingAgentsPathGenerator(name, NeedsRestroom, NeedsCheckIn, NeedsShop, NeedsEat);
@@ -48,7 +55,9 @@ public class ArrivingAgentsMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TimeToWait();
         IsTimeToBoard();
+        HasBoarded();
         if (IsWaitingOver() && TimeToBoard == false) PathExecution();
     }
 
@@ -94,6 +103,20 @@ public class ArrivingAgentsMovement : MonoBehaviour
         }
     }
 
+    void TimeToWait()
+    {
+        if (AgentPath.Destinations.Count == 0 && TimeToBoard == false && Waiting == false)
+        {
+            agentState = ArrivingAgentsPathGenerator.AgentState.Board;
+            navMeshAgent.ResetPath();
+            string ObjectPath = "GatesArr/Seats (" + Random.Range(0, 15).ToString()
+                + ")/Group " + Random.Range(1, 3).ToString()
+                + "/Chair (" + Random.Range(0, 5).ToString() + ")";
+            navMeshAgent.destination = GameObject.Find(ObjectPath).transform.position;
+            Waiting = true;
+        }
+    }
+
     void IsTimeToBoard()
     {
         if (TimeToBoard == true)
@@ -101,6 +124,15 @@ public class ArrivingAgentsMovement : MonoBehaviour
             agentState = ArrivingAgentsPathGenerator.AgentState.Board;
             navMeshAgent.ResetPath();
             navMeshAgent.destination = GameObject.Find("GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()).transform.position;
+        }
+    }
+
+    void HasBoarded()
+    {
+        if(TimeToBoard == true && 
+            agentState == ArrivingAgentsPathGenerator.AgentState.Board 
+            && Vector3.Distance(transform.position, navMeshAgent.destination) < 2.5f)
+        {
             Destroy(gameObject);
         }
     }

@@ -60,26 +60,25 @@ public class DepartedAgentsPathGenerator
 
     private void GenerateBehaviorBaggage(out List<Vector3> destinations, out List<float> WaitTime)
     {
-
+        int pickUpNo = Random.Range(1, 3);
         SpawnAgentBaggage SpawnBaggage;
 
         //Pick one of two possible conveyor belts
-        if (Random.Range(0, 2) == 0) SpawnBaggage = GameObject.Find("BaggageSpawner1").GetComponent<SpawnAgentBaggage>();
+        if (pickUpNo == 1) SpawnBaggage = GameObject.Find("BaggageSpawner1").GetComponent<SpawnAgentBaggage>();
         else SpawnBaggage = GameObject.Find("BaggageSpawner2").GetComponent<SpawnAgentBaggage>();
 
         //Spawn SuitCase
         SuitCase = SpawnBaggage.SpawnBaggage(AgentName);
+        SuitCase.transform.Rotate(new Vector3(90f, Random.Range(0, 100), Random.Range(0, 100)));
 
         destinations = new List<Vector3>
         {
-            GameObject.Find("BaggageClaim/Target").transform.position,
-            SuitCase.transform.position
+            GameObject.Find("BaggageClaim/PickUp (" + pickUpNo.ToString() + ")/Targets/Target" + " (" + Random.Range(0, 40).ToString() + ")" ).transform.position,
         };
 
         WaitTime = new List<float>()
         {
-            0f,
-            Random.Range(1f, 3f)
+            Random.Range(8f, 12f)
         };
     }
 

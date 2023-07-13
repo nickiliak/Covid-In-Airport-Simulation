@@ -8,7 +8,7 @@ public class SpawnAgentBaggage : MonoBehaviour
     public GameObject SuitCase;
 
     GameObject InstantiatedObject;
-    Vector3 offset = new Vector3(-1, 0, 1);
+    Vector3 offset = new Vector3(-0.4f, 0, 0.2f);
 
     public GameObject SpawnBaggage(string AgentID)
     {
