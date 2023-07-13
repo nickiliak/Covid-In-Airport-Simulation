@@ -108,9 +108,11 @@ public class ArrivingAgentsMovement : MonoBehaviour
         if (AgentPath.Destinations.Count == 0 && TimeToBoard == false && Waiting == false)
         {
             navMeshAgent.ResetPath();
-            string ObjectPath = "GatesArr/Seats (" + Random.Range(0, 14).ToString()
+            string ObjectPath = "GatesArr/Seat Set (" + Random.Range(0, 6).ToString()
+                + ")/Seats (" + Random.Range(0, 2).ToString()
                 + ")/Group " + Random.Range(1, 3).ToString()
                 + "/Chair (" + Random.Range(0, 5).ToString() + ")";
+            Debug.Log(ObjectPath);
             navMeshAgent.destination = GameObject.Find(ObjectPath).transform.position;
             Waiting = true;
         }

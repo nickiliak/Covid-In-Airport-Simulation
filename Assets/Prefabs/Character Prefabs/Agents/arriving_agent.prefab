@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7084595388658863954}
   - component: {fileID: 6771738127742226002}
   - component: {fileID: 2196357913976524832}
-  - component: {fileID: 6361920387198739163}
+  - component: {fileID: 1080619490038392318}
   - component: {fileID: 1121267112736129269}
   - component: {fileID: 4611117111947955232}
   - component: {fileID: 1286229699135955175}
@@ -101,10 +101,10 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.707216
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &6361920387198739163
+--- !u!136 &1080619490038392318
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 4
+  m_Height: 2.707216
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1121267112736129269

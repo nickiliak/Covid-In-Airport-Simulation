@@ -38,14 +38,12 @@ public class ArrivingAgentsPathGenerator
     {
         destinations = new List<Vector3>
         {
-            GameObject.Find("Bathroom1/BathroomBuild/Target").transform.position,
-            GameObject.Find("Bathroom1/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
-            GameObject.Find("Bathroom1/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
+            GameObject.Find("Bathroom (0)/Toilets/Toilet" + " (" + Random.Range(0, 6).ToString() + ")" + "/T").transform.position,
+            GameObject.Find("Bathroom (0)/Sinks/Sink" + " (" + Random.Range(0, 6).ToString() + ")").transform.position,
         };
 
         WaitTime = new List<float>()
         {
-            0f,
             Random.Range(1f, 3f),
             Random.Range(1f, 3f)
         };
@@ -68,14 +66,11 @@ public class ArrivingAgentsPathGenerator
     {
         destinations = new List<Vector3>
         {
-            GameObject.Find("Bathroom2/BathroomBuild/Target").transform.position,
-            GameObject.Find("Bathroom2/BathroomBuild" + "/Toilet" + " (" + Random.Range(0, 3).ToString() + ")").transform.position,
-            GameObject.Find("Bathroom2/BathroomBuild" + "/Sink" + " (" + Random.Range(0, 3).ToString() + ")").transform.position
+            GameObject.Find("Bathroom (2)/Toilets/Toilet" + " (" + Random.Range(0, 6).ToString() + ")" + "/T").transform.position,
+            GameObject.Find("Bathroom (2)/Sinks/Sink" + " (" + Random.Range(0, 6).ToString() + ")").transform.position,
         };
-
         WaitTime = new List<float>()
         {
-            0f,
             Random.Range(1f, 3f),
             Random.Range(1f, 3f)
         };
