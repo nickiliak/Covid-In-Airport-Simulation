@@ -94,6 +94,27 @@ public class UIController : MonoBehaviour
         CameraWindow.SetActive(false);
     }
 
+    void ActivateProperColliders(bool On) 
+    {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Agent");
+        foreach (GameObject obj in objectsWithTag)
+        {
+            // Get all capsule collider components found in the children
+            CapsuleCollider[] capsuleColliders = obj.GetComponentsInChildren<CapsuleCollider>();
+            if(On == true)
+            {
+                capsuleColliders[0].enabled = false;
+                capsuleColliders[1].enabled = true;
+            }
+            else
+            {
+                capsuleColliders[0].enabled = true;
+                capsuleColliders[1].enabled = false;
+            }
+
+        }
+    }
+
     void OnOffCrowdDensity()
     {
         if(CrowdDensity.activeInHierarchy)
@@ -105,6 +126,8 @@ public class UIController : MonoBehaviour
             CrowdDensity.SetActive(false);
             AirportPlane.SetActive(true);
 
+            ActivateProperColliders(false);
+
             foreach (AgentCounter AgentCounter_ in AgentCounters)
             {
                 AgentCounter_.objectsTouchingFloor = 0;
@@ -115,6 +138,8 @@ public class UIController : MonoBehaviour
             Color greenColor = Color.green;
             Image buttonImage = OnoffCrowdDensity.GetComponent<Image>();
             buttonImage.color = greenColor;
+
+            ActivateProperColliders(true);
 
             AirportPlane.SetActive(false);
             CrowdDensity.SetActive(true);
