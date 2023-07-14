@@ -32,11 +32,15 @@ public class DepartedAgentSpawner : MonoBehaviour
     }
     public DepartedAgentSpawnerSettings DepartedSpawnerSettings = new();
 
-
+    private GameObject CrowdDensity;
     private int FlightNo = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject Visualizations = GameObject.Find("Visualizations");
+        CrowdDensity = Visualizations.transform.Find("CrowdDensity").gameObject;
+
         StartCoroutine(PlaneHasArrived());
     }
 
@@ -58,8 +62,11 @@ public class DepartedAgentSpawner : MonoBehaviour
                 //Set Agents settings
                 newAgent.GetComponent<DepartedAgentMovement>().agentSettings = AgentSettings;
 
+                //If crowd shader is active we need to detect collisions not triggers
+                if (CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+
                 //Set Parent for agents so that its organized
-                if(DepartedSpawnerSettings.Parent != null) newAgent.transform.parent = DepartedSpawnerSettings.Parent.transform;
+                if (DepartedSpawnerSettings.Parent != null) newAgent.transform.parent = DepartedSpawnerSettings.Parent.transform;
 
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();

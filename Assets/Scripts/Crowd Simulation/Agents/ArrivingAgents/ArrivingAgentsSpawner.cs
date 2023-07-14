@@ -35,12 +35,16 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     }
     public ArrivingAgentSpawnerSettings ArrivingSpawnerSettings = new();
 
+    private GameObject CrowdDensity;
     private int FlightNo = 0;
     private List<GameObject> agents = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject Visualizations = GameObject.Find("Visualizations");
+        CrowdDensity = Visualizations.transform.Find("CrowdDensity").gameObject;
+
         StartCoroutine(StartAFlight());
     }
     private IEnumerator StartAFlight()
@@ -78,13 +82,20 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 //Agent Number and Flight Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
 
+                //If crowd shader is active we need to detect collisions not triggers
+                if(CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+
+
                 //Set color for this agent so all agents of this flight have the same color
                 Renderer agentRenderer = newAgent.GetComponent<Renderer>();
                 agentRenderer.material.color = randomColor;
 
+                //Pass the settings to the agent
                 ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
                 agentScript.EntryGateNumber = agentGate;
                 agentScript.agentSettings = AgentSettings;
+
+
 
                 //Wait a little bit until next Agent
                 float spawnDelay = Random.Range(0.1f, 2f);

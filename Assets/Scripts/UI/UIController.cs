@@ -100,17 +100,9 @@ public class UIController : MonoBehaviour
         foreach (GameObject obj in objectsWithTag)
         {
             // Get all capsule collider components found in the children
-            CapsuleCollider[] capsuleColliders = obj.GetComponentsInChildren<CapsuleCollider>();
-            if(On == true)
-            {
-                capsuleColliders[0].enabled = false;
-                capsuleColliders[1].enabled = true;
-            }
-            else
-            {
-                capsuleColliders[0].enabled = true;
-                capsuleColliders[1].enabled = false;
-            }
+            CapsuleCollider capsuleCollider = obj.GetComponent<CapsuleCollider>();
+            if (On == true) capsuleCollider.isTrigger = false;
+            else capsuleCollider.isTrigger = true;
 
         }
     }

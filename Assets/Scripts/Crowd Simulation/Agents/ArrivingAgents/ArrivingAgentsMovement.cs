@@ -58,7 +58,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
         TimeToWaitUntilBoard();
         IsTimeToBoard();
         HasBoarded();
-        if (IsWaitingOver() && TimeToBoard == false) PathExecution();
+        if (IsWaitingOver() && (TimeToBoard == false || agentState == ArrivingAgentsPathGenerator.AgentState.CheckIn)) PathExecution();
     }
 
     void PathExecution()
@@ -99,7 +99,10 @@ public class ArrivingAgentsMovement : MonoBehaviour
                 waitTimes = AgentPath.WaitTimes[0];
                 agentState = AgentPath.States[0];
             }
-
+        }
+        else
+        {
+            agentState = ArrivingAgentsPathGenerator.AgentState.None;
         }
     }
 
@@ -120,7 +123,9 @@ public class ArrivingAgentsMovement : MonoBehaviour
 
     void IsTimeToBoard()
     {
-        if (TimeToBoard == true && agentState != ArrivingAgentsPathGenerator.AgentState.Board)
+        if (TimeToBoard == true 
+            && agentState != ArrivingAgentsPathGenerator.AgentState.Board 
+            && agentState != ArrivingAgentsPathGenerator.AgentState.CheckIn)
         {
             agentState = ArrivingAgentsPathGenerator.AgentState.Board;
             navMeshAgent.ResetPath();
