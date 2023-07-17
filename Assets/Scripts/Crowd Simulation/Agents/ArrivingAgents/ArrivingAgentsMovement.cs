@@ -115,7 +115,6 @@ public class ArrivingAgentsMovement : MonoBehaviour
                 + ")/Seats (" + Random.Range(0, 2).ToString()
                 + ")/Group " + Random.Range(1, 3).ToString()
                 + "/Chair (" + Random.Range(0, 5).ToString() + ")";
-            Debug.Log(ObjectPath);
             navMeshAgent.destination = GameObject.Find(ObjectPath).transform.position;
             Waiting = true;
         }

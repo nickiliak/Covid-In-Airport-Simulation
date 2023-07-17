@@ -38,12 +38,14 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     private GameObject CrowdDensity;
     private int FlightNo = 0;
     private List<GameObject> agents = new List<GameObject>();
+    SimulationData sData;
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject Visualizations = GameObject.Find("Visualizations");
         CrowdDensity = Visualizations.transform.Find("CrowdDensity").gameObject;
+        sData = FindObjectOfType<SimulationData>(); 
 
         StartCoroutine(StartAFlight());
     }
@@ -75,6 +77,9 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 AgentPos.x = AgentPos.x + Random.Range(-40f, 40f);
                 GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
+
+                //Add agent to simulation data for general use
+                sData.CurrentIncomingAgents.Add(newAgent);
 
                 //Set Parent for agents so that its organized
                 newAgent.transform.parent = ArrivingSpawnerSettings.Parent.transform;

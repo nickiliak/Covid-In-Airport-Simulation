@@ -34,12 +34,14 @@ public class DepartedAgentSpawner : MonoBehaviour
 
     private GameObject CrowdDensity;
     private int FlightNo = 0;
+    SimulationData sData;
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject Visualizations = GameObject.Find("Visualizations");
         CrowdDensity = Visualizations.transform.Find("CrowdDensity").gameObject;
+        sData = FindObjectOfType<SimulationData>();
 
         StartCoroutine(PlaneHasArrived());
     }
@@ -58,6 +60,9 @@ public class DepartedAgentSpawner : MonoBehaviour
                 Vector3 AgentPos = transform.position;
                 AgentPos.x = AgentPos.x + UnityEngine.Random.Range(-5f, 5f);
                 GameObject newAgent = Instantiate(DepartedSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
+
+                //Add agent to simulation data for general use
+                sData.CurrentOutgoingAgents.Add(newAgent);
 
                 //Set Agents settings
                 newAgent.GetComponent<DepartedAgentMovement>().agentSettings = AgentSettings;

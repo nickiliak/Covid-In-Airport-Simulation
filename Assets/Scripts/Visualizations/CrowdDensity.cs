@@ -30,7 +30,7 @@ public class CrowdDensity : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        GenerateAgentAttributes collidedObjectData = collision.gameObject.GetComponent<GenerateAgentAttributes>();
+        AgentData collidedObjectData = collision.gameObject.GetComponent<AgentData>();
 
         if (collidedObjectData != null)
         {
