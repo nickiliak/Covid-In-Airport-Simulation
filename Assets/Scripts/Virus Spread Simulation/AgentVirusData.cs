@@ -22,6 +22,8 @@ public class AgentVirusData : MonoBehaviour
 
     GenerateAgentVirusData VirusDataGen = new();
 
+    SimulationData sd;
+
     void SetAgentVirusData()
     {
         int StateValue = VirusDataGen.GenerateViralStateValue();
@@ -40,6 +42,16 @@ public class AgentVirusData : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(MaskWearing); // Enable or disable glasses
     }
 
+    public void PassSimulationData()
+    {
+        sd = FindAnyObjectByType<SimulationData>();
+        if (sd != null) 
+        {
+            if (AgentViralState == SEIRMODEL.Susceptible) sd.IncreaseNumberOfSusceptible();
+            else if(AgentViralState == SEIRMODEL.Infected) sd.IncreaseNumberOfInfected();
+        }
+    }
+
     private void Start()
     {
         SetAgentVirusData();
@@ -47,9 +59,31 @@ public class AgentVirusData : MonoBehaviour
         GetComponent<Renderer>().material.color = ViralStateColor; //Pass it to the renderer
 
         EnableMask();
+
+        PassSimulationData();
     }
 
-    
+    //should fix this ugly ass of a function
+    public void ChangeViralState(SEIRMODEL newState)
+    {
+        if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Susceptible)
+            sd.DecreaseNumberOfSusceptible();
+        else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Exposed)
+            sd.DecreaseNumberOfExposed();
+        else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Infected)
+            sd.DecreaseNumberOfInfected();
+
+        AgentViralState = newState;
+        if (newState == SEIRMODEL.Susceptible)
+            sd.IncreaseNumberOfSusceptible();
+        else if (newState == SEIRMODEL.Exposed)
+            sd.IncreaseNumberOfExposed();
+        else if (newState == SEIRMODEL.Infected)
+            sd.IncreaseNumberOfInfected();
+
+        SetViralStateColor(VirusDataGen.GenerateViralStateColor(Convert.ToInt32(newState)));
+    }
+
     public void SetViralStateColor(Color newColor)
     {
         ViralStateColor = newColor;

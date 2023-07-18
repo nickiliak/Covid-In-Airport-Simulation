@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class VirusTransmission : MonoBehaviour
@@ -22,7 +23,6 @@ public class VirusTransmission : MonoBehaviour
     {
         if (other.CompareTag("Agent"))
         {
-            
             AgentVirusData other_vData = other.GetComponent<AgentVirusData>();
             if (other_vData.AgentViralState == AgentVirusData.SEIRMODEL.Infected 
                 && vData.AgentViralState == AgentVirusData.SEIRMODEL.Susceptible)
@@ -38,8 +38,7 @@ public class VirusTransmission : MonoBehaviour
             float chance = VirusTransmissionProbabilityGen(other.transform.position, vData.TransmissionChance); //WHOSE TRANSMISSION CHANCE DO I PASS ? IMPORTANTTTT!!!!!!!!!!!!!!!!!!
             if(Random.value < chance)
             {
-                vData.AgentViralState = AgentVirusData.SEIRMODEL.Exposed;
-                vData.SetViralStateColor(Color.yellow); 
+                vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);
                 Debug.Log("Exposed");
             }
         }

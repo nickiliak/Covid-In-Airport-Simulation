@@ -60,9 +60,6 @@ public class DepartedAgentSpawner : MonoBehaviour
                 AgentPos.x = AgentPos.x + UnityEngine.Random.Range(-5f, 5f);
                 GameObject newAgent = Instantiate(DepartedSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
 
-                //Add agent to simulation data for general use
-                sData.CurrentOutgoingAgents.Add(newAgent);
-
                 //Set Agents settings
                 newAgent.GetComponent<DepartedAgentMovement>().agentSettings = AgentSettings;
 
@@ -74,6 +71,9 @@ public class DepartedAgentSpawner : MonoBehaviour
 
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
+
+                //Add agent to simulation data for general use
+                sData.InsertNewOutGoingAgent(newAgent);
 
                 //Wait a little bit until next Agent
                 float spawnDelay = UnityEngine.Random.Range(0.1f, 2f);

@@ -630,13 +630,13 @@ MonoBehaviour:
   navMeshAgent: {fileID: 556014425830254171}
   Age: 0
   Gender: 0
+  AgentType: 1
   rb: {fileID: 741725685432784791}
   Speed: 0
   Accelaration: 0
   Proximity: 0
   Drag: 0
   AngularDrag: 0
-  AgentColor: {r: 0, g: 0, b: 0, a: 0}
   CrowdDensityPos: 0
   HeatmapTimer: 0
 --- !u!114 &-6012737723049047640
@@ -673,6 +673,7 @@ MonoBehaviour:
   ViralStateColor: {r: 0, g: 0, b: 0, a: 0}
   TransmissionChance: 0
   VirusTransmissionRadius: 0
+  MaskTransmissionStoppage: 0
   MaskWearing: 0
   SocialDistancing: 0
 --- !u!114 &5103657908916767440

@@ -38,10 +38,6 @@ public class ArrivingAgentsMovement : MonoBehaviour
         if (Random.value < agentSettings.ChanceToShop) NeedsShop = true;
         if (Random.value < agentSettings.ChanceToEat) NeedsEat = true;
 
-        GameObject myTextObject = GameObject.Find("AgentCounterText");
-        AgentTextCounter myText = myTextObject.GetComponent<AgentTextCounter>();
-        myText.IncreaseAgentCounter();
-
         //Generate the path the agents will walk on based on the parameters
         AgentPath = new ArrivingAgentsPathGenerator(name, NeedsRestroom, NeedsCheckIn, NeedsShop, NeedsEat);
         if (AgentPath.Destinations.Count > 0)

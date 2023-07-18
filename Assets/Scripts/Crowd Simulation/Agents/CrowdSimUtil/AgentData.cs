@@ -7,11 +7,13 @@ using UnityEngine.AI;
 public class AgentData : MonoBehaviour
 {
     enum gender { Male, Female }
+    public enum agentType { Incoming, Outgoing }
 
     [Header("Personal Data")]
     [SerializeField] NavMeshAgent navMeshAgent;
     [SerializeField] int Age;
     [SerializeField] gender Gender;
+    public agentType AgentType;
 
     [Header("Movement Data")]
     [SerializeField] Rigidbody rb;
@@ -22,7 +24,6 @@ public class AgentData : MonoBehaviour
     [SerializeField] float AngularDrag;
 
     [Header("Visualization Data")]
-    public Color AgentColor;
     public int CrowdDensityPos;
     public float HeatmapTimer;
 

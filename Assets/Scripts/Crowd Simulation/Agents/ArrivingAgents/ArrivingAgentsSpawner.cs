@@ -78,9 +78,6 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
                 agents.Add(newAgent);
 
-                //Add agent to simulation data for general use
-                sData.CurrentIncomingAgents.Add(newAgent);
-
                 //Set Parent for agents so that its organized
                 newAgent.transform.parent = ArrivingSpawnerSettings.Parent.transform;
 
@@ -100,7 +97,8 @@ public class ArrivingAgentsSpawner : MonoBehaviour
                 agentScript.EntryGateNumber = agentGate;
                 agentScript.agentSettings = AgentSettings;
 
-
+                //Add agent to simulation data for general use
+                sData.InsertNewIncomingAgent(newAgent);
 
                 //Wait a little bit until next Agent
                 float spawnDelay = Random.Range(0.1f, 2f);

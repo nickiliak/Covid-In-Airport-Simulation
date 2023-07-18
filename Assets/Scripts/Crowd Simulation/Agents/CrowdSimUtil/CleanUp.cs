@@ -13,24 +13,28 @@ public class CleanUp : MonoBehaviour
         if (CD != null) CD.ValidPoints[GA.CrowdDensityPos] = 0f;
     }
 
-    void DecreateGlobalTextCounter()
-    {
-        GameObject myTextObject = GameObject.Find("AgentCounterText");
-        if (myTextObject != null) {
-            AgentTextCounter myText = myTextObject.GetComponent<AgentTextCounter>();
-            myText.DecreaseAgentCounter();
-        }
-    }
-
     void RemoveFromSimulationData()
     {
-        //SCurrentIncomingAgents
+        SimulationData sd = FindAnyObjectByType<SimulationData>();
+        if (sd != null)
+        {
+            if (GetComponent<AgentData>().AgentType == AgentData.agentType.Incoming)
+                sd.RemoveNewIncomingAgent(gameObject);
+            else
+                sd.RemoveNewOutGoingAgent(gameObject);
+
+            if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Susceptible)
+                sd.DecreaseNumberOfSusceptible();
+            else if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Exposed)
+                sd.DecreaseNumberOfExposed();
+            else if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Infected)
+                sd.DecreaseNumberOfInfected();
+        }
     }
 
     private void OnDestroy()
     {
         RemovePositionFromCDArr();
-
-        DecreateGlobalTextCounter();
+        RemoveFromSimulationData();
     }
 }

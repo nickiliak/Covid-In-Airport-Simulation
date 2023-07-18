@@ -34,10 +34,6 @@ public class DepartedAgentMovement : MonoBehaviour
         if (Random.value < agentSettings.ChanceToUseRestroom) NeedsRestroom = true;
         if (Random.value < agentSettings.ChanceToHaveBaggage) NeedsBaggage = true;
         if (Random.value < agentSettings.ChanceToWantACar) NeedsCar = true;
-        
-        GameObject myTextObject = GameObject.Find("AgentCounterText");
-        AgentTextCounter myText =  myTextObject.GetComponent<AgentTextCounter>();
-        myText.IncreaseAgentCounter();
 
         //Generate the path the agents will walk on based on the parameters
         AgentPath = new DepartedAgentsPathGenerator(name, NeedsRestroom, NeedsBaggage, NeedsCar);

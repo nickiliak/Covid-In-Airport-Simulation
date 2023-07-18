@@ -5,7 +5,8 @@ using static AgentVirusData;
 
 public class GenerateAgentVirusData
 {
-    public int GenerateViralStateValue() { return Random.Range(0, 4); }
+    // IMPORTANT WE DONT GENERATE RECORVERED AGENTS FOR THE TIME BEING OR EXPOSED! SO ONLY S I
+    public int GenerateViralStateValue() { if (Random.Range(0, 2) == 0) return 0; else return 2; }           
     public float GenerateTransmissionChance() { return Random.Range(0f, 0.3f); }
     public float GenerateMaskTransmissionStopage() { return Random.Range(0.25f, 0.5f); }
 
