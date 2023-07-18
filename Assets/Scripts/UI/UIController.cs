@@ -24,10 +24,6 @@ public class UIController : MonoBehaviour
 
     [Space(10)]
 
-    [SerializeField] Button OnOffVirusVision;
-
-    [Space(10)]
-
     [SerializeField] Button OnoffCrowdDensity;
     [SerializeField] GameObject CrowdDensity;
     [SerializeField] GameObject AirportPlane;
@@ -55,7 +51,6 @@ public class UIController : MonoBehaviour
         OpenCamera.onClick.AddListener(OpenCameraWindow); // add the PrintMessage function to the button's onClick event
         CloseCamera.onClick.AddListener(CloseCameraWindow); // add the PrintMessage function to the button's onClick event
 
-        OnOffVirusVision.onClick.AddListener(OnOffVirusVisionFunc);
         OnoffCrowdDensity.onClick.AddListener(OnOffCrowdDensityFunc);
         OnOffHeatmap.onClick.AddListener(OnOffHeatmapFunc);
     }
@@ -98,20 +93,6 @@ public class UIController : MonoBehaviour
     {
         CameraWindow.SetActive(false);
     }
-
-
-
-    void OnOffVirusVisionFunc()
-    {
-        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Agent");
-        foreach (GameObject obj in objectsWithTag)
-        {
-            Renderer renderer = obj.GetComponent<Renderer>();
-            AgentVirusData data = obj.GetComponent<AgentVirusData>();
-            renderer.material.color = data.ViralStateColor;
-        }
-    }
-
 
     void ActivateProperColliders(bool On)
     {

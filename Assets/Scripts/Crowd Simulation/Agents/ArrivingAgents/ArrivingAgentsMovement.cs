@@ -6,14 +6,14 @@ using UnityEngine.AI;
 
 public class ArrivingAgentsMovement : MonoBehaviour
 {
+    
     public NavMeshAgent navMeshAgent;
-
-    public ArrivingAgentsSpawner.ArrivingAgentSettings agentSettings;
     public ArrivingAgentsPathGenerator.AgentState agentState;
     public int EntryGateNumber;
+    public bool TimeToBoard = false;
+    public ArrivingAgentsSpawner.ArrivingAgentSettings agentSettings;
 
     private ArrivingAgentsPathGenerator AgentPath;
-    public bool TimeToBoard = false;
     private bool Waiting = false;
 
     private bool NeedsRestroom = false;

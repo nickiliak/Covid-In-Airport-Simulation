@@ -61,7 +61,6 @@ public class AgentData : MonoBehaviour
 
     void SetVisualizationData()
     {
-        AgentColor = GetComponent<Renderer>().material.color;
         CrowdDensityPos = -1;
         HeatmapTimer = Time.time;
     }

@@ -51,7 +51,6 @@ public class DepartedAgentSpawner : MonoBehaviour
         while (true)
         {
             int agentCount = UnityEngine.Random.Range(DepartedSpawnerSettings.minSpawnCount, DepartedSpawnerSettings.maxSpawnCount);
-            Color randomColor = UnityEngine.Random.ColorHSV();
             FlightNo++;
 
             for (int i = 0; i < agentCount; i++)
@@ -75,10 +74,6 @@ public class DepartedAgentSpawner : MonoBehaviour
 
                 //Agent Flight Number and Number
                 newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
-
-                //Set color for this agent so all agents of this flight have the same color
-                Renderer agentRenderer = newAgent.GetComponent<Renderer>();
-                agentRenderer.material.color = randomColor;
 
                 //Wait a little bit until next Agent
                 float spawnDelay = UnityEngine.Random.Range(0.1f, 2f);
