@@ -5,18 +5,26 @@ using UnityEngine;
 
 public class VirusTransmission : MonoBehaviour
 {
+    SimulationData sd;
     AgentVirusData vData;
     private void Start()
     {
+        sd = FindAnyObjectByType<SimulationData>();
         vData = GetComponent<AgentVirusData>();
+    }
+
+    float CalculateL(Vector3 InfectedAgentPosition)
+    {
+        float distance = Vector3.Distance(InfectedAgentPosition, transform.position);
+        return (distance - sd.InfectionRange) /  ( - sd.InfectionRange );
     }
 
     float VirusTransmissionProbabilityGen(Vector3 InfectedAgentPosition)
     {
-        float distance = Vector3.Distance(InfectedAgentPosition, transform.position);
+        float L = CalculateL(InfectedAgentPosition);
 
-        if (vData.MaskWearing == true) return (distance);
-        else return  distance;
+        if (sd.MaskWearing) return L / (sd.VirusInfectiousness + sd.VirusInfectiousness * 0.3f);
+        else return L / sd.VirusInfectiousness;
     }
     
     bool InRangeOfInfected(Collider other)
@@ -35,7 +43,8 @@ public class VirusTransmission : MonoBehaviour
     {
         if (InRangeOfInfected(other) == true)
         {
-            float chance = VirusTransmissionProbabilityGen(other.transform.position); //WHOSE TRANSMISSION CHANCE DO I PASS ? IMPORTANTTTT!!!!!!!!!!!!!!!!!!
+            float chance = VirusTransmissionProbabilityGen(other.transform.position);
+            Debug.Log(chance);
             if(Random.value < chance)
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);

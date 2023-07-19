@@ -27,7 +27,6 @@ public class AgentVirusData : MonoBehaviour
         AgentViralState = (SEIRMODEL)Enum.GetValues(typeof(SEIRMODEL)).GetValue(StateValue);
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
         MaskWearing = sd.MaskWearing;
-        Debug.Log(MaskWearing);
     }
 
 
