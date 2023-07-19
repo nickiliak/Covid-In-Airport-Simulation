@@ -113,6 +113,7 @@ public class ArrivingAgentsMovement : MonoBehaviour
                 + "/Chair (" + Random.Range(0, 5).ToString() + ")";
             navMeshAgent.destination = GameObject.Find(ObjectPath).transform.position;
             Waiting = true;
+            agentState = ArrivingAgentsPathGenerator.AgentState.WaitingUntilBoard;
         }
     }
 

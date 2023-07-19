@@ -11,12 +11,12 @@ public class VirusTransmission : MonoBehaviour
         vData = GetComponent<AgentVirusData>();
     }
 
-    float VirusTransmissionProbabilityGen(Vector3 InfectedAgentPosition, float transmissionChance)
+    float VirusTransmissionProbabilityGen(Vector3 InfectedAgentPosition)
     {
         float distance = Vector3.Distance(InfectedAgentPosition, transform.position);
-        
-        if(vData.MaskWearing == true) return (transmissionChance / distance) * vData.MaskTransmissionStoppage;
-        else return transmissionChance / distance;
+
+        if (vData.MaskWearing == true) return (distance);
+        else return  distance;
     }
     
     bool InRangeOfInfected(Collider other)
@@ -35,7 +35,7 @@ public class VirusTransmission : MonoBehaviour
     {
         if (InRangeOfInfected(other) == true)
         {
-            float chance = VirusTransmissionProbabilityGen(other.transform.position, vData.TransmissionChance); //WHOSE TRANSMISSION CHANCE DO I PASS ? IMPORTANTTTT!!!!!!!!!!!!!!!!!!
+            float chance = VirusTransmissionProbabilityGen(other.transform.position); //WHOSE TRANSMISSION CHANCE DO I PASS ? IMPORTANTTTT!!!!!!!!!!!!!!!!!!
             if(Random.value < chance)
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);

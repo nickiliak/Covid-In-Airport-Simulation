@@ -11,9 +11,6 @@ public class AgentVirusData : MonoBehaviour
     [Header("Data")]
     public SEIRMODEL AgentViralState;
     public Color ViralStateColor;
-    public float TransmissionChance;
-    public float VirusTransmissionRadius;
-    public float MaskTransmissionStoppage;
 
     [Header("Quarantine Measures")]
     public bool MaskWearing;
@@ -21,18 +18,16 @@ public class AgentVirusData : MonoBehaviour
 
 
     GenerateAgentVirusData VirusDataGen = new();
-
     SimulationData sd;
 
     void SetAgentVirusData()
     {
-        int StateValue = VirusDataGen.GenerateViralStateValue();
+        int StateValue = VirusDataGen.GenerateViralStateValue(sd);
 
         AgentViralState = (SEIRMODEL)Enum.GetValues(typeof(SEIRMODEL)).GetValue(StateValue);
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
-        MaskTransmissionStoppage = VirusDataGen.GenerateMaskTransmissionStopage();
-        TransmissionChance = VirusDataGen.GenerateTransmissionChance();
-        MaskWearing = VirusDataGen.GenerateMaskWearing();
+        MaskWearing = sd.MaskWearing;
+        Debug.Log(MaskWearing);
     }
 
 
@@ -44,7 +39,7 @@ public class AgentVirusData : MonoBehaviour
 
     public void PassSimulationData()
     {
-        sd = FindAnyObjectByType<SimulationData>();
+        
         if (sd != null) 
         {
             if (AgentViralState == SEIRMODEL.Susceptible) sd.IncreaseNumberOfSusceptible();
@@ -54,6 +49,8 @@ public class AgentVirusData : MonoBehaviour
 
     private void Start()
     {
+        sd = FindAnyObjectByType<SimulationData>();
+
         SetAgentVirusData();
 
         GetComponent<Renderer>().material.color = ViralStateColor; //Pass it to the renderer

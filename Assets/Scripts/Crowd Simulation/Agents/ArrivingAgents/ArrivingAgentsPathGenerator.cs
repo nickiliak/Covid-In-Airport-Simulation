@@ -6,7 +6,7 @@ public class ArrivingAgentsPathGenerator
 {
     public List<List<Vector3>> Destinations;
     public List<List<float>> WaitTimes;
-    public enum AgentState { None, CheckIn, Restroom, Shop, Eat, Board }
+    public enum AgentState { None, CheckIn, Restroom, Shop, Eat, WaitingUntilBoard, Board }
     public List<AgentState> States;
 
     public GameObject SuitCase;

@@ -16,7 +16,7 @@ public class GenerateAgentData
     public int GenerateGenderValue() { return UnityEngine.Random.Range(0, 2); }
     public float GenerateSpeed() { return UnityEngine.Random.Range(4f, 8f); }
     public float GenerateAccelaration() { return UnityEngine.Random.Range(4f, 10f); }
-    public float GenerateProximity() { return UnityEngine.Random.Range(0.5f, 1f); } 
+    public float GenerateProximity() { return UnityEngine.Random.Range(0.2f, 0.4f); } 
     public float GenerateDrag() { return 100f; }
     public float GenerateAngularDrag() { return 100f; }
 

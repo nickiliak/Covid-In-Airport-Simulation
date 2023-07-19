@@ -431,8 +431,7 @@ GameObject:
   - component: {fileID: 3126922813966412445}
   - component: {fileID: 7084595388658863954}
   - component: {fileID: 6771738127742226002}
-  - component: {fileID: 2196357913976524832}
-  - component: {fileID: 1785362386438489401}
+  - component: {fileID: 6040705480372496161}
   - component: {fileID: 4611117111947955232}
   - component: {fileID: 1121267112736129269}
   - component: {fileID: -1458904879399426325}
@@ -515,7 +514,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2196357913976524832
+--- !u!136 &6040705480372496161
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -528,20 +527,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2.707216
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &1785362386438489401
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7083532259587614262}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 4}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: -0.35360813, z: 0}
 --- !u!54 &4611117111947955232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -595,13 +581,13 @@ MonoBehaviour:
   navMeshAgent: {fileID: 1121267112736129269}
   Age: 0
   Gender: 0
+  AgentType: 0
   rb: {fileID: 4611117111947955232}
   Speed: 0
   Accelaration: 0
   Proximity: 0
   Drag: 0
   AngularDrag: 0
-  AgentColor: {r: 0, g: 0, b: 0, a: 0}
   CrowdDensityPos: 0
   HeatmapTimer: 0
 --- !u!114 &1286229699135955175
@@ -639,8 +625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgentViralState: 0
   ViralStateColor: {r: 0, g: 0, b: 0, a: 0}
-  TransmissionChance: 0
-  VirusTransmissionRadius: 0
   MaskWearing: 0
   SocialDistancing: 0
 --- !u!114 &1124977381332191988
