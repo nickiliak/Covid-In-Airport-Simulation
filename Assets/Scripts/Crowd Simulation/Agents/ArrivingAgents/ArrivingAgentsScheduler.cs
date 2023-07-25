@@ -1,23 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ArrivingAgentsScheduler : MonoBehaviour
 {
-    float TimeUntilNextBatch;
-    // Start is called before the first frame update
-    void Start()
+    private int TotalFlights = 0;
+    private float StartingTime = 0f;
+    private List<Flight> FlightList;
+    private ArrivingAgentsSpawner AgentSpawner;
+
+    public class Flight
     {
-        TimeUntilNextBatch = Time.time;
+        public float AgentStartArrivingTime;
+        public float BoardingTime;
+        public int AgentNumber;
+        public int FlightNumber;
+
+        public Flight(float agentStartArrivingTime, int agentNumber, float boardingTime, int flightNumber)
+        {
+            AgentStartArrivingTime = agentStartArrivingTime;
+            AgentNumber = agentNumber;
+            BoardingTime = boardingTime;
+            FlightNumber = flightNumber;
+        }
+    }
+    float GetTimeDelay(float AgentStartArrivingTime)
+    {
+        return AgentStartArrivingTime - StartingTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    Flight GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
     {
-        if(Time.time - TimeUntilNextBatch > 15f ) 
+        TotalFlights++;
+        return new Flight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights);
+    }
+
+    private IEnumerator InitiateFlight(Flight flight)
+    {
+        yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
+        //Debug.Log("Flight Initiated");
+        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.BoardingTime, flight.FlightNumber);
+    }
+
+    void Start()
+    {
+        StartingTime = Time.time;
+        FlightList = new List<Flight>();
+        AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
+
+        FlightList.Add(GenerateFlight(StartingTime, 100, 120f));
+        FlightList.Add(GenerateFlight(StartingTime + 10f, 100, 120f));
+        FlightList.Add(GenerateFlight(StartingTime + 20f, 100, 120f));
+
+        for (int i = 0; i < TotalFlights; i++)
         {
-            TimeUntilNextBatch = Time.time;
-            FindObjectOfType<ArrivingAgentsSpawner>().SpawnAgents();
+            StartCoroutine(InitiateFlight(FlightList[0]));
+            FlightList.Remove(FlightList[0]);
         }
+
+        //Application.Quit();
+        //EditorApplication.isPlaying = false;
     }
 }

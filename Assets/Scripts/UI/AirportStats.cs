@@ -20,6 +20,7 @@ public class AirportStats : MonoBehaviour
     TextMeshProUGUI VirusInfectiousness;
     TextMeshProUGUI VirusRange;
     TextMeshProUGUI TimeScaleText;
+    TextMeshProUGUI TimeElapsed;
 
     SimulationData sd;
     private void Start()
@@ -48,6 +49,7 @@ public class AirportStats : MonoBehaviour
         VirusRange.text = VirusRange.name + ": " + sd.InfectionRange.ToString();
 
         TimeScaleText = gameObject.transform.Find("Virus Variables/Time/TimeNumber").gameObject.GetComponent<TextMeshProUGUI>();
+        TimeElapsed = gameObject.transform.Find("Airport Stats/Time Elapsed").gameObject.GetComponent<TextMeshProUGUI>();
     }
     private void FixedUpdate()
     {
@@ -71,5 +73,7 @@ public class AirportStats : MonoBehaviour
         float TimeScale = (float)gameObject.transform.Find("Virus Variables/Time/TimeSlider").gameObject.GetComponent<Slider>().value;
         TimeScaleText.text = TimeScale.ToString();
         sd.UpdateTimeScale(TimeScale);
+
+        TimeElapsed.text = "Time Elasped: " + Time.time.ToString() + " s";
     }
 }
