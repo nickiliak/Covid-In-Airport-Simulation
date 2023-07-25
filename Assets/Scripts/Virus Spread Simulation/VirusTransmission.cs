@@ -44,14 +44,12 @@ public class VirusTransmission : MonoBehaviour
         if (InRangeOfInfected(other) == true)
         {
             float chance = VirusTransmissionProbabilityGen(other.transform.position);
-            Debug.Log(chance);
+            //Debug.Log(chance);
             if(Random.value < chance)
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);
                 Debug.Log("Exposed");
             }
         }
-        
-
     }
 }

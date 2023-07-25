@@ -17,6 +17,10 @@ public class AirportStats : MonoBehaviour
     TextMeshProUGUI Exposed;
     TextMeshProUGUI ExposedPercentage;
     TextMeshProUGUI MaxInfectedNumber;
+    TextMeshProUGUI VirusInfectiousness;
+    TextMeshProUGUI VirusRange;
+    TextMeshProUGUI TimeScaleText;
+
     SimulationData sd;
     private void Start()
     {
@@ -35,7 +39,15 @@ public class AirportStats : MonoBehaviour
         Exposed = gameObject.transform.Find("Airport Stats/Exposed").gameObject.GetComponent<TextMeshProUGUI>();
         ExposedPercentage = gameObject.transform.Find("Airport Stats/Exposed %").gameObject.GetComponent<TextMeshProUGUI>();
 
-        MaxInfectedNumber = gameObject.transform.Find("Agent Variables/Infected/MaxInfectedNumber").gameObject.GetComponent<TextMeshProUGUI>();
+        MaxInfectedNumber = gameObject.transform.Find("Virus Variables/Infected/MaxInfectedNumber").gameObject.GetComponent<TextMeshProUGUI>();
+
+        VirusInfectiousness = gameObject.transform.Find("Virus Variables/Virus Infectiousness").gameObject.GetComponent<TextMeshProUGUI>();
+        VirusInfectiousness.text = VirusInfectiousness.name + ": " + sd.VirusInfectiousness.ToString();
+
+        VirusRange = gameObject.transform.Find("Virus Variables/Virus Exposure Range").gameObject.GetComponent<TextMeshProUGUI>();
+        VirusRange.text = VirusRange.name + ": " + sd.InfectionRange.ToString();
+
+        TimeScaleText = gameObject.transform.Find("Virus Variables/Time/TimeNumber").gameObject.GetComponent<TextMeshProUGUI>();
     }
     private void FixedUpdate()
     {
@@ -52,9 +64,12 @@ public class AirportStats : MonoBehaviour
         Exposed.text = Exposed.name + ": " + sd.NumberOfExposed.ToString();
         ExposedPercentage.text = ExposedPercentage.name + ": " + ((float)sd.NumberOfExposed / sd.TotalNumberOfAgents * 100).ToString() + "%";
 
-        int MaximumNumberOfInfected = (int)gameObject.transform.Find("Agent Variables/Infected/InfectedSlider").gameObject.GetComponent<Slider>().value;
+        int MaximumNumberOfInfected = (int)gameObject.transform.Find("Virus Variables/Infected/InfectedSlider").gameObject.GetComponent<Slider>().value;
         MaxInfectedNumber.text = MaximumNumberOfInfected.ToString();
         sd.UpdateMaximumNumberOfInfected(MaximumNumberOfInfected);
 
+        float TimeScale = (float)gameObject.transform.Find("Virus Variables/Time/TimeSlider").gameObject.GetComponent<Slider>().value;
+        TimeScaleText.text = TimeScale.ToString();
+        sd.UpdateTimeScale(TimeScale);
     }
 }

@@ -80,16 +80,13 @@ public class ArrivingAgentsMovement : MonoBehaviour
                 }
             }
         }
-        else if (destinations != null && destinations.Count == 0)
+        else if (destinations != null && destinations.Count == 0 && AgentPath.Destinations.Count != 0)
         {
-            if (AgentPath.Destinations.Count != 0)
-            {
-                AgentPath.Destinations.Remove(AgentPath.Destinations[0]);
-                AgentPath.WaitTimes.Remove(AgentPath.WaitTimes[0]);
-                AgentPath.States.Remove(AgentPath.States[0]);
-            }
+            AgentPath.Destinations.Remove(AgentPath.Destinations[0]);
+            AgentPath.WaitTimes.Remove(AgentPath.WaitTimes[0]);
+            AgentPath.States.Remove(AgentPath.States[0]);
 
-            if (AgentPath.Destinations.Count != 0)
+            if(AgentPath.Destinations.Count != 0)
             {
                 destinations = AgentPath.Destinations[0];
                 waitTimes = AgentPath.WaitTimes[0];

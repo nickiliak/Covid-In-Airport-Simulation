@@ -27,8 +27,6 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     {
         public GameObject agentPrefab; // Prefab of the agent to spawn
         public GameObject Parent;
-        public float minSpawnDelay; // Minimum delay between spawns
-        public float maxSpawnDelay; // Maximum delay between spawns
         public int minSpawnCount;
         public int maxSpawnCount;
         public float waitTime;
@@ -46,69 +44,66 @@ public class ArrivingAgentsSpawner : MonoBehaviour
         GameObject Visualizations = GameObject.Find("Visualizations");
         CrowdDensity = Visualizations.transform.Find("CrowdDensity").gameObject;
         sData = FindObjectOfType<SimulationData>(); 
-
-        StartCoroutine(StartAFlight());
     }
-    private IEnumerator StartAFlight()
+
+    public void SpawnAgents()
     {
-        
-        while (true)
+        StartCoroutine(AgentsArriving());
+    }
+
+    private IEnumerator AgentsArriving()
+    {
+        int agentCount = Random.Range(ArrivingSpawnerSettings.minSpawnCount, ArrivingSpawnerSettings.maxSpawnCount);
+        Color randomColor = Random.ColorHSV();
+        FlightNo++;
+
+        int agentGate = Random.Range(1, 4); 
+
+        for (int i = 0; i < agentCount; i++)
         {
-            if(agents.Count != 0 )
-            {
-                foreach (GameObject agent in agents)
-                {
-                    ArrivingAgentsMovement agentScript = agent.GetComponent<ArrivingAgentsMovement>();
-                    agentScript.TimeToBoard = true;
-                }
+            Vector3 AgentPos = transform.position;
+            AgentPos.x = AgentPos.x + Random.Range(-40f, 40f);
+            GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
+            agents.Add(newAgent);
 
-                agents.Clear();
+            //Set Parent for agents so that its organized
+            newAgent.transform.parent = ArrivingSpawnerSettings.Parent.transform;
+
+            //Agent Number and Flight Number
+            newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
+
+            //If crowd shader is active we need to detect collisions not triggers
+            if(CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+
+
+            //Set color for this agent so all agents of this flight have the same color
+            Renderer agentRenderer = newAgent.GetComponent<Renderer>();
+            agentRenderer.material.color = randomColor;
+
+            //Pass the settings to the agent
+            ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
+            agentScript.EntryGateNumber = agentGate;
+            agentScript.agentSettings = AgentSettings;
+
+            //Add agent to simulation data for general use
+            sData.InsertNewIncomingAgent(newAgent);
+
+            //Wait a little bit until next Agent
+            float spawnDelay = Random.Range(0.1f, 1f);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+
+        yield return new WaitForSeconds(ArrivingSpawnerSettings.waitTime); //Wait X time until time to board has arrived
+
+        if (agents.Count != 0)
+        {
+            foreach (GameObject agent in agents)
+            {
+                ArrivingAgentsMovement agentScript = agent.GetComponent<ArrivingAgentsMovement>();
+                agentScript.TimeToBoard = true;
             }
 
-            int agentCount = Random.Range(ArrivingSpawnerSettings.minSpawnCount, ArrivingSpawnerSettings.maxSpawnCount);
-            Color randomColor = Random.ColorHSV();
-            FlightNo++;
-
-            int agentGate = Random.Range(1, 4); 
-
-            for (int i = 0; i < agentCount; i++)
-            {
-                Vector3 AgentPos = transform.position;
-                AgentPos.x = AgentPos.x + Random.Range(-40f, 40f);
-                GameObject newAgent = Instantiate(ArrivingSpawnerSettings.agentPrefab, AgentPos, Quaternion.identity);
-                agents.Add(newAgent);
-
-                //Set Parent for agents so that its organized
-                newAgent.transform.parent = ArrivingSpawnerSettings.Parent.transform;
-
-                //Agent Number and Flight Number
-                newAgent.name = "FlightNo" + FlightNo.ToString() + "_AgentNo" + i.ToString();
-
-                //If crowd shader is active we need to detect collisions not triggers
-                if(CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
-
-
-                //Set color for this agent so all agents of this flight have the same color
-                Renderer agentRenderer = newAgent.GetComponent<Renderer>();
-                agentRenderer.material.color = randomColor;
-
-                //Pass the settings to the agent
-                ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
-                agentScript.EntryGateNumber = agentGate;
-                agentScript.agentSettings = AgentSettings;
-
-                //Add agent to simulation data for general use
-                sData.InsertNewIncomingAgent(newAgent);
-
-                //Wait a little bit until next Agent
-                float spawnDelay = Random.Range(0.1f, 2f);
-                yield return new WaitForSeconds(spawnDelay);
-            }
-
-            //Wait until next flight is ready
-            float randomSpawnInterval = Random.Range(ArrivingSpawnerSettings.minSpawnDelay, ArrivingSpawnerSettings.maxSpawnDelay);
-            yield return new WaitForSeconds(randomSpawnInterval);
-            yield return new WaitForSeconds(ArrivingSpawnerSettings.waitTime);
+            agents.Clear();
         }
     }
 }

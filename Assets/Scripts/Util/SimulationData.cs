@@ -11,6 +11,7 @@ public class SimulationData : MonoBehaviour
     public int TotalNumberOfAgents = 0;
     public int NumberOfIncomingAgents = 0;
     public int NumberOfOutgoingAgents = 0;
+    public float TimeScale = 1f;
 
     [Header("Virus Data")]
     public int NumberOfSusceptible = 0;
@@ -70,5 +71,6 @@ public class SimulationData : MonoBehaviour
 
     public void UpdateMaskWearing(bool newMaskWearing) { MaskWearing = newMaskWearing; }
 
+    public void UpdateTimeScale(float newTimeScale) { TimeScale = newTimeScale; Time.timeScale = TimeScale; }
     
 }
