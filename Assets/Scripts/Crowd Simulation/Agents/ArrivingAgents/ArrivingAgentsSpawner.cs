@@ -70,7 +70,10 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             agentRenderer.material.color = randomColor;
 
             //Pass the settings to the agent
-            ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
+            //ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
+            //agentScript.EntryGateNumber = agentGate;
+            //agentScript.agentSettings = AgentSettings;
+            ArrivingAgentsBT agentScript = newAgent.GetComponent<ArrivingAgentsBT>();
             agentScript.EntryGateNumber = agentGate;
             agentScript.agentSettings = AgentSettings;
 

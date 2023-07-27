@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 3652621200324780338}
   - component: {fileID: 1124977381332191988}
   - component: {fileID: 2163138650694436516}
+  - component: {fileID: 5031064263249013356}
   m_Layer: 0
   m_Name: incoming_agent
   m_TagString: Agent
@@ -597,7 +598,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7083532259587614262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c01df2f000530fa46a59886475985efb, type: 3}
   m_Name: 
@@ -651,6 +652,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e1f5b84fd8dba4687d6efb9f9e2efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5031064263249013356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083532259587614262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0831f6f70656ca4ebd43f5ec170bef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 1121267112736129269}
+  agentState: 0
+  EntryGateNumber: 0
+  TimeToBoard: 0
+  agentSettings:
+    ChanceToUseRestroom: 0
+    ChanceToCheckIn: 0
+    ChanceToShop: 0
+    ChanceToEat: 0
 --- !u!1 &8223929326762957863
 GameObject:
   m_ObjectHideFlags: 0
