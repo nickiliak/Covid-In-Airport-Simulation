@@ -26,7 +26,6 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     public ArrivingAgentSettings AgentSettings = new();
 
     private GameObject CrowdDensity;
-    private List<GameObject> agents = new List<GameObject>();
     SimulationData sData;
 
     // Start is called before the first frame update
@@ -45,7 +44,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
     private IEnumerator AgentsArriving(int AgentNumber, float BoardingTime, int FlightNumber)
     {
         Color randomColor = Random.ColorHSV();
-
+        List<GameObject> agents = new List<GameObject>();
         int agentGate = Random.Range(1, 4); 
 
         for (int i = 0; i < AgentNumber; i++)

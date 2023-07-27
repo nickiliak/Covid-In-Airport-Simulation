@@ -45,7 +45,7 @@ public class DepartedAgentSpawner : MonoBehaviour
             GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
 
             //Set Agents settings
-            newAgent.GetComponent<DepartedAgentMovement>().agentSettings = AgentSettings;
+            newAgent.GetComponent<DepartedAgentsBT>().agentSettings = AgentSettings;
 
             //If crowd shader is active we need to detect collisions not triggers
             if (CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;

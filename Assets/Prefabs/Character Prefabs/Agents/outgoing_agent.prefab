@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 741725685432784791}
   - component: {fileID: 556014425830254171}
   - component: {fileID: 4881504443169630878}
-  - component: {fileID: -6012737723049047640}
+  - component: {fileID: 1637094517844319783}
   - component: {fileID: 5518721965221749743}
   - component: {fileID: 5103657908916767440}
   - component: {fileID: 4602965764877810103}
@@ -625,7 +625,7 @@ MonoBehaviour:
   AngularDrag: 0
   CrowdDensityPos: 0
   HeatmapTimer: 0
---- !u!114 &-6012737723049047640
+--- !u!114 &1637094517844319783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,11 +634,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8720071481651670940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4e1506330730f4409a755eb44879a3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e0487ca27e9ce8448e85bed1b3da18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 556014425830254171}
-  agentState: 0
+  Action: 0
   agentSettings:
     ChanceToUseRestroom: 0.33
     ChanceToHaveBaggage: 0.8
@@ -657,9 +657,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgentViralState: 0
   ViralStateColor: {r: 0, g: 0, b: 0, a: 0}
-  TransmissionChance: 0
-  VirusTransmissionRadius: 0
-  MaskTransmissionStoppage: 0
   MaskWearing: 0
   SocialDistancing: 0
 --- !u!114 &5103657908916767440
