@@ -26,9 +26,10 @@ public class CheckIn : AgentBehavior
         };
     }
 
-    public override void ExecuteCustomBehavior()
+    public override bool ExecuteCustomBehavior()
     {
         navmeshAgent.areaMask |= 1 << NavMesh.GetAreaFromName("AfterCheckIn");
+        return false;
     }
 
     public override NodeState Evaluate()

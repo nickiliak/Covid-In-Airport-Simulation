@@ -26,9 +26,10 @@ public class Exit : AgentBehavior
         };
     }
 
-    public override void ExecuteCustomBehavior()
+    public override bool ExecuteCustomBehavior()
     {
         Object.Destroy(Agent);
+        return true;
     }
 
     public override NodeState Evaluate()

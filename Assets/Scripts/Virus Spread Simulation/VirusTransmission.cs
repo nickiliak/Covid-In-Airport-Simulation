@@ -48,7 +48,7 @@ public class VirusTransmission : MonoBehaviour
             if(Random.value < chance)
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);
-                Debug.Log("Exposed");
+                //Debug.Log("Exposed");
             }
         }
     }

@@ -26,9 +26,10 @@ public class Boarding : AgentBehavior
             0f
         };
     }
-    public override void ExecuteCustomBehavior()
+    public override bool ExecuteCustomBehavior()
     {
         Object.Destroy(Agent);
+        return true;
     }
 
     public override NodeState Evaluate()

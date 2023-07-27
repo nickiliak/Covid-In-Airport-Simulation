@@ -6,7 +6,9 @@ using UnityEngine.AI;
 
 public class Baggage : AgentBehavior
 {
-    public Baggage(NavMeshAgent navmeshagent, string keyforBool, GameObject Agent)
+    GameObject Agent;
+    GameObject SuitCase;
+    public Baggage(NavMeshAgent navmeshagent, string keyforBool, GameObject agent)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
@@ -20,7 +22,8 @@ public class Baggage : AgentBehavior
         else SpawnBaggage = GameObject.Find("BaggageSpawner2").GetComponent<SpawnAgentBaggage>();
 
         //Spawn SuitCase
-        SpawnBaggage.SpawnBaggage(Agent.name);
+        Agent = agent;
+        SuitCase = SpawnBaggage.SpawnBaggage(Agent.name);
         //SuitCase.transform.Rotate(new Vector3(90f, Random.Range(0, 100), Random.Range(0, 100)));
 
         positionStrings = new List<string>()
@@ -30,14 +33,27 @@ public class Baggage : AgentBehavior
 
         waitTimes = new List<float>()
         {
-            Random.Range(8f, 12f)
+            0f
         };
+    }
+
+    public override bool ExecuteCustomBehavior()
+    {
+        if (Vector3.Distance(Agent.transform.position, SuitCase.transform.position) < 2)
+        {
+            Object.Destroy(SuitCase);
+            return false;
+        }
+        else CustomVariableBool2 = true;
+        Debug.Log(Vector3.Distance(Agent.transform.position, SuitCase.transform.position));
+
+        return true;
     }
 
     public override NodeState Evaluate()
     {
 
-        state = RunNextSetInBehavior(false, 1);
+        state = RunNextSetInBehavior(true, 1);
         return state;
     }
 }
