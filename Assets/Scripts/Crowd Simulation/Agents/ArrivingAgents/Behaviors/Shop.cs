@@ -8,12 +8,11 @@ using static ArrivingAgentsBT;
 
 public class Shop : AgentBehavior
 {
-    public Shop(NavMeshAgent navmeshagent, string keyforBool, out AgentAction agentState)
+    public Shop(NavMeshAgent navmeshagent, string keyforBool)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.Shop;
 
         positionStrings = new List<string>()
         {

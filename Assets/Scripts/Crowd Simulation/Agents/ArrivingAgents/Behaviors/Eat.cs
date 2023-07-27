@@ -9,12 +9,11 @@ using UnityEngine.AI;
 
 public class Eat : AgentBehavior
 {
-    public Eat(NavMeshAgent navmeshagent, string keyforBool, out AgentAction agentState)
+    public Eat(NavMeshAgent navmeshagent, string keyforBool)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.Eat;
 
         positionStrings = new List<string>()
         {

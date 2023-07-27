@@ -7,12 +7,10 @@ using UnityEngine.AI;
 
 public class WaitingUntilBoard : AgentBehavior
 {
-    public WaitingUntilBoard(NavMeshAgent navmeshagent, out AgentAction agentState)
+    public WaitingUntilBoard(NavMeshAgent navmeshagent)
     {
         navmeshAgent = navmeshagent;
-        agentState = AgentAction.WaitingUntilBoard;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.CheckIn;
 
         positionStrings = new List<string>()
         {

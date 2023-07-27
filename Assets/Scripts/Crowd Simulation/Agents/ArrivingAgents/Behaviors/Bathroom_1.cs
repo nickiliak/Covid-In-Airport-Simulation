@@ -9,12 +9,11 @@ using UnityEngine.AI;
 
 public class Bathroom_1 : AgentBehavior
 {
-    public Bathroom_1(NavMeshAgent navmeshagent, string keyforBool, out AgentAction agentState)
+    public Bathroom_1(NavMeshAgent navmeshagent, string keyforBool)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.Restroom;
 
         positionStrings = new List<string>()
         {

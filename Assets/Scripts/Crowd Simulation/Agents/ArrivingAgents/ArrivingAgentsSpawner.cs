@@ -70,9 +70,6 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             agentRenderer.material.color = randomColor;
 
             //Pass the settings to the agent
-            //ArrivingAgentsMovement agentScript = newAgent.GetComponent<ArrivingAgentsMovement>();
-            //agentScript.EntryGateNumber = agentGate;
-            //agentScript.agentSettings = AgentSettings;
             ArrivingAgentsBT agentScript = newAgent.GetComponent<ArrivingAgentsBT>();
             agentScript.EntryGateNumber = agentGate;
             agentScript.agentSettings = AgentSettings;
@@ -92,7 +89,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
         {
             foreach (GameObject agent in agents)
             {
-                ArrivingAgentsMovement agentScript = agent.GetComponent<ArrivingAgentsMovement>();
+                ArrivingAgentsBT agentScript = agent.GetComponent<ArrivingAgentsBT>();
                 agentScript.TimeToBoard = true;
             }
 

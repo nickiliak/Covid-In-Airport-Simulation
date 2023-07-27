@@ -10,12 +10,11 @@ using UnityEngine.AI;
 public class Boarding : AgentBehavior
 {
     GameObject Agent;
-    public Boarding(NavMeshAgent navmeshagent, out AgentAction agentState, int EntryGateNumber, GameObject agent)
+    public Boarding(NavMeshAgent navmeshagent, int EntryGateNumber, GameObject agent)
     {
         navmeshAgent = navmeshagent;
         Agent = agent;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.Board;
 
         positionStrings = new List<string>()
         {
@@ -34,8 +33,11 @@ public class Boarding : AgentBehavior
 
     public override NodeState Evaluate()
     {
-
-        state = RunNextSetInBehavior(true, 1);
+        if (Agent.GetComponent<ArrivingAgentsBT>().TimeToBoard == false) 
+            return NodeState.FAILURE;
+        else
+            state = RunNextSetInBehavior(true, 1);
+        
         return state;
     }
 }

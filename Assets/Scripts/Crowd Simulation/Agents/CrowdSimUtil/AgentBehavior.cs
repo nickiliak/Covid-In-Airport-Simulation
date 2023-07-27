@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
+using static ArrivingAgentsBT;
 
 public class AgentBehavior : BehaviorTree.Node
 {
     public NavMeshAgent navmeshAgent;
     public string keyForBool = "null";
 
+    //public AgentAction BehaviorAction;
     public enum InnerState { EXECUTING, WAITING }
     public InnerState Istate = InnerState.EXECUTING;
 
@@ -52,12 +54,12 @@ public class AgentBehavior : BehaviorTree.Node
                 AgentGoToPosition(FindPositionOfGameObject(positionStrings[0]));
             else if (HasPath() == true && IsCloseEnoughToTarget(distanceUntilCloseEnough))
             {
-                if (executeCustomBeh) ExecuteCustomBehavior();
-
                 navmeshAgent.ResetPath();
                 positionStrings.RemoveAt(0);
                 TimeStartedWaiting = Time.time;
                 Istate = InnerState.WAITING;
+
+                if (executeCustomBeh) ExecuteCustomBehavior();
             }
 
         }

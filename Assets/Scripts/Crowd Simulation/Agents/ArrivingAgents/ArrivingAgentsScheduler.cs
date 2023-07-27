@@ -49,7 +49,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
         FlightList = new List<Flight>();
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
 
-        FlightList.Add(GenerateFlight(StartingTime, 100, 150f));
+        FlightList.Add(GenerateFlight(StartingTime, 60, 80f));
 
         for (int i = 0; i < TotalFlights; i++)
         {

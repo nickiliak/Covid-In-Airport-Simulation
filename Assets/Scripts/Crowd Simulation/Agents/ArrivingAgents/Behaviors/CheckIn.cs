@@ -9,12 +9,11 @@ using static ArrivingAgentsBT;
 
 public class CheckIn : AgentBehavior
 {
-    public CheckIn (NavMeshAgent navmeshagent, string keyforBool, out AgentAction agentState)
+    public CheckIn (NavMeshAgent navmeshagent, string keyforBool)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
-        agentState = AgentAction.CheckIn;
 
         positionStrings = new List<string>()
         {

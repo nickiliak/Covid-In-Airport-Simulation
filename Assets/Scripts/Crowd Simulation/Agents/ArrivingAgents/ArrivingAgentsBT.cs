@@ -20,33 +20,33 @@ public class ArrivingAgentsBT : BehaviorTree.Tree
 
         Node root = new Selector(new List<Node>
             {
+                new Boarding(navMeshAgent, EntryGateNumber, gameObject),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool1", agentSettings.ChanceToUseRestroom),
-                    new Bathroom_1(navMeshAgent, "BathroomBool1", out Action)
+                    new Bathroom_1(navMeshAgent, "BathroomBool1")
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("CheckInBool", agentSettings.ChanceToCheckIn),
-                    new CheckIn(navMeshAgent,"CheckInBool", out Action)
+                    new CheckIn(navMeshAgent,"CheckInBool")
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool2", agentSettings.ChanceToUseRestroom),
-                    new Bathroom_2(navMeshAgent, "BathroomBool2", out Action)
+                    new Bathroom_2(navMeshAgent, "BathroomBool2")
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("ShopBool", agentSettings.ChanceToShop),
-                    new Shop(navMeshAgent, "ShopBool", out Action)
+                    new Shop(navMeshAgent, "ShopBool")
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("EatBool", agentSettings.ChanceToEat),
-                    new Eat(navMeshAgent, "EatBool", out Action)
+                    new Eat(navMeshAgent, "EatBool")
                 }),
-                new Boarding(navMeshAgent, out Action, EntryGateNumber, gameObject),
-                new WaitingUntilBoard(navMeshAgent, out Action)
+                new WaitingUntilBoard(navMeshAgent)
             });
 
         return root;
