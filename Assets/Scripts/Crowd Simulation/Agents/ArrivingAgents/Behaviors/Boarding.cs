@@ -10,10 +10,12 @@ using UnityEngine.AI;
 public class Boarding : AgentBehavior
 {
     GameObject Agent;
+    AgentData agentData;
     public Boarding(NavMeshAgent navmeshagent, int EntryGateNumber, GameObject agent)
     {
         navmeshAgent = navmeshagent;
         Agent = agent;
+        agentData = Agent.GetComponent<AgentData>();
         Istate = InnerState.EXECUTING;
 
         positionStrings = new List<string>()

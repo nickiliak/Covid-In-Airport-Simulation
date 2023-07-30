@@ -21,8 +21,10 @@ public class SimulationData : MonoBehaviour
     public float VirusInfectiousness = 0;
     public float InfectionRange = 0;
     public bool MaskWearing = true;
-    
 
+
+    [Header("Reducing Capacity")]
+    public int Bathroom1_capacity = 0;
 
     public void InsertNewIncomingAgent(GameObject newAgent)
     {

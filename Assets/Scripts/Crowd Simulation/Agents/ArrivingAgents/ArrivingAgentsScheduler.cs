@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -7,9 +8,10 @@ public class ArrivingAgentsScheduler : MonoBehaviour
 {
     private int TotalFlights = 0;
     private float StartingTime = 0f;
-    private List<Flight> FlightList;
+    public List<Flight> FlightList;
     private ArrivingAgentsSpawner AgentSpawner;
 
+    [Serializable]
     public class Flight
     {
         public float AgentStartArrivingTime;
@@ -46,10 +48,10 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     void Start()
     {
         StartingTime = Time.time;
-        FlightList = new List<Flight>();
+        //FlightList = new List<Flight>();
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
 
-        FlightList.Add(GenerateFlight(StartingTime, 60, 80f));
+        //FlightList.Add(GenerateFlight(StartingTime, 60, 80f));
        // FlightList.Add(GenerateFlight(StartingTime, 45, 100f));
         //FlightList.Add(GenerateFlight(StartingTime, 69, 120f));
 
@@ -65,5 +67,14 @@ public class ArrivingAgentsScheduler : MonoBehaviour
 
         //Application.Quit();
         //EditorApplication.isPlaying = false;
+    }
+
+    private void Update()
+    {
+        if (FlightList.Count > 0)
+        {
+            StartCoroutine(InitiateFlight(FlightList[0]));
+            FlightList.Remove(FlightList[0]);
+        }
     }
 }

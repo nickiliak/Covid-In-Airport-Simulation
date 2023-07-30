@@ -21,7 +21,7 @@ public class DepartedAgentsBT : BehaviorTree.Tree
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool", agentSettings.ChanceToUseRestroom),
-                    new Bathroom(navMeshAgent, "BathroomBool")
+                    new Bathroom(navMeshAgent, "BathroomBool", gameObject)
                 }),
                 new Sequence(new List<Node>
                 {

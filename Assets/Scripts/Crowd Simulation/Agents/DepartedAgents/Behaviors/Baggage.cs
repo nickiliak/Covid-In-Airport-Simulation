@@ -45,7 +45,6 @@ public class Baggage : AgentBehavior
             return false;
         }
         else CustomVariableBool2 = true;
-        Debug.Log(Vector3.Distance(Agent.transform.position, SuitCase.transform.position));
 
         return true;
     }

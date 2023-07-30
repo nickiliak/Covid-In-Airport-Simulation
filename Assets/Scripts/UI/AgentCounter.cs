@@ -24,6 +24,7 @@ public class AgentCounter : MonoBehaviour
         {
             objectsTouchingFloor++;
             AgentCounterText.text = objectsTouchingFloor.ToString();
+            other.gameObject.GetComponent<AgentData>().CurrentAreaInName = gameObject.name;
         }
     }
 
@@ -33,6 +34,7 @@ public class AgentCounter : MonoBehaviour
         {
             objectsTouchingFloor--;
             AgentCounterText.text = objectsTouchingFloor.ToString();
+            other.gameObject.GetComponent<AgentData>().CurrentAreaInName = "null";
         }
     }
 
