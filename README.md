@@ -1,2 +1,2 @@
-# Covid-In-Airport-Simulation
-Simulating the spread of covid in an Airport enviroment with Unity
+# Virus-In-Airport-Simulation
+The simulation involves replicating a virtual airport based on the actual design of Fairbanks International Airport in Alaska. The movement of the crowd within the virtual airport is determined by a decision graph with predefined probabilities, for example, a 20% chance of passengers going shopping during their free time before their flight departs. The first step in the simulation was to create a realistic airport environment populated by virtual agents. In the second step, the spread of the virus was implemented within the virtual airport. The final step includes testing various virus prevention measures and evaluating their effectiveness and impact.
