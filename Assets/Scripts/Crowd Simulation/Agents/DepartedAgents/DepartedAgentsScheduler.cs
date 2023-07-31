@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DepartedAgentsScheduler : MonoBehaviour
 {
-    public List<Flight> FlightList;
+    private List<Flight> FlightList;
     private int TotalFlights = 0;
     private float StartingTime = 0f;
     private DepartedAgentSpawner AgentSpawner;
@@ -29,13 +29,13 @@ public class DepartedAgentsScheduler : MonoBehaviour
         return AgentStartArrivingTime - StartingTime;
     }
 
-    Flight GenerateFlight(float agentStartArrivingTime, int agentNumber)
+    public Flight GenerateFlight(float agentStartArrivingTime, int agentNumber)
     {
         TotalFlights++;
         return new Flight(agentStartArrivingTime, agentNumber, TotalFlights);
     }
 
-    private IEnumerator InitiateFlight(Flight flight)
+    public IEnumerator InitiateFlight(Flight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber);
@@ -44,29 +44,6 @@ public class DepartedAgentsScheduler : MonoBehaviour
     void Start()
     {
         StartingTime = Time.time;
-        //FlightList = new List<Flight>();
         AgentSpawner = FindObjectOfType<DepartedAgentSpawner>();
-
-       // FlightList.Add(GenerateFlight(StartingTime, 100));
-       /// FlightList.Add(GenerateFlight(StartingTime + 10f, 100));
-       // FlightList.Add(GenerateFlight(StartingTime + 20f, 100));
-
-        /*for (int i = 0; i < TotalFlights; i++)
-        {
-            StartCoroutine(InitiateFlight(FlightList[0]));
-            FlightList.Remove(FlightList[0]);
-        }*/
-
-        //Application.Quit();
-        //EditorApplication.isPlaying = false;
-    }
-
-    private void Update()
-    {
-        if (FlightList.Count > 0)
-        {
-            StartCoroutine(InitiateFlight(FlightList[0]));
-            FlightList.Remove(FlightList[0]);
-        }
     }
 }

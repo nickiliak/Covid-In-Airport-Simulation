@@ -8,7 +8,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
 {
     private int TotalFlights = 0;
     private float StartingTime = 0f;
-    public List<Flight> FlightList;
+    private List<Flight> FlightList;
     private ArrivingAgentsSpawner AgentSpawner;
 
     [Serializable]
@@ -31,50 +31,28 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     {
         return AgentStartArrivingTime - StartingTime;
     }
-
-    Flight GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
+    public void InitiateAllFlights()
     {
-        TotalFlights++;
-        return new Flight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights);
+        foreach (Flight flight in FlightList)
+        {
+            StartCoroutine(InitiateFlight(flight));
+        }
     }
 
+    public void GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
+    {
+        TotalFlights++;
+        FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights));
+    }
     private IEnumerator InitiateFlight(Flight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
-        //Debug.Log("Flight Initiated");
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.BoardingTime, flight.FlightNumber);
     }
-
-    void Start()
+    public void Init()
     {
         StartingTime = Time.time;
-        //FlightList = new List<Flight>();
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
-
-        //FlightList.Add(GenerateFlight(StartingTime, 60, 80f));
-       // FlightList.Add(GenerateFlight(StartingTime, 45, 100f));
-        //FlightList.Add(GenerateFlight(StartingTime, 69, 120f));
-
-        //FlightList.Add(GenerateFlight(StartingTime, 60, 80f));
-        //FlightList.Add(GenerateFlight(StartingTime, 45, 100f));
-        //FlightList.Add(GenerateFlight(StartingTime, 69, 120f));
-
-        for (int i = 0; i < TotalFlights; i++)
-        {
-            StartCoroutine(InitiateFlight(FlightList[0]));
-            FlightList.Remove(FlightList[0]);
-        }
-
-        //Application.Quit();
-        //EditorApplication.isPlaying = false;
-    }
-
-    private void Update()
-    {
-        if (FlightList.Count > 0)
-        {
-            StartCoroutine(InitiateFlight(FlightList[0]));
-            FlightList.Remove(FlightList[0]);
-        }
+        FlightList = new List<Flight>();
     }
 }

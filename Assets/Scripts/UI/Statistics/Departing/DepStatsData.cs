@@ -15,8 +15,8 @@ public class DepStatsData : MonoBehaviour
     DepStatsUiUpdate SUU;
     void Start()
     {
-        Canvas = GameObject.Find("InSimulationMenu").transform;
-        SUU = Canvas.Find("Statistics").gameObject.GetComponent<DepStatsUiUpdate>();
+       // Canvas = GameObject.Find("Menus").transform;
+       // SUU = Canvas.Find("Statistics").gameObject.GetComponent<DepStatsUiUpdate>();
     }
 
 

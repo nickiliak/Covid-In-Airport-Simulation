@@ -15,8 +15,8 @@ public class ArrStatsData : MonoBehaviour
     ArrStatsUiUpdate SUU;
     void Start()
     {
-        Canvas = GameObject.Find("InSimulationMenu").transform;
-        SUU = Canvas.Find("Statistics").gameObject.GetComponent<ArrStatsUiUpdate>();
+       // Canvas = GameObject.Find("Menus").transform;
+     //   SUU = Canvas.Find("Statistics").gameObject.GetComponent<ArrStatsUiUpdate>();
     }
 
     public void OnArrAgentCreated()
