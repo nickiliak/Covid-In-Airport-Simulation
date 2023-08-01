@@ -16,7 +16,6 @@ public class AirportStats : MonoBehaviour
     TextMeshProUGUI SusceptiblePercentage;
     TextMeshProUGUI Exposed;
     TextMeshProUGUI ExposedPercentage;
-    TextMeshProUGUI MaxInfectedNumber;
     TextMeshProUGUI VirusInfectiousness;
     TextMeshProUGUI VirusRange;
     TextMeshProUGUI TimeScaleText;
@@ -39,8 +38,6 @@ public class AirportStats : MonoBehaviour
 
         Exposed = gameObject.transform.Find("Airport Stats/Exposed").gameObject.GetComponent<TextMeshProUGUI>();
         ExposedPercentage = gameObject.transform.Find("Airport Stats/Exposed %").gameObject.GetComponent<TextMeshProUGUI>();
-
-        MaxInfectedNumber = gameObject.transform.Find("Virus Variables/Infected/MaxInfectedNumber").gameObject.GetComponent<TextMeshProUGUI>();
 
         VirusInfectiousness = gameObject.transform.Find("Virus Variables/Virus Infectiousness").gameObject.GetComponent<TextMeshProUGUI>();
         VirusInfectiousness.text = VirusInfectiousness.name + ": " + sd.VirusInfectiousness.ToString();
@@ -66,14 +63,10 @@ public class AirportStats : MonoBehaviour
         Exposed.text = Exposed.name + ": " + sd.NumberOfExposed.ToString();
         ExposedPercentage.text = ExposedPercentage.name + ": " + ((float)sd.NumberOfExposed / sd.TotalNumberOfAgents * 100).ToString() + "%";
 
-        int MaximumNumberOfInfected = (int)gameObject.transform.Find("Virus Variables/Infected/InfectedSlider").gameObject.GetComponent<Slider>().value;
-        MaxInfectedNumber.text = MaximumNumberOfInfected.ToString();
-        sd.UpdateMaximumNumberOfInfected(MaximumNumberOfInfected);
-
         float TimeScale = (float)gameObject.transform.Find("Virus Variables/Time/TimeSlider").gameObject.GetComponent<Slider>().value;
         TimeScaleText.text = TimeScale.ToString();
         sd.UpdateTimeScale(TimeScale);
 
-        TimeElapsed.text = "Time Elasped: " + Time.time.ToString() + " s";
+        TimeElapsed.text = "Time Elasped: " + (Time.time- sd.StartingTime).ToString() + " s";
     }
 }

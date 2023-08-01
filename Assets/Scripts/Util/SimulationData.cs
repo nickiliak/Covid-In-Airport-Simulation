@@ -11,12 +11,14 @@ public class SimulationData : MonoBehaviour
     public int TotalNumberOfAgents = 0;
     public int NumberOfIncomingAgents = 0;
     public int NumberOfOutgoingAgents = 0;
+    public float StartingTime = 0f;
     public float TimeScale = 1f;
 
     [Header("Virus Data")]
     public int NumberOfSusceptible = 0;
     public int NumberOfInfected = 0;
     public int NumberOfExposed = 0;
+
     public int MaximumNumberOfInfected = 0;
     public float VirusInfectiousness = 0;
     public float InfectionRange = 0;

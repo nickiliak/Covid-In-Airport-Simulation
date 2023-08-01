@@ -29,10 +29,18 @@ public class DepartedAgentsScheduler : MonoBehaviour
         return AgentStartArrivingTime - StartingTime;
     }
 
-    public Flight GenerateFlight(float agentStartArrivingTime, int agentNumber)
+    public void InitiateAllFlights()
+    {
+        foreach (Flight flight in FlightList)
+        {
+            StartCoroutine(InitiateFlight(flight));
+        }
+    }
+
+    public void GenerateFlight(float agentStartArrivingTime, int agentNumber)
     {
         TotalFlights++;
-        return new Flight(agentStartArrivingTime, agentNumber, TotalFlights);
+        FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, TotalFlights));
     }
 
     public IEnumerator InitiateFlight(Flight flight)
@@ -41,9 +49,10 @@ public class DepartedAgentsScheduler : MonoBehaviour
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber);
     }
 
-    void Start()
+    public void Init()
     {
         StartingTime = Time.time;
         AgentSpawner = FindObjectOfType<DepartedAgentSpawner>();
+        FlightList = new List<Flight>();
     }
 }
