@@ -9,6 +9,7 @@ public class DepartedAgentsScheduler : MonoBehaviour
     private int TotalFlights = 0;
     private float StartingTime = 0f;
     private DepartedAgentSpawner AgentSpawner;
+    private SimulationData sd;
 
     [Serializable]
     public class Flight
@@ -41,12 +42,14 @@ public class DepartedAgentsScheduler : MonoBehaviour
     {
         TotalFlights++;
         FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, TotalFlights));
+        sd.IncreasedTotalFlightsGenerated();
     }
 
     public IEnumerator InitiateFlight(Flight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber);
+        sd.IncreasedTotalFlightsInitiated();
     }
 
     public void Init()
@@ -54,5 +57,6 @@ public class DepartedAgentsScheduler : MonoBehaviour
         StartingTime = Time.time;
         AgentSpawner = FindObjectOfType<DepartedAgentSpawner>();
         FlightList = new List<Flight>();
+        sd = FindAnyObjectByType<SimulationData>();
     }
 }

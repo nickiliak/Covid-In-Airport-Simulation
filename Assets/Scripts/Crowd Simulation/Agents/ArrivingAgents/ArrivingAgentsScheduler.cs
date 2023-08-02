@@ -10,6 +10,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     private float StartingTime = 0f;
     private List<Flight> FlightList;
     private ArrivingAgentsSpawner AgentSpawner;
+    private SimulationData sd;
 
     [Serializable]
     public class Flight
@@ -43,16 +44,19 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     {
         TotalFlights++;
         FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights));
+        sd.IncreasedTotalFlightsGenerated();
     }
     private IEnumerator InitiateFlight(Flight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.BoardingTime, flight.FlightNumber);
+        sd.IncreasedTotalFlightsInitiated();
     }
     public void Init()
     {
         StartingTime = Time.time;
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
         FlightList = new List<Flight>();
+        sd = FindAnyObjectByType<SimulationData>();
     }
 }

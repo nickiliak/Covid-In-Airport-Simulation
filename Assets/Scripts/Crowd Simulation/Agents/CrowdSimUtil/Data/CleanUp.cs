@@ -19,16 +19,16 @@ public class CleanUp : MonoBehaviour
         if (sd != null)
         {
             if (GetComponent<AgentData>().AgentType == AgentData.agentType.Incoming)
-                sd.RemoveNewIncomingAgent(gameObject);
+                sd.airportData.RemoveNewIncomingAgent(gameObject);
             else
-                sd.RemoveNewOutGoingAgent(gameObject);
-
+                sd.airportData.RemoveNewOutGoingAgent(gameObject);
+            
             if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Susceptible)
-                sd.DecreaseNumberOfSusceptible();
+                sd.virusData.DecreaseCurrentNumberOfSusceptible();
             else if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Exposed)
-                sd.DecreaseNumberOfExposed();
+                sd.virusData.DecreaseCurrentNumberOfExposed();
             else if (GetComponent<AgentVirusData>().AgentViralState == AgentVirusData.SEIRMODEL.Infected)
-                sd.DecreaseNumberOfInfected();
+                sd.virusData.DecreaseCurrentNumberOfInfected();
         }
     }
 

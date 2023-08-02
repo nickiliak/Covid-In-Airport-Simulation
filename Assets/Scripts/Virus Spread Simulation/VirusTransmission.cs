@@ -16,15 +16,15 @@ public class VirusTransmission : MonoBehaviour
     float CalculateL(Vector3 InfectedAgentPosition)
     {
         float distance = Vector3.Distance(InfectedAgentPosition, transform.position);
-        return (distance - sd.InfectionRange) /  ( - sd.InfectionRange );
+        return (distance - sd.virusData.GetInfectionRange()) /  ( - sd.virusData.GetInfectionRange() );
     }
 
     float VirusTransmissionProbabilityGen(Vector3 InfectedAgentPosition)
     {
         float L = CalculateL(InfectedAgentPosition);
 
-        if (sd.MaskWearing) return L / (sd.VirusInfectiousness + sd.VirusInfectiousness * 0.3f);
-        else return L / sd.VirusInfectiousness;
+        if (sd.virusData.GetMaskWearing()) return L / (sd.virusData.GetVirusInfectiousness() + sd.virusData.GetVirusInfectiousness() * 0.3f);
+        else return L / sd.virusData.GetVirusInfectiousness();
     }
     
     bool InRangeOfInfected(Collider other)

@@ -26,7 +26,7 @@ public class AgentVirusData : MonoBehaviour
 
         AgentViralState = (SEIRMODEL)Enum.GetValues(typeof(SEIRMODEL)).GetValue(StateValue);
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
-        MaskWearing = sd.MaskWearing;
+        MaskWearing = sd.virusData.GetMaskWearing();
     }
 
 
@@ -41,8 +41,8 @@ public class AgentVirusData : MonoBehaviour
         
         if (sd != null) 
         {
-            if (AgentViralState == SEIRMODEL.Susceptible) sd.IncreaseNumberOfSusceptible();
-            else if(AgentViralState == SEIRMODEL.Infected) sd.IncreaseNumberOfInfected();
+            if (AgentViralState == SEIRMODEL.Susceptible) sd.virusData.IncreaseCurrentNumberOfSusceptible();
+            else if(AgentViralState == SEIRMODEL.Infected) sd.virusData.IncreaseCurrentNumberOfInfected();
         }
     }
 
@@ -63,19 +63,22 @@ public class AgentVirusData : MonoBehaviour
     public void ChangeViralState(SEIRMODEL newState)
     {
         if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Susceptible)
-            sd.DecreaseNumberOfSusceptible();
+            sd.virusData.DecreaseCurrentNumberOfSusceptible();
         else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Exposed)
-            sd.DecreaseNumberOfExposed();
+            sd.virusData.DecreaseCurrentNumberOfExposed();
         else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Infected)
-            sd.DecreaseNumberOfInfected();
+            sd.virusData.DecreaseCurrentNumberOfInfected();
 
         AgentViralState = newState;
         if (newState == SEIRMODEL.Susceptible)
-            sd.IncreaseNumberOfSusceptible();
+            sd.virusData.IncreaseCurrentNumberOfSusceptible();
         else if (newState == SEIRMODEL.Exposed)
-            sd.IncreaseNumberOfExposed();
+        {
+            sd.virusData.IncreaseTotalNumberOfExposed();
+            sd.virusData.IncreaseCurrentNumberOfExposed();
+        }
         else if (newState == SEIRMODEL.Infected)
-            sd.IncreaseNumberOfInfected();
+            sd.virusData.IncreaseCurrentNumberOfInfected();
 
         SetViralStateColor(VirusDataGen.GenerateViralStateColor(Convert.ToInt32(newState)));
     }

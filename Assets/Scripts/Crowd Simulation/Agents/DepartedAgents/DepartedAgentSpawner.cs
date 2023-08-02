@@ -57,7 +57,7 @@ public class DepartedAgentSpawner : MonoBehaviour
             newAgent.name = "FlightNo" + FlightNumber.ToString() + "_AgentNo" + i.ToString();
 
             //Add agent to simulation data for general use
-            sData.InsertNewOutGoingAgent(newAgent);
+            sData.airportData.InsertNewOutGoingAgent(newAgent);
 
             //Wait a little bit until next Agent
             float spawnDelay = UnityEngine.Random.Range(0.5f, 1f);
