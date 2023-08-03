@@ -33,7 +33,6 @@ public class StartSimulation : MonoBehaviour
     void Start()
     {
         sd = FindObjectOfType<SimulationData>();
-        sd.totalRepeats = int.Parse(RepeatForXTimes.text);
         StartSimulationButton.onClick.AddListener(SimulationStart); // add the PrintMessage function to the button's onClick event
     }
 
@@ -50,7 +49,7 @@ public class StartSimulation : MonoBehaviour
                 AST_AC_BT.Add(int.Parse(child.GetChild(i).gameObject.GetComponent<TMP_InputField>().text));
             }
 
-            sd.OFlights.Add(A_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1], AST_AC_BT[2]));
+            A_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1], AST_AC_BT[2]);
             AST_AC_BT.Clear();
         }
 
@@ -70,7 +69,7 @@ public class StartSimulation : MonoBehaviour
                 AST_AC_BT.Add(int.Parse(child.GetChild(i).gameObject.GetComponent<TMP_InputField>().text));
             }
 
-            sd.IFlights.Add(D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1]));
+            D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1]);
             AST_AC_BT.Clear();
         }
 
@@ -80,12 +79,19 @@ public class StartSimulation : MonoBehaviour
     void InitiateSimulationData()
     {
         sd.StartingTime = Time.time;
+        sd.totalRepeats = int.Parse(RepeatForXTimes.text);
 
-        sd.GetVirusData().SetTotalNumberOfInfected(int.Parse(VirusNoInfected.text));
-        sd.GetVirusData().UpdateInfectionRange(int.Parse(VirusInfectRange.text));
-        sd.GetVirusData().UpdateVirusInfectiousness(int.Parse(VirusInfectiousness.text));
 
-        sd.GetVirusData().UpdateMaskWearing(MaskWearing.isOn);
+        for (int i = 0; i < sd.totalRepeats; i++)
+        {
+            VirusData vD = new VirusData();
+            vD.SetTotalNumberOfInfected(int.Parse(VirusNoInfected.text));
+            vD.UpdateInfectionRange(int.Parse(VirusInfectRange.text));
+            vD.UpdateVirusInfectiousness(int.Parse(VirusInfectiousness.text));
+            vD.UpdateMaskWearing(MaskWearing.isOn);
+
+            sd.GetVirusDataList().Add(vD);
+        }
     }
 
     void SimulationStart()

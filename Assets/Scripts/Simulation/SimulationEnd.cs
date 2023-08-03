@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SimulationEnd : MonoBehaviour
 {
+    public GameObject SR;
     SimulationData sd;
 
     string ParametersFilename = "";
@@ -40,19 +41,25 @@ public class SimulationEnd : MonoBehaviour
 
     private void OnEnable()
     {
+        SR.SetActive(false);
+        sd = FindAnyObjectByType<SimulationData>();
         ParametersFilename = Application.dataPath + "/DataGeneration/AirportSimulation_Parameters.txt";
         DataFilename = Application.dataPath + "/DataGeneration/Datasets/dataset" + sd.currentRepeat.ToString() + ".csv";
 
-        sd = FindAnyObjectByType<SimulationData>();
         GenerateData();
 
-        if(sd.currentRepeat < sd.totalRepeats)
+        if(sd.currentRepeat < sd.totalRepeats - 1)
         {
             sd.ResetData();
-            //RestartSimulationARA
+            sd.RestartSim();
+
+            SR.SetActive(true);
+
+            gameObject.SetActive(false);
         }
         else
         {
+            Debug.Log("OVER");
             EditorApplication.isPlaying = false;
             Application.Quit();
         }

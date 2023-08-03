@@ -11,20 +11,23 @@ public class SimulationData : MonoBehaviour
 
     public float TotalFlightsCreated = 0f;
     public float TotalFlightsInitiated = 0f;
-    public List<IncomingFlight> IFlights = new();
-    public List<OutgoingFlight> OFlights = new();
 
     public int totalRepeats = 0;
-    public int currentRepeat = 1;
+    public int currentRepeat = 0;
+
+    private ArrivingAgentsScheduler AAS;
+    private DepartedAgentsScheduler DAS;
 
     private AirportData airportData = new();
     private List<VirusData> virusData = new();
     private List<RecordedData> RData = new();
 
+
     [Header("Reducing Capacity ")]
     public int Bathroom1_capacity = 0;
 
     public AirportData GetAirportData() { return airportData; }
+    public List<VirusData> GetVirusDataList() { return virusData; }
     public VirusData GetVirusData() { return virusData[currentRepeat]; }
     public List<RecordedData> GetRecordedData() { return RData; }
 
@@ -39,14 +42,22 @@ public class SimulationData : MonoBehaviour
         EndingTime = 0f;
         TimeScale = 1f;
 
-        TotalFlightsCreated = 0f;
         TotalFlightsInitiated = 0f;
         currentRepeat++;
-
-
 
         airportData = new();
         RData = new();
     }
-        
+       
+    public void RestartSim()
+    {
+        AAS = FindAnyObjectByType<ArrivingAgentsScheduler>();
+        DAS = FindAnyObjectByType<DepartedAgentsScheduler>();
+
+        AAS.Reset();
+        DAS.Reset();
+
+        AAS.InitiateAllFlights();
+        DAS.InitiateAllFlights();
+    }
 }

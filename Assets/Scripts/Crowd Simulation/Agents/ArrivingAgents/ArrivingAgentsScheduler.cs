@@ -49,8 +49,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     public void Reset()
     {
         TotalFlights = 0;
-        StartingTime = 0f;
-        FlightList = new List<OutgoingFlight>();
+        StartingTime = sd.StartingTime;
     }
 
 }

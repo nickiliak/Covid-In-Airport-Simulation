@@ -27,8 +27,7 @@ public class SimulationRunning : MonoBehaviour
         if (sd.TotalFlightsCreated == sd.TotalFlightsInitiated && sd.GetAirportData().GetCurrentTotalNumberOfAgents() == 0)
         {
             sd.EndingTime = Time.time;
-            SE.gameObject.SetActive(true);
-            gameObject.SetActive(false);
+            SE.SetActive(true);
         }
     }
 }

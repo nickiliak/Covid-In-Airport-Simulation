@@ -51,7 +51,6 @@ public class DepartedAgentsScheduler : MonoBehaviour
     public void Reset()
     {
         TotalFlights = 0;
-        StartingTime = 0f;
-        FlightList = new List<IncomingFlight>();
+        StartingTime = sd.StartingTime;
     }
 }

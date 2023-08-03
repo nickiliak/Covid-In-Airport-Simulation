@@ -48,7 +48,6 @@ public class AgentVirusData : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("hey");
         sd = FindAnyObjectByType<SimulationData>();
 
         SetAgentVirusData();
