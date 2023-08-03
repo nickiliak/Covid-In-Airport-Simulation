@@ -11,6 +11,8 @@ public class Boarding : AgentBehavior
 {
     GameObject Agent;
     AgentData agentData;
+    Vector3 FinalDestination;
+
     public Boarding(NavMeshAgent navmeshagent, int EntryGateNumber, GameObject agent)
     {
         navmeshAgent = navmeshagent;
@@ -18,6 +20,7 @@ public class Boarding : AgentBehavior
         agentData = Agent.GetComponent<AgentData>();
         Istate = InnerState.EXECUTING;
 
+        FinalDestination = GameObject.Find("GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()).transform.position;
         positionStrings = new List<string>()
         {
             "GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()
@@ -30,7 +33,13 @@ public class Boarding : AgentBehavior
     }
     public override bool ExecuteCustomBehavior()
     {
-        Object.Destroy(Agent);
+        if (navmeshAgent.destination != FinalDestination)
+        {
+            navmeshAgent.areaMask |= 1 << NavMesh.GetAreaFromName("AfterCheckIn");
+            navmeshAgent.destination = FinalDestination;
+        }
+        if(agentData.CurrentAreaInName == "GatesArr Plane (1)" && IsCloseEnoughToTarget(1))
+            Object.Destroy(Agent);
         return true;
     }
 
@@ -38,7 +47,7 @@ public class Boarding : AgentBehavior
     {
         if (Agent.GetComponent<ArrivingAgentsBT>().TimeToBoard == false) 
             return NodeState.FAILURE;
-        else
+        else 
             state = RunNextSetInBehavior(true, 1);
         
         return state;

@@ -8,45 +8,31 @@ public class ArrivingAgentsScheduler : MonoBehaviour
 {
     private int TotalFlights = 0;
     private float StartingTime = 0f;
-    private List<Flight> FlightList;
+    private List<OutgoingFlight> FlightList;
     private ArrivingAgentsSpawner AgentSpawner;
     private SimulationData sd;
 
-    [Serializable]
-    public class Flight
-    {
-        public float AgentStartArrivingTime;
-        public float BoardingTime;
-        public int AgentNumber;
-        public int FlightNumber;
-
-        public Flight(float agentStartArrivingTime, int agentNumber, float boardingTime, int flightNumber)
-        {
-            AgentStartArrivingTime = agentStartArrivingTime;
-            AgentNumber = agentNumber;
-            BoardingTime = boardingTime;
-            FlightNumber = flightNumber;
-        }
-    }
     float GetTimeDelay(float AgentStartArrivingTime)
     {
         return AgentStartArrivingTime - StartingTime;
     }
     public void InitiateAllFlights()
     {
-        foreach (Flight flight in FlightList)
+        foreach (OutgoingFlight flight in FlightList)
         {
             StartCoroutine(InitiateFlight(flight));
         }
     }
 
-    public void GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
+    public OutgoingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
     {
         TotalFlights++;
-        FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights));
+        OutgoingFlight newFLight = new OutgoingFlight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights);
+        FlightList.Add(newFLight);
         sd.IncreasedTotalFlightsGenerated();
+        return newFLight;
     }
-    private IEnumerator InitiateFlight(Flight flight)
+    private IEnumerator InitiateFlight(OutgoingFlight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.BoardingTime, flight.FlightNumber);
@@ -56,7 +42,15 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     {
         StartingTime = Time.time;
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
-        FlightList = new List<Flight>();
+        FlightList = new List<OutgoingFlight>();
         sd = FindAnyObjectByType<SimulationData>();
     }
+
+    public void Reset()
+    {
+        TotalFlights = 0;
+        StartingTime = 0f;
+        FlightList = new List<OutgoingFlight>();
+    }
+
 }

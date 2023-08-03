@@ -34,7 +34,8 @@ public class AgentCounter : MonoBehaviour
         {
             objectsTouchingFloor--;
             AgentCounterText.text = objectsTouchingFloor.ToString();
-            other.gameObject.GetComponent<AgentData>().CurrentAreaInName = "null";
+            if(other.gameObject.GetComponent<AgentData>().CurrentAreaInName != "GatesArr Plane (1)")
+                other.gameObject.GetComponent<AgentData>().CurrentAreaInName = "null";
         }
     }
 

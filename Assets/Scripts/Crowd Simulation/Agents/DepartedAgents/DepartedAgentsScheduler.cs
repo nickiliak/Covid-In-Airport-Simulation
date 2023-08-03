@@ -5,26 +5,12 @@ using UnityEngine;
 
 public class DepartedAgentsScheduler : MonoBehaviour
 {
-    private List<Flight> FlightList;
+    private List<IncomingFlight> FlightList;
     private int TotalFlights = 0;
     private float StartingTime = 0f;
     private DepartedAgentSpawner AgentSpawner;
     private SimulationData sd;
 
-    [Serializable]
-    public class Flight
-    {
-        public float AgentStartArrivingTime;
-        public int AgentNumber;
-        public int FlightNumber;
-
-        public Flight(float agentStartArrivingTime, int agentNumber, int flightNumber)
-        {
-            AgentStartArrivingTime = agentStartArrivingTime;
-            AgentNumber = agentNumber;
-            FlightNumber = flightNumber;
-        }
-    }
     float GetTimeDelay(float AgentStartArrivingTime)
     {
         return AgentStartArrivingTime - StartingTime;
@@ -32,20 +18,22 @@ public class DepartedAgentsScheduler : MonoBehaviour
 
     public void InitiateAllFlights()
     {
-        foreach (Flight flight in FlightList)
+        foreach (IncomingFlight flight in FlightList)
         {
             StartCoroutine(InitiateFlight(flight));
         }
     }
 
-    public void GenerateFlight(float agentStartArrivingTime, int agentNumber)
+    public IncomingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber)
     {
         TotalFlights++;
-        FlightList.Add(new Flight(agentStartArrivingTime, agentNumber, TotalFlights));
+        IncomingFlight newFlight = new IncomingFlight(agentStartArrivingTime, agentNumber, TotalFlights);
+        FlightList.Add(newFlight);
         sd.IncreasedTotalFlightsGenerated();
+        return newFlight;
     }
 
-    public IEnumerator InitiateFlight(Flight flight)
+    public IEnumerator InitiateFlight(IncomingFlight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
         AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber);
@@ -56,7 +44,14 @@ public class DepartedAgentsScheduler : MonoBehaviour
     {
         StartingTime = Time.time;
         AgentSpawner = FindObjectOfType<DepartedAgentSpawner>();
-        FlightList = new List<Flight>();
+        FlightList = new List<IncomingFlight>();
         sd = FindAnyObjectByType<SimulationData>();
+    }
+
+    public void Reset()
+    {
+        TotalFlights = 0;
+        StartingTime = 0f;
+        FlightList = new List<IncomingFlight>();
     }
 }

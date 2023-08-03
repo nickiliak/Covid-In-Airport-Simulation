@@ -1,0 +1,6 @@
+Simulation has been executed.
+Total Time elapsed:128.9016
+
+Parameters Used:
+Virus: [Virus Infectiousness: 20,InfectionRange: 20,TotalNumberOfInfected: 20]
+MaskWearing: [False]

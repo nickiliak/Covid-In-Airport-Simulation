@@ -13,6 +13,7 @@ public class StartSimulation : MonoBehaviour
 
     [SerializeField] GameObject In_GameMenuWindow;
     [SerializeField] GameObject SimulationRunning;
+    [SerializeField] TMP_InputField RepeatForXTimes;
 
     [Header("Agent Data")]
     [SerializeField] Button StartSimulationButton;
@@ -32,6 +33,7 @@ public class StartSimulation : MonoBehaviour
     void Start()
     {
         sd = FindObjectOfType<SimulationData>();
+        sd.totalRepeats = int.Parse(RepeatForXTimes.text);
         StartSimulationButton.onClick.AddListener(SimulationStart); // add the PrintMessage function to the button's onClick event
     }
 
@@ -47,11 +49,8 @@ public class StartSimulation : MonoBehaviour
             {
                 AST_AC_BT.Add(int.Parse(child.GetChild(i).gameObject.GetComponent<TMP_InputField>().text));
             }
-            //Debug.Log(AST_AC_BT[0]);
-            //Debug.Log(AST_AC_BT[1]);
-            //Debug.Log(AST_AC_BT[2]);
 
-            A_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1], AST_AC_BT[2]);
+            sd.OFlights.Add(A_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1], AST_AC_BT[2]));
             AST_AC_BT.Clear();
         }
 
@@ -70,10 +69,8 @@ public class StartSimulation : MonoBehaviour
             {
                 AST_AC_BT.Add(int.Parse(child.GetChild(i).gameObject.GetComponent<TMP_InputField>().text));
             }
-            //Debug.Log(AST_AC_BT[0]);
-            //Debug.Log(AST_AC_BT[1]);
 
-            D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1]);
+            sd.IFlights.Add(D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1]));
             AST_AC_BT.Clear();
         }
 
@@ -84,11 +81,11 @@ public class StartSimulation : MonoBehaviour
     {
         sd.StartingTime = Time.time;
 
-        sd.virusData.SetTotalNumberOfInfected(int.Parse(VirusNoInfected.text));
-        sd.virusData.UpdateInfectionRange(int.Parse(VirusInfectRange.text));
-        sd.virusData.UpdateVirusInfectiousness(int.Parse(VirusInfectiousness.text));
+        sd.GetVirusData().SetTotalNumberOfInfected(int.Parse(VirusNoInfected.text));
+        sd.GetVirusData().UpdateInfectionRange(int.Parse(VirusInfectRange.text));
+        sd.GetVirusData().UpdateVirusInfectiousness(int.Parse(VirusInfectiousness.text));
 
-        sd.virusData.UpdateMaskWearing(MaskWearing.isOn);
+        sd.GetVirusData().UpdateMaskWearing(MaskWearing.isOn);
     }
 
     void SimulationStart()

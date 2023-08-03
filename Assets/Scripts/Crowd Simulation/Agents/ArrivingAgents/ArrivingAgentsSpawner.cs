@@ -74,7 +74,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
             agentScript.agentSettings = AgentSettings;
 
             //Add agent to simulation data for general use
-            sData.airportData.InsertNewIncomingAgent(newAgent);
+            sData.GetAirportData().InsertNewIncomingAgent(newAgent);
 
             //Wait a little bit until next Agent
             float spawnDelay = Random.Range(0f, 1f);

@@ -26,7 +26,7 @@ public class AgentVirusData : MonoBehaviour
 
         AgentViralState = (SEIRMODEL)Enum.GetValues(typeof(SEIRMODEL)).GetValue(StateValue);
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
-        MaskWearing = sd.virusData.GetMaskWearing();
+        MaskWearing = sd.GetVirusData().GetMaskWearing();
     }
 
 
@@ -41,13 +41,14 @@ public class AgentVirusData : MonoBehaviour
         
         if (sd != null) 
         {
-            if (AgentViralState == SEIRMODEL.Susceptible) sd.virusData.IncreaseCurrentNumberOfSusceptible();
-            else if(AgentViralState == SEIRMODEL.Infected) sd.virusData.IncreaseCurrentNumberOfInfected();
+            if (AgentViralState == SEIRMODEL.Susceptible) sd.GetVirusData().IncreaseCurrentNumberOfSusceptible();
+            else if(AgentViralState == SEIRMODEL.Infected) sd.GetVirusData().IncreaseCurrentNumberOfInfected();
         }
     }
 
     private void Start()
     {
+        Debug.Log("hey");
         sd = FindAnyObjectByType<SimulationData>();
 
         SetAgentVirusData();
@@ -63,22 +64,22 @@ public class AgentVirusData : MonoBehaviour
     public void ChangeViralState(SEIRMODEL newState)
     {
         if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Susceptible)
-            sd.virusData.DecreaseCurrentNumberOfSusceptible();
+            sd.GetVirusData().DecreaseCurrentNumberOfSusceptible();
         else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Exposed)
-            sd.virusData.DecreaseCurrentNumberOfExposed();
+            sd.GetVirusData().DecreaseCurrentNumberOfExposed();
         else if (GetComponent<AgentVirusData>().AgentViralState == SEIRMODEL.Infected)
-            sd.virusData.DecreaseCurrentNumberOfInfected();
+            sd.GetVirusData().DecreaseCurrentNumberOfInfected();
 
         AgentViralState = newState;
         if (newState == SEIRMODEL.Susceptible)
-            sd.virusData.IncreaseCurrentNumberOfSusceptible();
+            sd.GetVirusData().IncreaseCurrentNumberOfSusceptible();
         else if (newState == SEIRMODEL.Exposed)
         {
-            sd.virusData.IncreaseTotalNumberOfExposed();
-            sd.virusData.IncreaseCurrentNumberOfExposed();
+            sd.GetVirusData().IncreaseTotalNumberOfExposed();
+            sd.GetVirusData().IncreaseCurrentNumberOfExposed();
         }
         else if (newState == SEIRMODEL.Infected)
-            sd.virusData.IncreaseCurrentNumberOfInfected();
+            sd.GetVirusData().IncreaseCurrentNumberOfInfected();
 
         SetViralStateColor(VirusDataGen.GenerateViralStateColor(Convert.ToInt32(newState)));
     }

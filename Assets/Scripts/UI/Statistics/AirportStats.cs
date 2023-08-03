@@ -40,28 +40,28 @@ public class AirportStats : MonoBehaviour
         ExposedPercentage = gameObject.transform.Find("Airport Stats/Exposed %").gameObject.GetComponent<TextMeshProUGUI>();
 
         VirusInfectiousness = gameObject.transform.Find("Virus Variables/Virus Infectiousness").gameObject.GetComponent<TextMeshProUGUI>();
-        VirusInfectiousness.text = VirusInfectiousness.name + ": " + sd.virusData.GetVirusInfectiousness().ToString();
+        VirusInfectiousness.text = VirusInfectiousness.name + ": " + sd.GetVirusData().GetVirusInfectiousness().ToString();
 
         VirusRange = gameObject.transform.Find("Virus Variables/Virus Exposure Range").gameObject.GetComponent<TextMeshProUGUI>();
-        VirusRange.text = VirusRange.name + ": " + sd.virusData.GetInfectionRange().ToString();
+        VirusRange.text = VirusRange.name + ": " + sd.GetVirusData().GetInfectionRange().ToString();
 
         TimeScaleText = gameObject.transform.Find("Virus Variables/Time/TimeNumber").gameObject.GetComponent<TextMeshProUGUI>();
         TimeElapsed = gameObject.transform.Find("Airport Stats/Time Elapsed").gameObject.GetComponent<TextMeshProUGUI>();
     }
     private void FixedUpdate()
     {
-        TotalAgents.text = TotalAgents.name + ": " + sd.airportData.GetCurrentNumberOfOutgoingAgents().ToString();
-        IncomingAgents.text = IncomingAgents.name + ": " + sd.airportData.GetCurrentNumberOfIncomingAgents().ToString();
-        OutgoingAgents.text = OutgoingAgents.name + ": " + sd.airportData.GetCurrentNumberOfOutgoingAgents().ToString();
+        TotalAgents.text = TotalAgents.name + ": " + sd.GetAirportData().GetCurrentNumberOfOutgoingAgents().ToString();
+        IncomingAgents.text = IncomingAgents.name + ": " + sd.GetAirportData().GetCurrentNumberOfIncomingAgents().ToString();
+        OutgoingAgents.text = OutgoingAgents.name + ": " + sd.GetAirportData().GetCurrentNumberOfOutgoingAgents().ToString();
 
-        Infected.text = Infected.name + ": " + sd.virusData.GetCurrentNumberOfInfected().ToString();
-        InfectedPercentage.text = InfectedPercentage.name + ": " + ((float)sd.virusData.GetCurrentNumberOfInfected() / sd.airportData.GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
+        Infected.text = Infected.name + ": " + sd.GetVirusData().GetCurrentNumberOfInfected().ToString();
+        InfectedPercentage.text = InfectedPercentage.name + ": " + ((float)sd.GetVirusData().GetCurrentNumberOfInfected() / sd.GetAirportData().GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
 
-        Susceptible.text = Susceptible.name + ": " + sd.virusData.GetCurrentNumberOfSusceptible().ToString();
-        SusceptiblePercentage.text = SusceptiblePercentage.name + ": " + ((float)sd.virusData.GetCurrentNumberOfSusceptible() / sd.airportData.GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
+        Susceptible.text = Susceptible.name + ": " + sd.GetVirusData().GetCurrentNumberOfSusceptible().ToString();
+        SusceptiblePercentage.text = SusceptiblePercentage.name + ": " + ((float)sd.GetVirusData().GetCurrentNumberOfSusceptible() / sd.GetAirportData().GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
 
-        Exposed.text = Exposed.name + ": " + sd.virusData.GetCurrentNumberOfExposed().ToString();
-        ExposedPercentage.text = ExposedPercentage.name + ": " + ((float)sd.virusData.GetCurrentNumberOfExposed() / sd.airportData.GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
+        Exposed.text = Exposed.name + ": " + sd.GetVirusData().GetCurrentNumberOfExposed().ToString();
+        ExposedPercentage.text = ExposedPercentage.name + ": " + ((float)sd.GetVirusData().GetCurrentNumberOfExposed() / sd.GetAirportData().GetCurrentNumberOfOutgoingAgents() * 100).ToString() + "%";
 
         float TimeScale = (float)gameObject.transform.Find("Virus Variables/Time/TimeSlider").gameObject.GetComponent<Slider>().value;
         TimeScaleText.text = TimeScale.ToString();

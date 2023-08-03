@@ -16,7 +16,7 @@ public class GenerateAgentVirusData
     // IMPORTANT WE DONT GENERATE RECORVERED AGENTS FOR THE TIME BEING OR EXPOSED! SO ONLY S I
     public int GenerateViralStateValue(SimulationData sd)
     { 
-        if (sd.virusData.GetCurrentNumberOfInfected() >= sd.virusData.GetTotalNumberOfInfected()) 
+        if (sd.GetVirusData().GetCurrentNumberOfInfected() >= sd.GetVirusData().GetTotalNumberOfInfected()) 
         {
             return SUSCEPTIBLE;
         }
