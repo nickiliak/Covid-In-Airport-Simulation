@@ -1,6 +1,6 @@
 Simulation has been executed.
-Total Time elapsed:1232.681
+Total Time elapsed:427.6266
 
 Parameters Used:
-Virus: [Virus Infectiousness: 50,InfectionRange: 50,TotalNumberOfInfected: 40]
+Virus: [Virus Infectiousness: 20,InfectionRange: 20,TotalNumberOfInfected: 20]
 MaskWearing: [True]

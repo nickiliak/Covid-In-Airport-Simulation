@@ -10,7 +10,8 @@ public class SimulationEnd : MonoBehaviour
     SimulationData sd;
 
     string ParametersFilename = "";
-    string DataFilename = "";
+    string graphName = "";
+    string barName = "";
 
     public void GenerateData()
     {
@@ -26,16 +27,25 @@ public class SimulationEnd : MonoBehaviour
         parameters.WriteLine("MaskWearing: [" + sd.GetVirusData().GetMaskWearing().ToString() + "]");
         parameters.Close();
 
-        TextWriter data = new StreamWriter(DataFilename, false);
-        data.WriteLine("Susceptible,Infected,Exposed,Time");
-        for (int i = 0; i < sd.GetRecordedData().Count; i++)
+        TextWriter graph = new StreamWriter(graphName, false);
+        graph.WriteLine("Susceptible,Infected,Exposed,Time");
+        for (int i = 0; i < sd.GetRecordedDataGraph().Count; i++)
         {
-            data.WriteLine(sd.GetRecordedData()[i].GetCurrentNumberOfSuscpetible() + "," +
-                sd.GetRecordedData()[i].GetCurrentNumberOfInfected() + "," +
-                sd.GetRecordedData()[i].GetTotalNumberOfExposed() + "," +
-                sd.GetRecordedData()[i].GetTime());
+            graph.WriteLine(sd.GetRecordedDataGraph()[i].GetCurrentNumberOfSuscpetible() + "," +
+                sd.GetRecordedDataGraph()[i].GetCurrentNumberOfInfected() + "," +
+                sd.GetRecordedDataGraph()[i].GetTotalNumberOfExposed() + "," +
+                sd.GetRecordedDataGraph()[i].GetTime());
         }
-        data.Close();
+        graph.Close();
+
+        TextWriter bar = new StreamWriter(barName, false);
+        bar.WriteLine("Area,Hit");
+        for (int i = 0; i < sd.GetRecordedDataBar().Count; i++)
+        {
+            bar.WriteLine(sd.GetRecordedDataBar()[i].GetArea() + "," +
+                sd.GetRecordedDataBar()[i].GetHit());
+        }
+        bar.Close();
     }
 
 
@@ -44,7 +54,8 @@ public class SimulationEnd : MonoBehaviour
         SR.SetActive(false);
         sd = FindAnyObjectByType<SimulationData>();
         ParametersFilename = Application.dataPath + "/DataGeneration/AirportSimulation_Parameters.txt";
-        DataFilename = Application.dataPath + "/DataGeneration/Datasets/dataset" + sd.currentRepeat.ToString() + ".csv";
+        graphName = Application.dataPath + "/DataGeneration/Datasets/Graphs/dataset" + sd.currentRepeat.ToString() + "graph.csv";
+        barName = Application.dataPath + "/DataGeneration/Datasets/Bars/dataset" + sd.currentRepeat.ToString() + "bar.csv";
 
         GenerateData();
 

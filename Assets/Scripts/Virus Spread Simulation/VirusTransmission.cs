@@ -6,10 +6,12 @@ using UnityEngine;
 public class VirusTransmission : MonoBehaviour
 {
     SimulationData sd;
+    AgentData Data;
     AgentVirusData vData;
     private void Start()
     {
         sd = FindAnyObjectByType<SimulationData>();
+        Data = GetComponent<AgentData>();
         vData = GetComponent<AgentVirusData>();
     }
 
@@ -48,6 +50,7 @@ public class VirusTransmission : MonoBehaviour
             if(Random.value < chance)
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);
+                sd.GetRecordedDataBar().Add(new RecordedData(Data.CurrentAreaInName, 1));
                 //Debug.Log("Exposed");
             }
         }

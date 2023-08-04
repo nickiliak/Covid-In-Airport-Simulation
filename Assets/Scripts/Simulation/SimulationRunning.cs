@@ -15,7 +15,7 @@ public class SimulationRunning : MonoBehaviour
     
     private void RecordData()
     {
-        sd.GetRecordedData().Add(new RecordedData(
+        sd.GetRecordedDataGraph().Add(new RecordedData(
             sd.GetVirusData().GetCurrentNumberOfSusceptible(), 
             sd.GetVirusData().GetCurrentNumberOfInfected(), 
             sd.GetVirusData().GetTotalNumberOfExposed(), 

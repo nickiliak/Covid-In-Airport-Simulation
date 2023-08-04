@@ -20,7 +20,8 @@ public class SimulationData : MonoBehaviour
 
     private AirportData airportData = new();
     private List<VirusData> virusData = new();
-    private List<RecordedData> RData = new();
+    private List<RecordedData> RDataGraph = new();
+    private List<RecordedData> RDataBar = new();
 
 
     [Header("Reducing Capacity ")]
@@ -29,7 +30,8 @@ public class SimulationData : MonoBehaviour
     public AirportData GetAirportData() { return airportData; }
     public List<VirusData> GetVirusDataList() { return virusData; }
     public VirusData GetVirusData() { return virusData[currentRepeat]; }
-    public List<RecordedData> GetRecordedData() { return RData; }
+    public List<RecordedData> GetRecordedDataGraph() { return RDataGraph; }
+    public List<RecordedData> GetRecordedDataBar() { return RDataBar; }
 
     public void IncreasedTotalFlightsGenerated() { TotalFlightsCreated++; }
     public void IncreasedTotalFlightsInitiated() { TotalFlightsInitiated++; }
@@ -46,7 +48,8 @@ public class SimulationData : MonoBehaviour
         currentRepeat++;
 
         airportData = new();
-        RData = new();
+        RDataGraph = new();
+        RDataBar = new();
     }
        
     public void RestartSim()

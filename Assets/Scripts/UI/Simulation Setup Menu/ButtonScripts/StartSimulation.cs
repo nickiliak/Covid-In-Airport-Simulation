@@ -92,6 +92,15 @@ public class StartSimulation : MonoBehaviour
 
             sd.GetVirusDataList().Add(vD);
         }
+
+       // sd.GetRecordedDataBar().Add(new RecordedData());
+       /// sd.GetRecordedDataBar().Add(new RecordedData());
+       /// sd.GetRecordedDataBar().Add(new RecordedData());
+        //sd.GetRecordedDataBar().Add(new RecordedData());
+       // sd.GetRecordedDataBar().Add(new RecordedData());
+       // sd.GetRecordedDataBar().Add(new RecordedData());
+       // sd.GetRecordedDataBar().Add(new RecordedData());
+        //sd.GetRecordedDataBar().Add(new RecordedData());
     }
 
     void SimulationStart()
