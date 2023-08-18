@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class StartSimulation : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class StartSimulation : MonoBehaviour
     [SerializeField] TMP_InputField RepeatForXTimes;
 
     [Header("Agent Data")]
-    [SerializeField] Button StartSimulationButton;
+    [SerializeField] UnityEngine.UI.Button StartSimulationButton;
     [SerializeField] GameObject IncomingAgentInputFlightFields;
     [SerializeField] GameObject OutgoingAgentInputFlightFields;
     [SerializeField] GameObject SetUpWindow;
@@ -25,7 +27,7 @@ public class StartSimulation : MonoBehaviour
     [SerializeField] TMP_InputField VirusInfectiousness;
     [SerializeField] TMP_InputField VirusInfectRange;
     [SerializeField] TMP_InputField VirusNoInfected;
-    [SerializeField] Toggle MaskWearing;
+    [SerializeField] UnityEngine.UI.Toggle MaskWearing;
 
 
     private List<int> AST_AC_BT = new List<int>();
@@ -76,11 +78,26 @@ public class StartSimulation : MonoBehaviour
         D_Scheduler.InitiateAllFlights();
     }
     
+    void GenerateSimulationFolder()
+    {
+        sd.SimulationRunNumber = Directory.GetDirectories(Application.dataPath + "/GeneratedData/Simulations").Length;
+        string newFolderName = "Simulation" + sd.SimulationRunNumber;
+        string newFolderPath = Path.Combine((Application.dataPath + "/GeneratedData/Simulations"), newFolderName);
+
+        // Create the new folder
+        Directory.CreateDirectory(newFolderPath);
+
+        string SimulationPath = Application.dataPath + "/GeneratedData/Simulations/Simulation" + sd.SimulationRunNumber.ToString();
+        Directory.CreateDirectory(Path.Combine(SimulationPath, "Datasets"));
+        Directory.CreateDirectory(Path.Combine(SimulationPath + "/Datasets", "Bars"));
+        Directory.CreateDirectory(Path.Combine(SimulationPath + "/Datasets", "Graphs"));
+    }
+
     void InitiateSimulationData()
     {
         sd.StartingTime = Time.time;
         sd.totalRepeats = int.Parse(RepeatForXTimes.text);
-
+        GenerateSimulationFolder();
 
         for (int i = 0; i < sd.totalRepeats; i++)
         {

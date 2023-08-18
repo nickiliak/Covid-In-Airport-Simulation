@@ -31,17 +31,17 @@ public class WaitingUntilBoard : AgentBehavior
     void GenerateDynamicPosition()
     {
         GameObject Seats = GameObject.Find("Seats");
-        Seats.GetComponent<AvailableObjects>().PickRandomAvailableObject();
-        positionStrings = new List<string>()
+        /*positionStrings = new List<string>()
         {
-            Seats.GetComponent<AvailableObjects>().PickRandomAvailableObject().name
+            
         };
 
         waitTimes = new List<float>()
         {
             0f
-        };
+        };*/
 
+        navmeshAgent.destination = Seats.GetComponent<AvailableObjects>().PickRandomAvailableObject().transform.position;
         hasDynamicPosition = true;
     }
 
@@ -49,7 +49,7 @@ public class WaitingUntilBoard : AgentBehavior
     {
         if (hasDynamicPosition == false) GenerateDynamicPosition();
 
-        state = RunNextSetInBehavior(false, 1);
+        //state = RunNextSetInBehavior(false, 1);
         return state;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Exit : AgentBehavior
 {
+    Vector3 ExitPosition;
     GameObject Agent;
     public Exit(NavMeshAgent navmeshagent, GameObject agent)
     {
@@ -13,7 +14,7 @@ public class Exit : AgentBehavior
         Istate = InnerState.EXECUTING;
         Agent = agent;
 
-        Vector3 ExitPosition = GameObject.Find("Exit/Target").transform.position;
+        ExitPosition = GameObject.Find("Exit/Target").transform.position + new Vector3(Random.Range(-60, 60), 0, 0);
 
         positionStrings = new List<string>()
         {
@@ -34,8 +35,15 @@ public class Exit : AgentBehavior
 
     public override NodeState Evaluate()
     {
+        if (navmeshAgent.hasPath == false)
+        {
+            navmeshAgent.destination = ExitPosition;
+        }
+        else if (IsCloseEnoughToTarget(2))
+        {
+            Object.Destroy(Agent);
+        }
 
-        state = RunNextSetInBehavior(true, 1);
         return state;
     }
 }

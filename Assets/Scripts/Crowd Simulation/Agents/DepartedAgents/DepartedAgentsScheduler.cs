@@ -11,6 +11,10 @@ public class DepartedAgentsScheduler : MonoBehaviour
     private DepartedAgentSpawner AgentSpawner;
     private SimulationData sd;
 
+    public List<IncomingFlight> getFlightList() { return FlightList; }
+    public int getTotalFlights() { return TotalFlights; }
+    public float getStartingTime() { return StartingTime; }
+
     float GetTimeDelay(float AgentStartArrivingTime)
     {
         return AgentStartArrivingTime - StartingTime;
@@ -27,7 +31,7 @@ public class DepartedAgentsScheduler : MonoBehaviour
     public IncomingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber)
     {
         TotalFlights++;
-        IncomingFlight newFlight = new IncomingFlight(agentStartArrivingTime, agentNumber, TotalFlights);
+        IncomingFlight newFlight = new(agentStartArrivingTime, agentNumber, TotalFlights);
         FlightList.Add(newFlight);
         sd.IncreasedTotalFlightsGenerated();
         return newFlight;

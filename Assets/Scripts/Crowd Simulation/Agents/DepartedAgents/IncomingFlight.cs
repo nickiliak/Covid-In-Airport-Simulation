@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncomingFlight : MonoBehaviour
+public class IncomingFlight
 {
     public float AgentStartArrivingTime;
     public int AgentNumber;

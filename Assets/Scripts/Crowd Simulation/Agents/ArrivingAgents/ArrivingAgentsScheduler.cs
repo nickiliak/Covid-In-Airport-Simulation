@@ -12,6 +12,10 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     private ArrivingAgentsSpawner AgentSpawner;
     private SimulationData sd;
 
+    public int getTotalFlights() { return TotalFlights; }
+    public float getStartingTime() { return StartingTime; }
+    public List<OutgoingFlight> getFlightList() { return FlightList; }
+
     float GetTimeDelay(float AgentStartArrivingTime)
     {
         return AgentStartArrivingTime - StartingTime;
@@ -27,7 +31,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     public OutgoingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber, float boardingTime)
     {
         TotalFlights++;
-        OutgoingFlight newFLight = new OutgoingFlight(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights);
+        OutgoingFlight newFLight = new(agentStartArrivingTime, agentNumber, boardingTime, TotalFlights);
         FlightList.Add(newFLight);
         sd.IncreasedTotalFlightsGenerated();
         return newFLight;
@@ -35,7 +39,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
     private IEnumerator InitiateFlight(OutgoingFlight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
-        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.BoardingTime, flight.FlightNumber);
+        AgentSpawner.SpawnAgents(flight.AgentNumber, sd.StartingTime + flight.BoardingTime, flight.FlightNumber);
         sd.IncreasedTotalFlightsInitiated();
     }
     public void Init()

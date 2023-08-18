@@ -29,7 +29,12 @@ public class AvailableObjects : MonoBehaviour
 
     public GameObject PickRandomAvailableObject()
     {
-        if (availableObjects.Count == 0) return null;
+        if (availableObjects.Count == 0)
+        {
+            int RandomIndex = Random.Range(0, unavailableObjects.Count);
+            GameObject gameObject = unavailableObjects[RandomIndex];
+            return gameObject;
+        }
         else
         {
             int RandomIndex = Random.Range(0, availableObjects.Count);

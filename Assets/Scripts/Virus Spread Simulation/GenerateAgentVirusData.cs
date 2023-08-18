@@ -22,7 +22,7 @@ public class GenerateAgentVirusData
         }
         else
         {
-            if (Random.Range(0, 2) == 0) return SUSCEPTIBLE;
+            if (Random.Range(0, 4) == 0) return SUSCEPTIBLE;
             else return INFECTED;
         }
 

@@ -8,6 +8,7 @@ public class SimulationData : MonoBehaviour
     public float StartingTime = 0f;
     public float EndingTime = 0f;
     public float TimeScale = 1f;
+    public int SimulationRunNumber = 0;
 
     public float TotalFlightsCreated = 0f;
     public float TotalFlightsInitiated = 0f;
@@ -15,8 +16,8 @@ public class SimulationData : MonoBehaviour
     public int totalRepeats = 0;
     public int currentRepeat = 0;
 
-    private ArrivingAgentsScheduler AAS;
-    private DepartedAgentsScheduler DAS;
+    public ArrivingAgentsScheduler AAS;
+    public DepartedAgentsScheduler DAS;
 
     private AirportData airportData = new();
     private List<VirusData> virusData = new();

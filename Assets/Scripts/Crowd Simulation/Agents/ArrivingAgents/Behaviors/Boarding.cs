@@ -38,7 +38,8 @@ public class Boarding : AgentBehavior
             navmeshAgent.areaMask |= 1 << NavMesh.GetAreaFromName("AfterCheckIn");
             navmeshAgent.destination = FinalDestination;
         }
-        if(agentData.CurrentAreaInName == "GatesArr Plane (1)" && IsCloseEnoughToTarget(1))
+
+        if(Vector3.Distance(Agent.transform.position, FinalDestination) < 2)
             Object.Destroy(Agent);
         return true;
     }
