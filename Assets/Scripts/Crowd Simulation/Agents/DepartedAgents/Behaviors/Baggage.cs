@@ -6,25 +6,17 @@ using UnityEngine.AI;
 
 public class Baggage : AgentBehavior
 {
+    int pickUpNo;
     GameObject Agent;
-    GameObject SuitCase;
+    GameObject SuitCase = null;
     public Baggage(NavMeshAgent navmeshagent, string keyforBool, GameObject agent)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
 
-        int pickUpNo = Random.Range(1, 3);
-        SpawnAgentBaggage SpawnBaggage;
-
-        //Pick one of two possible conveyor belts
-        if (pickUpNo == 1) SpawnBaggage = GameObject.Find("BaggageSpawner1").GetComponent<SpawnAgentBaggage>();
-        else SpawnBaggage = GameObject.Find("BaggageSpawner2").GetComponent<SpawnAgentBaggage>();
-
-        //Spawn SuitCase
         Agent = agent;
-        SuitCase = SpawnBaggage.SpawnBaggage(Agent.name);
-        //SuitCase.transform.Rotate(new Vector3(90f, Random.Range(0, 100), Random.Range(0, 100)));
+        pickUpNo = Random.Range(1, 3);
 
         positionStrings = new List<string>()
         {
@@ -49,8 +41,21 @@ public class Baggage : AgentBehavior
         return true;
     }
 
+    public void GenerateSuitCase()
+    {
+        SpawnAgentBaggage SpawnBaggage;
+
+        //Pick one of two possible conveyor belts
+        if (pickUpNo == 1) SpawnBaggage = GameObject.Find("BaggageSpawner1").GetComponent<SpawnAgentBaggage>();
+        else SpawnBaggage = GameObject.Find("BaggageSpawner2").GetComponent<SpawnAgentBaggage>();
+
+        //Spawn SuitCase
+        SuitCase = SpawnBaggage.SpawnBaggage(Agent.name);
+    }
+
     public override NodeState Evaluate()
     {
+        if (SuitCase == null) GenerateSuitCase();
 
         state = RunNextSetInBehavior(true, 1);
         return state;

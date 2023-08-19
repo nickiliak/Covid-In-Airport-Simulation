@@ -1,21 +1,20 @@
 Simulation has been executed.
-Low Infection Chance, Yes Mask
 
-Simulation Run Number:1
+Simulation Run Number:11
 
-Simulation was repeated for 5 Times.
-Total Time elapsed:876.6109
+Simulation was repeated for 1 Times.
+Total Time elapsed:230.4916
 
 Parameters Used:
 
 ############ AIRPORT ############
 
-Incoming Total Flights:0
-Flight1: [Arriving Time: 0, Agent Count: 80, Boarding Time: 120]
+Incoming Total Flights:1
+Flight1: [Arriving Time: 0, Agent Count: 120, Boarding Time: 180]
 
-Outgoing Total Flights:0
-Flight1: [Arriving Time: 0, Agent Count: 80]
+Outgoing Total Flights:1
+Flight1: [Arriving Time: 0, Agent Count: 120]
 
 ############ VIRUS ############
-Virus: [Virus Infectiousness: 99,InfectionRange: 1,TotalNumberOfInfected: 50]
+Virus: [Virus Infectiousness: 20,InfectionRange: 20,TotalNumberOfInfected: 20]
 MaskWearing: [True]
