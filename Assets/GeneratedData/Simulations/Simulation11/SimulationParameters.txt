@@ -3,17 +3,17 @@ Simulation has been executed.
 Simulation Run Number:11
 
 Simulation was repeated for 1 Times.
-Total Time elapsed:230.4916
+Total Time elapsed:283.7032
 
 Parameters Used:
 
 ############ AIRPORT ############
 
 Incoming Total Flights:1
-Flight1: [Arriving Time: 0, Agent Count: 120, Boarding Time: 180]
+Flight1: [Arriving Time: 0, Agent Count: 250, Boarding Time: 20]
 
 Outgoing Total Flights:1
-Flight1: [Arriving Time: 0, Agent Count: 120]
+Flight1: [Arriving Time: 0, Agent Count: 250]
 
 ############ VIRUS ############
 Virus: [Virus Infectiousness: 20,InfectionRange: 20,TotalNumberOfInfected: 20]
