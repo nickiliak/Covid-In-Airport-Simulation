@@ -20,10 +20,10 @@ public class Boarding : AgentBehavior
         agentData = Agent.GetComponent<AgentData>();
         Istate = InnerState.EXECUTING;
 
-        FinalDestination = GameObject.Find("GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()).transform.position;
+        FinalDestination = GameObject.Find("GatesArr/EntryGates/Gate" + EntryGateNumber.ToString() + "/GateDoor/Target").transform.position;
         positionStrings = new List<string>()
         {
-            "GatesArr/EntryGates/Gate" + EntryGateNumber.ToString()
+            "GatesArr/EntryGates/Gate" + EntryGateNumber.ToString() + "/GateDoor/Target"
         };
 
         waitTimes = new List<float>()

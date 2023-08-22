@@ -30,18 +30,18 @@ public class DepartedAgentSpawner : MonoBehaviour
         sData = FindObjectOfType<SimulationData>();
     }
 
-    public void SpawnAgents(int AgentNumber, int FlightNumber)
+    public void SpawnAgents(int AgentNumber, int FlightNumber, int GateNumber)
     {
-        StartCoroutine(PlaneWithAgentsArrived(AgentNumber, FlightNumber));
+        StartCoroutine(PlaneWithAgentsArrived(AgentNumber, FlightNumber, GateNumber));
     }
 
-    private IEnumerator PlaneWithAgentsArrived(int AgentNumber, int FlightNumber)
+    private IEnumerator PlaneWithAgentsArrived(int AgentNumber, int FlightNumber, int GateNumber)
     {
         for (int i = 0; i < AgentNumber; i++)
         {
             //Spawn Agent
-            Vector3 AgentPos = transform.position;
-            AgentPos.x = AgentPos.x + UnityEngine.Random.Range(-5f, 5f);
+            Vector3 AgentPos = transform.GetChild(GateNumber - 1).GetChild(0).Find("Target").position;
+            AgentPos.x = AgentPos.z + UnityEngine.Random.Range(-5f, 2f);
             GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
 
             //Set Agents settings

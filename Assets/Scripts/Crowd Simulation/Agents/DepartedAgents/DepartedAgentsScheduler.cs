@@ -40,7 +40,7 @@ public class DepartedAgentsScheduler : MonoBehaviour
     public IEnumerator InitiateFlight(IncomingFlight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
-        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber);
+        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber, 2);
         sd.IncreasedTotalFlightsInitiated();
     }
 
