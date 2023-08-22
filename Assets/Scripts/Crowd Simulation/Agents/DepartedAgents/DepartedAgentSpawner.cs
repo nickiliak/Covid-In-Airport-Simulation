@@ -41,7 +41,7 @@ public class DepartedAgentSpawner : MonoBehaviour
         {
             //Spawn Agent
             Vector3 AgentPos = transform.GetChild(GateNumber - 1).GetChild(0).Find("Target").position;
-            AgentPos.x = AgentPos.z + UnityEngine.Random.Range(-5f, 2f);
+            //AgentPos.x = AgentPos.z + UnityEngine.Random.Range(-5f, 2f);
             GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
 
             //Set Agents settings
