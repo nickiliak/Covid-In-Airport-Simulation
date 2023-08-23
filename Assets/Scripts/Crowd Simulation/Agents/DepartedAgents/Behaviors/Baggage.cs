@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Baggage : AgentBehavior
 {
     int pickUpNo;
+    bool HasGeneratedOnce = false;
     GameObject Agent;
     GameObject SuitCase = null;
     public Baggage(NavMeshAgent navmeshagent, string keyforBool, GameObject agent)
@@ -44,6 +45,7 @@ public class Baggage : AgentBehavior
     public void GenerateSuitCase()
     {
         SpawnAgentBaggage SpawnBaggage;
+        HasGeneratedOnce = true;
 
         //Pick one of two possible conveyor belts
         if (pickUpNo == 1) SpawnBaggage = GameObject.Find("BaggageSpawner1").GetComponent<SpawnAgentBaggage>();
@@ -55,7 +57,7 @@ public class Baggage : AgentBehavior
 
     public override NodeState Evaluate()
     {
-        if (SuitCase == null) GenerateSuitCase();
+        if (SuitCase == null && HasGeneratedOnce == false) GenerateSuitCase();
 
         state = RunNextSetInBehavior(true, 1);
         return state;

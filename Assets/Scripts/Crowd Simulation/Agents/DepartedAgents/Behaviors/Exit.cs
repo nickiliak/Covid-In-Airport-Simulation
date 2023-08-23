@@ -14,7 +14,7 @@ public class Exit : AgentBehavior
         Istate = InnerState.EXECUTING;
         Agent = agent;
 
-        ExitPosition = GameObject.Find("Exit/Target").transform.position + new Vector3(Random.Range(-60, 60), 0, 0);
+        ExitPosition = GameObject.Find("Exit/Target").transform.position + new Vector3(Random.Range(-100, 100), 0, 0);
 
         positionStrings = new List<string>()
         {

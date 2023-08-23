@@ -10,6 +10,7 @@ public class ArrivingAgentsSpawner : MonoBehaviour
 
     public GameObject agentPrefab; // Prefab of the agent to spawn
     public GameObject Parent;
+    int agentGate;
 
     [Serializable]
     public class ArrivingAgentSettings
@@ -41,40 +42,45 @@ public class ArrivingAgentsSpawner : MonoBehaviour
         StartCoroutine(AgentsArriving(AgentNumber, BoardingTime, FlightNumber));
     }
 
+    void SpawnAgent(List<GameObject> agents, int FlightNumber, int i, Vector3 AgentPos)
+    {
+        GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
+        agents.Add(newAgent);
+
+        //Set Parent for agents so that its organized
+        newAgent.transform.parent = Parent.transform;
+
+        //Agent Number and Flight Number
+        newAgent.name = "FlightNo" + FlightNumber.ToString() + "_AgentNo" + i.ToString();
+
+        //If crowd shader is active we need to detect collisions not triggers
+        if (CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
+
+
+        //Set color for this agent so all agents of this flight have the same color
+        //Renderer agentRenderer = newAgent.GetComponent<Renderer>();
+        //agentRenderer.material.color = randomColor;
+
+        //Pass the settings to the agent
+        ArrivingAgentsBT agentScript = newAgent.GetComponent<ArrivingAgentsBT>();
+        agentScript.EntryGateNumber = agentGate;
+        agentScript.agentSettings = AgentSettings;
+
+        //Add agent to simulation data for general use
+        sData.GetAirportData().InsertNewIncomingAgent(newAgent);
+    }
+
     private IEnumerator AgentsArriving(int AgentNumber, float BoardingTime, int FlightNumber)
     {
-        Color randomColor = Random.ColorHSV();
+        //Color randomColor = Random.ColorHSV();
         List<GameObject> agents = new List<GameObject>();
-        int agentGate = Random.Range(1, 4); 
-
-        for (int i = 0; i < AgentNumber; i++)
+        agentGate = Random.Range(1, 4);
+        int i = 0;
+        while (i < AgentNumber)
         {
             Vector3 AgentPos = transform.position;
-            AgentPos.x = AgentPos.x + Random.Range(-40f, 40f);
-            GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
-            agents.Add(newAgent);
-
-            //Set Parent for agents so that its organized
-            newAgent.transform.parent = Parent.transform;
-
-            //Agent Number and Flight Number
-            newAgent.name = "FlightNo" + FlightNumber.ToString() + "_AgentNo" + i.ToString();
-
-            //If crowd shader is active we need to detect collisions not triggers
-            if(CrowdDensity.activeInHierarchy) newAgent.GetComponent<CapsuleCollider>().isTrigger = false;
-
-
-            //Set color for this agent so all agents of this flight have the same color
-            Renderer agentRenderer = newAgent.GetComponent<Renderer>();
-            agentRenderer.material.color = randomColor;
-
-            //Pass the settings to the agent
-            ArrivingAgentsBT agentScript = newAgent.GetComponent<ArrivingAgentsBT>();
-            agentScript.EntryGateNumber = agentGate;
-            agentScript.agentSettings = AgentSettings;
-
-            //Add agent to simulation data for general use
-            sData.GetAirportData().InsertNewIncomingAgent(newAgent);
+            AgentPos.x = AgentPos.x + Random.Range(-100f, 100f);
+            SpawnAgent(agents, FlightNumber, i++, AgentPos);
 
             //Wait a little bit until next Agent
             float spawnDelay = Random.Range(0f, 1f);
