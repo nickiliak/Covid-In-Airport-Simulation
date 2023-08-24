@@ -18,7 +18,7 @@ public class CarSimulation : MonoBehaviour
         if(CarPrefabs[index].GetComponent<NavMeshAgent>() == null)
             CarPrefabs[index].AddComponent<NavMeshAgent>();
 
-        GameObject Car = Instantiate(CarPrefabs[index], transform.position, Quaternion.Euler(0, RotationYAxis, 0));
+        GameObject Car = Instantiate(CarPrefabs[index], transform.position + new Vector3(0, 0.6f, 0), Quaternion.Euler(0, RotationYAxis, 0));
 
         Car.GetComponent<NavMeshAgent>().destination = Target.transform.position;
         Cars.Add(Car);

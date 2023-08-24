@@ -25,8 +25,8 @@ public class VirusTransmission : MonoBehaviour
     {
         float L = CalculateL(InfectedAgentPosition);
 
-        if (sd.GetVirusData().GetMaskWearing()) return L / (sd.GetVirusData().GetVirusInfectiousness() + sd.GetVirusData().GetVirusInfectiousness() * 0.3f);
-        else return L / sd.GetVirusData().GetVirusInfectiousness();
+        if (sd.GetVirusData().GetMaskWearing()) return L / (sd.GetVirusData().GetVirusInfectiousness() + sd.GetVirusData().GetVirusInfectiousness() * 0.3f) * vData.naturalSusceptibility;
+        else return L / sd.GetVirusData().GetVirusInfectiousness() * vData.naturalSusceptibility;
     }
     
     bool InRangeOfInfected(Collider other)
@@ -41,6 +41,13 @@ public class VirusTransmission : MonoBehaviour
         return false;
     }
 
+    private IEnumerator AddPointToHeatMap()
+    {
+        GetComponent<CapsuleCollider>().isTrigger = false;
+        yield return new WaitForSeconds(1.0f);
+        GetComponent<CapsuleCollider>().isTrigger = true;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (InRangeOfInfected(other) == true)
@@ -51,7 +58,8 @@ public class VirusTransmission : MonoBehaviour
             {
                 vData.ChangeViralState(AgentVirusData.SEIRMODEL.Exposed);
                 sd.GetRecordedDataBar().Add(new RecordedData(Data.CurrentAreaInName, 1));
-                //Debug.Log("Exposed");
+                StartCoroutine(AddPointToHeatMap());
+                Debug.Log("Exposed");
             }
         }
     }

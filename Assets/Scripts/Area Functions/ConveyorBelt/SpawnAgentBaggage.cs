@@ -19,6 +19,7 @@ public class SpawnAgentBaggage : MonoBehaviour
         InstantiatedObject.name = BaggageName;
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("SuitCaseLayer"), LayerMask.NameToLayer("SuitCaseLayer")); // NEED TO MOVE THIS WTF 
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("SuitCaseLayer"), LayerMask.NameToLayer("HeatMapLayer")); // NEED TO MOVE THIS WTF 
 
         Renderer renderer = InstantiatedObject.GetComponent<Renderer>();
         Color randomColor = new Color(Random.value, Random.value, Random.value);

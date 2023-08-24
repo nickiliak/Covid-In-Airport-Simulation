@@ -11,6 +11,7 @@ public class AgentVirusData : MonoBehaviour
     [Header("Data")]
     public SEIRMODEL AgentViralState;
     public Color ViralStateColor;
+    public float naturalSusceptibility;
 
     [Header("Quarantine Measures")]
     public bool MaskWearing;
@@ -26,6 +27,7 @@ public class AgentVirusData : MonoBehaviour
 
         AgentViralState = (SEIRMODEL)Enum.GetValues(typeof(SEIRMODEL)).GetValue(StateValue);
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
+        naturalSusceptibility = 1f;
         MaskWearing = sd.GetVirusData().GetMaskWearing();
     }
 

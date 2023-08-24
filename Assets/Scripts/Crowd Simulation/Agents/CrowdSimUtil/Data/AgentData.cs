@@ -15,6 +15,7 @@ public class AgentData : MonoBehaviour
     [SerializeField] gender Gender;
     public agentType AgentType;
     public string CurrentAreaInName = "null";
+    public string Ethnicity = "Greece";
 
     [Header("Movement Data")]
     [SerializeField] Rigidbody rb;
