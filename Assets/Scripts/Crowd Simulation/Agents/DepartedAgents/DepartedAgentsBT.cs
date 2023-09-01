@@ -25,6 +25,11 @@ public class DepartedAgentsBT : BehaviorTree.Tree
                 }),
                 new Sequence(new List<Node>
                 {
+                    new CheckIfWeActivateBehavior("RandomizePath", 1f),
+                    new RandomizePath(navMeshAgent, "RandomizePath")
+                }),
+                new Sequence(new List<Node>
+                {
                     new CheckIfWeActivateBehavior("BaggageBool", agentSettings.ChanceToHaveBaggage),
                     new Baggage(navMeshAgent, "BaggageBool", gameObject)
                 }),

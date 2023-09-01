@@ -41,10 +41,10 @@ public class AgentBehavior : BehaviorTree.Node
 
     public void AgentGoToPosition(Vector3 Position)
     {
-        //NavMeshPath path = new NavMeshPath();
-        //navmeshAgent.CalculatePath(Position, path);
-        //navmeshAgent.SetPath(path);
-        navmeshAgent.destination = Position;
+        NavMeshPath path = new NavMeshPath();
+        navmeshAgent.CalculatePath(Position, path);
+        navmeshAgent.SetPath(path);
+        //navmeshAgent.destination = Position;
     }
 
     public virtual bool ExecuteCustomBehavior() { return false; }

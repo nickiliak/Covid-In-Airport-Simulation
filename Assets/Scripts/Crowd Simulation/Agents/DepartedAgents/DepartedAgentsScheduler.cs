@@ -28,10 +28,10 @@ public class DepartedAgentsScheduler : MonoBehaviour
         }
     }
 
-    public IncomingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber)
+    public IncomingFlight GenerateFlight(float agentStartArrivingTime, int agentNumber, int Gate)
     {
         TotalFlights++;
-        IncomingFlight newFlight = new(agentStartArrivingTime, agentNumber, TotalFlights);
+        IncomingFlight newFlight = new(agentStartArrivingTime, agentNumber, TotalFlights, Gate);
         FlightList.Add(newFlight);
         sd.IncreasedTotalFlightsGenerated();
         return newFlight;
@@ -40,7 +40,7 @@ public class DepartedAgentsScheduler : MonoBehaviour
     public IEnumerator InitiateFlight(IncomingFlight flight)
     {
         yield return new WaitForSeconds(GetTimeDelay(flight.AgentStartArrivingTime));
-        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber, 2);
+        AgentSpawner.SpawnAgents(flight.AgentNumber, flight.FlightNumber, flight.Gate);
         sd.IncreasedTotalFlightsInitiated();
     }
 

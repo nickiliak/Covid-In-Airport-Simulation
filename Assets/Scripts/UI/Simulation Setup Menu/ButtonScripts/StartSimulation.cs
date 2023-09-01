@@ -66,12 +66,12 @@ public class StartSimulation : MonoBehaviour
         Transform Fields = OutgoingAgentInputFlightFields.transform;
         foreach (Transform child in Fields)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 AST_AC_BT.Add(int.Parse(child.GetChild(i).gameObject.GetComponent<TMP_InputField>().text));
             }
 
-            D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1]);
+            D_Scheduler.GenerateFlight(AST_AC_BT[0], AST_AC_BT[1], AST_AC_BT[2]);
             AST_AC_BT.Clear();
         }
 
