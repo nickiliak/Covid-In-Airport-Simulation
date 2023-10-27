@@ -17,14 +17,14 @@ public class ArrivingAgentsBT : BehaviorTree.Tree
 
     protected override Node SetupTree()
     {
-
+        AgentData agentdata = gameObject.GetComponent<AgentData>();
         Node root = new Selector(new List<Node>
             {
                 new Boarding(navMeshAgent, EntryGateNumber, gameObject),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool1", agentSettings.ChanceToUseRestroom),
-                    new Bathroom_1(navMeshAgent, "BathroomBool1")
+                    new BotMiddleBathroom(navMeshAgent, "BathroomBool1", agentdata)
                 }),
                 new Sequence(new List<Node>
                 {
@@ -34,19 +34,19 @@ public class ArrivingAgentsBT : BehaviorTree.Tree
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool2", agentSettings.ChanceToUseRestroom),
-                    new Bathroom_2(navMeshAgent, "BathroomBool2")
+                    new TopMiddleBathroom(navMeshAgent, "BathroomBool2", agentdata)
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("ShopBool", agentSettings.ChanceToShop),
-                    new Shop(navMeshAgent, "ShopBool")
+                    new Shop(navMeshAgent, "ShopBool", agentdata)
                 }),
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("EatBool", agentSettings.ChanceToEat),
-                    new Eat(navMeshAgent, "EatBool")
+                    new Eat(navMeshAgent, "EatBool", agentdata)
                 }),
-                new WaitingUntilBoard(navMeshAgent)
+                new WaitingUntilBoard(navMeshAgent, agentdata)
             });
 
         return root;

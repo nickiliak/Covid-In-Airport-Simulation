@@ -8,48 +8,28 @@ using Unity.VisualScripting;
 
 public class WaitingUntilBoard : AgentBehavior
 {
+    AgentData agentdata;
     bool hasDynamicPosition = false;
-    public WaitingUntilBoard(NavMeshAgent navmeshagent)
+    public WaitingUntilBoard(NavMeshAgent navmeshagent, AgentData agentData)
     {
         navmeshAgent = navmeshagent;
+        agentdata = agentData;
         Istate = InnerState.EXECUTING;
-
-        /*positionStrings = new List<string>()
-        {
-            "GatesArr/Seat Set (" + Random.Range(0, 6).ToString()
-            + ")/Seats (" + Random.Range(0, 2).ToString()
-            + ")/Group " + Random.Range(1, 3).ToString()
-            + "/Chair (" + Random.Range(0, 5).ToString() + ")"
-        };
-
-        waitTimes = new List<float>()
-        {
-            0f
-        };*/
     }
-    //need to changee from string to vector3 fuck my life bro
+    
     void GenerateDynamicPosition()
     {
         GameObject Seats = GameObject.Find("Seats");
-        /*positionStrings = new List<string>()
-        {
-            
-        };
-
-        waitTimes = new List<float>()
-        {
-            0f
-        };*/
-
-        navmeshAgent.destination = Seats.GetComponent<AvailableObjects>().PickRandomAvailableObject().transform.position;
-        hasDynamicPosition = true;
+        agentdata.Seat = Seats.GetComponent<AvailableObjects>().PickRandomAvailableObject();
+        if(agentdata.Seat != null) 
+            navmeshAgent.destination = agentdata.Seat.transform.position;
+            hasDynamicPosition = true;
     }
 
     public override NodeState Evaluate()
     {
         if (hasDynamicPosition == false) GenerateDynamicPosition();
 
-        //state = RunNextSetInBehavior(false, 1);
         return state;
     }
 }

@@ -17,9 +17,9 @@ NavMeshProjectSettings:
     cost: 1
   - name: AfterCheckIn
     cost: 1
-  - name: 
-    cost: 0
-  - name: 
+  - name: FoodEntry
+    cost: 1
+  - name: FoodExit
     cost: 1
   - name: 
     cost: 1

@@ -41,7 +41,7 @@ public class AgentBehavior : BehaviorTree.Node
 
     public void AgentGoToPosition(Vector3 Position)
     {
-        NavMeshPath path = new NavMeshPath();
+        NavMeshPath path = new();
         navmeshAgent.CalculatePath(Position, path);
         navmeshAgent.SetPath(path);
         //navmeshAgent.destination = Position;
@@ -66,7 +66,10 @@ public class AgentBehavior : BehaviorTree.Node
                 Istate = InnerState.WAITING;
             }
             else if (HasPath() == false && CustomVariableBool1)
+            {
                 AgentGoToPosition(FindPositionOfGameObject(positionStrings[0]));
+            }
+                
         }
         else if (Istate == InnerState.WAITING)
         {

@@ -13,20 +13,22 @@ public class GenerateAgentVirusData
     Color INFECTEDCOLOR = Color.red;
     Color RECOVEREDCOLOR = Color.green;
 
+
     // IMPORTANT WE DONT GENERATE RECORVERED AGENTS FOR THE TIME BEING OR EXPOSED! SO ONLY S I
     public int GenerateViralStateValue(SimulationData sd)
-    { 
-        if (sd.GetVirusData().GetCurrentNumberOfInfected() >= sd.GetVirusData().GetTotalNumberOfInfected()) 
+    {
+
+        if (Random.value < 0.15)
         {
-            return SUSCEPTIBLE;
+            sd.counter = 0;
+            return INFECTED;
         }
         else
         {
-            if (Random.Range(0, 4) == 0) return SUSCEPTIBLE;
-            else return INFECTED;
+            sd.counter++;
+            return SUSCEPTIBLE;
         }
-
-    }   
+    }
 
     public Color GenerateViralStateColor(int ViralStateValue) {
         if (ViralStateValue == 0) return SUSCEPTIBLECOLOR;

@@ -36,5 +36,9 @@ public class CleanUp : MonoBehaviour
     {
         RemovePositionFromCDArr();
         RemoveFromSimulationData();
+
+        AgentData GA = gameObject.GetComponent<AgentData>();
+        if(GA.Seat != null)
+            GameObject.Find("Seats").GetComponent<AvailableObjects>().availableObjects.Add(GA.Seat);
     }
 }

@@ -564,7 +564,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.5
   m_BaseOffset: 1
-  m_WalkableMask: 23
+  m_WalkableMask: 87
   m_ObstacleAvoidanceType: 4
 --- !u!114 &-1458904879399426325
 MonoBehaviour:
@@ -582,6 +582,8 @@ MonoBehaviour:
   Age: 0
   Gender: 0
   AgentType: 0
+  CurrentAreaInName: null
+  Ethnicity: Greece
   rb: {fileID: 4611117111947955232}
   Speed: 0
   Accelaration: 0
@@ -590,6 +592,7 @@ MonoBehaviour:
   AngularDrag: 0
   CrowdDensityPos: 0
   HeatmapTimer: 0
+  Seat: {fileID: 0}
 --- !u!114 &5031064263249013356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AgentViralState: 0
   ViralStateColor: {r: 0, g: 0, b: 0, a: 0}
+  naturalSusceptibility: 0
   MaskWearing: 0
   SocialDistancing: 0
 --- !u!114 &1124977381332191988

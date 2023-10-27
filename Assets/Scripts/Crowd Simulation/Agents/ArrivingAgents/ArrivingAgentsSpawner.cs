@@ -42,8 +42,10 @@ public class ArrivingAgentsSpawner : MonoBehaviour
         StartCoroutine(AgentsArriving(AgentNumber, BoardingTime, FlightNumber));
     }
 
-    void SpawnAgent(List<GameObject> agents, int FlightNumber, int i, Vector3 AgentPos)
+    void SpawnAgent(List<GameObject> agents, int FlightNumber, int i)
     {
+        Vector3 AgentPos = transform.position;
+        AgentPos.x += Random.Range(-80f, 80f);
         GameObject newAgent = Instantiate(agentPrefab, AgentPos, Quaternion.identity);
         agents.Add(newAgent);
 
@@ -72,15 +74,20 @@ public class ArrivingAgentsSpawner : MonoBehaviour
 
     private IEnumerator AgentsArriving(int AgentNumber, float BoardingTime, int FlightNumber)
     {
+
         //Color randomColor = Random.ColorHSV();
         List<GameObject> agents = new List<GameObject>();
         agentGate = Random.Range(1, 4);
         int i = 0;
-        while (i < AgentNumber)
-        {
-            Vector3 AgentPos = transform.position;
-            AgentPos.x = AgentPos.x + Random.Range(-100f, 100f);
-            SpawnAgent(agents, FlightNumber, i++, AgentPos);
+        while (i < AgentNumber) {
+
+            int j = Random.Range(2, 4);
+            if(i + j < AgentNumber)
+                for (int k = 0; k < j; k++) SpawnAgent(agents, FlightNumber, i++);
+            else
+                SpawnAgent(agents, FlightNumber, i++);
+
+
 
             //Wait a little bit until next Agent
             float spawnDelay = Random.Range(0f, 1f);
@@ -90,15 +97,12 @@ public class ArrivingAgentsSpawner : MonoBehaviour
         float delay = BoardingTime - Time.time;
         if (delay > 0) yield return new WaitForSeconds(delay); //Wait X time until time to board has arrived meanin delay function until the time has come
 
-        if (agents.Count != 0)
+        foreach (GameObject agent in agents)
         {
-            foreach (GameObject agent in agents)
-            {
-                ArrivingAgentsBT agentScript = agent.GetComponent<ArrivingAgentsBT>();
-                agentScript.TimeToBoard = true;
-            }
-
-            agents.Clear();
+            ArrivingAgentsBT agentScript = agent.GetComponent<ArrivingAgentsBT>();
+            agentScript.TimeToBoard = true;
         }
+
+        agents.Clear();
     }
 }

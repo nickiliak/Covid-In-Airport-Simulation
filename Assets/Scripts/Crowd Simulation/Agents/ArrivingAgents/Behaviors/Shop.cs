@@ -5,14 +5,23 @@ using UnityEngine;
 using BehaviorTree;
 using UnityEngine.AI;
 using static ArrivingAgentsBT;
+using System.Text.RegularExpressions;
+using TMPro;
 
 public class Shop : AgentBehavior
 {
-    public Shop(NavMeshAgent navmeshagent, string keyforBool)
+    SimulationData sd;
+    TextMeshPro AgentCounterNumberText;
+    AgentData agentData;
+    public Shop(NavMeshAgent navmeshagent, string keyforBool, AgentData _agentData)
     {
         navmeshAgent = navmeshagent;
         keyForBool = keyforBool;
         Istate = InnerState.EXECUTING;
+
+        sd = GameObject.Find("SimulationData").GetComponent<SimulationData>();
+        AgentCounterNumberText = GameObject.Find("Shop Plane/AgentCounter").GetComponent<TextMeshPro>();
+        agentData = _agentData;
 
         positionStrings = new List<string>()
         {
@@ -31,6 +40,13 @@ public class Shop : AgentBehavior
 
     public override NodeState Evaluate()
     {
+        if (sd.Shop_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "Shop Plane")
+        {
+            navmeshAgent.ResetPath();
+            parent.SetData(keyForBool, false);
+            return NodeState.FAILURE;
+        }
+
         RunNextSetInBehavior(false, 1);
         return state;
     }

@@ -15,13 +15,13 @@ public class DepartedAgentsBT : BehaviorTree.Tree
 
     protected override Node SetupTree()
     {
-
+        AgentData agentdata = gameObject.GetComponent<AgentData>();
         Node root = new Selector(new List<Node>
             {
                 new Sequence(new List<Node>
                 {
                     new CheckIfWeActivateBehavior("BathroomBool", agentSettings.ChanceToUseRestroom),
-                    new Bathroom(navMeshAgent, "BathroomBool", gameObject)
+                    new TopLeftBathroom(navMeshAgent, "BathroomBool", agentdata)
                 }),
                 new Sequence(new List<Node>
                 {

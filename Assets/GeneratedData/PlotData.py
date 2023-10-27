@@ -143,7 +143,7 @@ def plot_bar_csv_files(folder_path, PlotsPath):
 
 
 # Get a list of all items (files and subdirectories) in the folder
-items = os.listdir('Simulations')
+items = os.listdir('Simulations')                                                                                                                                                                                   
 # Filter out the subdirectories
 subdirectories = [item for item in items if os.path.isdir(os.path.join('Simulations', item))]
 # Get the count of subdirectories
@@ -151,8 +151,8 @@ subdirectory_count = len(subdirectories)
 
 for i in range(subdirectory_count):
     if create_plots_folders("Simulations/" + "Simulation" + str(i)) == True:
-        #plot_graph_csv_files("Simulations/" + "Simulation" + str(i) + "/Datasets/Graphs", "Simulations/" + "Simulation" + str(i) + "/")
-        plot_stack_line_csv_files("Simulations/" + "Simulation" + str(i) + "/Datasets/Graphs", "Simulations/" + "Simulation" + str(i) + "/")
+        plot_graph_csv_files("Simulations/" + "Simulation" + str(i) + "/Datasets/Graphs", "Simulations/" + "Simulation" + str(i) + "/")
+        #plot_stack_line_csv_files("Simulations/" + "Simulation" + str(i) + "/Datasets/Graphs", "Simulations/" + "Simulation" + str(i) + "/")
         plot_bar_csv_files("Simulations/" + "Simulation" + str(i) + "/Datasets/Bars", "Simulations/" + "Simulation" + str(i) + "/")
 
 

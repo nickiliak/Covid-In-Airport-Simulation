@@ -48,6 +48,7 @@ public class ArrivingAgentsScheduler : MonoBehaviour
         AgentSpawner = FindObjectOfType<ArrivingAgentsSpawner>();
         FlightList = new List<OutgoingFlight>();
         sd = FindAnyObjectByType<SimulationData>();
+        sd.StartingTime = StartingTime;
     }
 
     public void Reset()

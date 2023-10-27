@@ -24,9 +24,15 @@ public class SimulationData : MonoBehaviour
     private List<RecordedData> RDataGraph = new();
     private List<RecordedData> RDataBar = new();
 
+    //Temp counter of infected
+    public int counter = 0;
 
     [Header("Reducing Capacity ")]
-    public int Bathroom1_capacity = 0;
+    public int TopLeftBathroom_Capacity = 0;
+    public int TopMiddleBathroom_Capacity = 0;
+    public int BotMiddleBathroom_Capacity = 0;
+    public int Restaurant_Capacity = 0;
+    public int Shop_Capacity = 0;
 
     public AirportData GetAirportData() { return airportData; }
     public List<VirusData> GetVirusDataList() { return virusData; }

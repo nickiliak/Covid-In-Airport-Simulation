@@ -29,6 +29,13 @@ public class AgentData : MonoBehaviour
     public int CrowdDensityPos;
     public float HeatmapTimer;
 
+    [Header("Extra")]
+    public GameObject Seat;
+
+    public class AgentProfile
+    {
+
+    }
 
     private GenerateAgentData Data = new();
     

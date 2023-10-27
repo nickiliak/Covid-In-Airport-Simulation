@@ -29,6 +29,13 @@ public class StartSimulation : MonoBehaviour
     [SerializeField] TMP_InputField VirusNoInfected;
     [SerializeField] UnityEngine.UI.Toggle MaskWearing;
 
+    [Header("Area Limit Capacity")]
+    [SerializeField] TMP_InputField TopLeftRestroom;
+    [SerializeField] TMP_InputField TopMiddleRestroom;
+    [SerializeField] TMP_InputField BotMiddleRestroom;
+    [SerializeField] TMP_InputField Restaurant;
+    [SerializeField] TMP_InputField Shop;
+
 
     private List<int> AST_AC_BT = new List<int>();
     // Start is called before the first frame update
@@ -110,14 +117,11 @@ public class StartSimulation : MonoBehaviour
             sd.GetVirusDataList().Add(vD);
         }
 
-       // sd.GetRecordedDataBar().Add(new RecordedData());
-       /// sd.GetRecordedDataBar().Add(new RecordedData());
-       /// sd.GetRecordedDataBar().Add(new RecordedData());
-        //sd.GetRecordedDataBar().Add(new RecordedData());
-       // sd.GetRecordedDataBar().Add(new RecordedData());
-       // sd.GetRecordedDataBar().Add(new RecordedData());
-       // sd.GetRecordedDataBar().Add(new RecordedData());
-        //sd.GetRecordedDataBar().Add(new RecordedData());
+        sd.TopLeftBathroom_Capacity = int.Parse(TopLeftRestroom.text);
+        sd.TopMiddleBathroom_Capacity = int.Parse(TopMiddleRestroom.text);
+        sd.BotMiddleBathroom_Capacity = int.Parse(BotMiddleRestroom.text);
+        sd.Restaurant_Capacity = int.Parse(Restaurant.text);
+        sd.Shop_Capacity = int.Parse(Shop.text);
     }
 
     void SimulationStart()
