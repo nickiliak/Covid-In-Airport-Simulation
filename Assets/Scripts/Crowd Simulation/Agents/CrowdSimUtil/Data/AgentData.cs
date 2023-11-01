@@ -57,7 +57,12 @@ public class AgentData : MonoBehaviour
     {
         Speed = Data.GenerateSpeed();
         Accelaration = Data.GenerateAccelaration();
-        Proximity = Data.GenerateProximity();
+
+        if (GetComponent<AgentVirusData>().SocialDistancing == true)
+            Proximity = Data.GenerateProximity() + UnityEngine.Random.Range(0.2f, 0.4f);
+        else
+            Proximity = Data.GenerateProximity();
+
         Drag = Data.GenerateDrag();
         AngularDrag = Data.GenerateAngularDrag();
 

@@ -21,7 +21,11 @@ public class Eat : AgentBehavior
         Istate = InnerState.EXECUTING;
 
         sd = GameObject.Find("SimulationData").GetComponent<SimulationData>();
-        AgentCounterNumberText = GameObject.Find("Food Plane/AgentCounter").GetComponent<TextMeshPro>();
+        GameObject AgentCounterObject = GameObject.Find("Food Plane/AgentCounter");
+        if (AgentCounterObject != null)
+            AgentCounterNumberText = AgentCounterObject.GetComponent<TextMeshPro>();
+        else
+            AgentCounterNumberText = null;
         agentData = _agentData;
 
         positionStrings = new List<string>()
@@ -54,7 +58,7 @@ public class Eat : AgentBehavior
 
     public override NodeState Evaluate()
     {
-        if(sd.Restaurant_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "Food Plane")
+        if(AgentCounterNumberText != null && sd.Restaurant_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "Food Plane")
         {            
             navmeshAgent.ResetPath();
             parent.SetData(keyForBool, false);

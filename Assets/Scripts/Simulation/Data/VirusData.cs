@@ -15,14 +15,17 @@ public class VirusData
     private float VirusInfectiousness = 0;
     private float InfectionRange = 0;
     private bool MaskWearing = true;
+    private bool SocialDistancing = true;
 
     public void UpdateVirusInfectiousness(float newInfectiousness) { VirusInfectiousness = newInfectiousness; }
     public void UpdateInfectionRange(float newInfectionRange) { InfectionRange = newInfectionRange; }
     public void UpdateMaskWearing(bool newMaskWearing) { MaskWearing = newMaskWearing; }
+    public void UpdateSocialDistancing(bool newSocialDistancing) { SocialDistancing =  newSocialDistancing; }
 
     public float GetVirusInfectiousness() { return VirusInfectiousness; }
     public float GetInfectionRange() { return InfectionRange; }
     public bool GetMaskWearing() { return MaskWearing; }
+    public bool GetSocialDistancing() {  return SocialDistancing; }
 
     /// <summary>
     /// CurrentNumbers Functions

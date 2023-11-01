@@ -55,7 +55,7 @@ def plot_graph_csv_files(folder_path, PlotsPath):
         plt.legend()
 
         # Set the y-axis tick interval to 5
-        plt.yticks(range(0, int(max(max(S), max(E), max(I)) + 1), 5))
+        plt.yticks(range(0, int(max(max(S), max(E), max(I)) + 1), 10))
         
         # Save the plot to a file
         plt.savefig(PlotsPath + "Plots/Graphs/plot" + str(count) + ".png")

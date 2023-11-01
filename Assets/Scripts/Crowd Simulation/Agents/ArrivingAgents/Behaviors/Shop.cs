@@ -20,7 +20,11 @@ public class Shop : AgentBehavior
         Istate = InnerState.EXECUTING;
 
         sd = GameObject.Find("SimulationData").GetComponent<SimulationData>();
-        AgentCounterNumberText = GameObject.Find("Shop Plane/AgentCounter").GetComponent<TextMeshPro>();
+        GameObject AgentCounterObject = GameObject.Find("Shop Plane/AgentCounter");
+        if (AgentCounterObject != null)
+            AgentCounterNumberText = AgentCounterObject.GetComponent<TextMeshPro>();
+        else
+            AgentCounterNumberText = null;
         agentData = _agentData;
 
         positionStrings = new List<string>()
@@ -40,7 +44,7 @@ public class Shop : AgentBehavior
 
     public override NodeState Evaluate()
     {
-        if (sd.Shop_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "Shop Plane")
+        if (AgentCounterNumberText != null && sd.Shop_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "Shop Plane")
         {
             navmeshAgent.ResetPath();
             parent.SetData(keyForBool, false);

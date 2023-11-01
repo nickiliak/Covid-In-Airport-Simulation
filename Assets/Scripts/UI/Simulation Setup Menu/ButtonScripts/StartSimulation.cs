@@ -28,6 +28,7 @@ public class StartSimulation : MonoBehaviour
     [SerializeField] TMP_InputField VirusInfectRange;
     [SerializeField] TMP_InputField VirusNoInfected;
     [SerializeField] UnityEngine.UI.Toggle MaskWearing;
+    [SerializeField] UnityEngine.UI.Toggle SocialDistancing;
 
     [Header("Area Limit Capacity")]
     [SerializeField] TMP_InputField TopLeftRestroom;
@@ -113,6 +114,7 @@ public class StartSimulation : MonoBehaviour
             vD.UpdateInfectionRange(int.Parse(VirusInfectRange.text));
             vD.UpdateVirusInfectiousness(int.Parse(VirusInfectiousness.text));
             vD.UpdateMaskWearing(MaskWearing.isOn);
+            vD.UpdateMaskWearing(SocialDistancing.isOn);
 
             sd.GetVirusDataList().Add(vD);
         }

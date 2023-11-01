@@ -29,6 +29,7 @@ public class AgentVirusData : MonoBehaviour
         ViralStateColor = VirusDataGen.GenerateViralStateColor(StateValue);
         naturalSusceptibility = 1f;
         MaskWearing = sd.GetVirusData().GetMaskWearing();
+        SocialDistancing = sd.GetVirusData().GetSocialDistancing();
     }
 
 

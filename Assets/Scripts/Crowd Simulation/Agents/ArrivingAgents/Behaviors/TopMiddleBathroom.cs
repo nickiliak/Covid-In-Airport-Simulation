@@ -22,7 +22,11 @@ public class TopMiddleBathroom : AgentBehavior
         Istate = InnerState.EXECUTING;
 
         sd = GameObject.Find("SimulationData").GetComponent<SimulationData>();
-        AgentCounterNumberText = GameObject.Find("TopMiddleBathroom Plane/AgentCounter").GetComponent<TextMeshPro>();
+        GameObject AgentCounterObject = GameObject.Find("TopMiddleBathroom Plane/AgentCounter");
+        if (AgentCounterObject != null)
+            AgentCounterNumberText = AgentCounterObject.GetComponent<TextMeshPro>();
+        else
+            AgentCounterNumberText = null;
         agentData = _agentData;
 
         positionStrings = new List<string>()
@@ -40,7 +44,7 @@ public class TopMiddleBathroom : AgentBehavior
 
     public override NodeState Evaluate()
     {
-        if (sd.TopMiddleBathroom_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "TopMiddleBathroom Plane")
+        if (AgentCounterNumberText != null && sd.TopMiddleBathroom_Capacity <= int.Parse(Regex.Match(AgentCounterNumberText.text, @"\d+").Value) && agentData.CurrentAreaInName != "TopMiddleBathroom Plane")
         {
             navmeshAgent.ResetPath();
             parent.SetData(keyForBool, false);
