@@ -1,24 +1,29 @@
 # Covid-In-Airport-Simulation
 
-A Unity/C# agent-based simulation that recreates Fairbanks International Airport’s terminal to study COVID-19 spread using an SIR-inspired model and configurable mitigation strategies.
+A Unity/C# agent-based simulation that reconstructs Fairbanks International Airport’s terminal to explore COVID-19 spread using an SIR-inspired model and configurable mitigation settings.
 
 ---
 
 ## Features
 
-- **3D Airport Layout**: Virtual reconstruction of Fairbanks International Airport :contentReference[oaicite:0]{index=0}  
-- **Agent-Based Movement**: Passengers follow a weighted decision graph (e.g., 20 % chance to shop) :contentReference[oaicite:1]{index=1}  
-- **SIR-Inspired Infection**: Susceptible→Infected→Recovered transitions on proximity encounters :contentReference[oaicite:2]{index=2}  
-- **Mitigation Controls**: Adjustable capacity limits, distancing radii, and mask efficacy via Inspector  
-- **Inspector Tuning**: Change infection radius, transmission probability, and decision weights on the fly  
+- **3D Airport Layout**  
+  Virtual rebuild of Fairbanks International Airport terminal.  
+- **Agent Movement**  
+  Passengers navigate via weighted decision graphs (e.g., chance to shop, wait, board).  
+- **SIR-Style Infection**  
+  Susceptible → Infected → Recovered transitions based on proximity and timing.  
+- **Mitigation Controls**  
+  Tweak capacity caps, social-distancing radius, and mask-efficacy in real time.  
+- **Inspector Tuning**  
+  All key variables exposed in Unity’s Inspector for on-the-fly adjustments.
 
 ---
 
 ## Prerequisites
 
-- Unity **2021.3 LTS** or later  
-- .NET **4.x** (built into Unity)  
-- Git (to clone)  
+- Unity **2021.3 LTS** or newer  
+- .NET **4.x** (built-in with Unity)  
+- Git (to clone the repo)
 
 ---
 
@@ -28,11 +33,11 @@ A Unity/C# agent-based simulation that recreates Fairbanks International Airport
 git clone https://github.com/nickiliak/Covid-In-Airport-Simulation.git
 cd Covid-In-Airport-Simulation
 
-# Open in Unity:
-# 1. Launch Unity Hub → Add → select this folder.
+# In Unity:
+# 1. Open Unity Hub → Add project → select this folder.
 # 2. Open Assets/Scenes/MainScene.unity.
 # 3. Press Play.
 
-# Or build headlessly:
+# From command line (headless build):
 make
-./COVIDSim    # on Linux/macOS
+./COVIDSim    # Linux/macOS
