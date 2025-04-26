@@ -37,7 +37,3 @@ cd Covid-In-Airport-Simulation
 # 1. Open Unity Hub → Add project → select this folder.
 # 2. Open Assets/Scenes/MainScene.unity.
 # 3. Press Play.
-
-# From command line (headless build):
-make
-./COVIDSim    # Linux/macOS
